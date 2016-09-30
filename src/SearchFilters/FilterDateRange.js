@@ -27,7 +27,7 @@ class FilterDateRange extends Filter {
   }
 
   componentWillReceiveProps(nextProps){
-    let sortedOptions = nextProps.options.sort((a,b)=>+a.value - b.value);
+    let sortedOptions = nextProps.options;
     this.setStartDateIndex(sortedOptions, nextProps.location.query.startDate);
     this.setEndDateIndex(sortedOptions, nextProps.location.query.endDate);
   }
@@ -51,7 +51,7 @@ class FilterDateRange extends Filter {
     let currentEndDate = +this.props.location.query.endDate;
     let optionDate = + option.value;
     let data = this.state.dragBarData;
-    let sortedOptions = this.props.options.sort((a,b)=>+a.value - b.value);
+    let sortedOptions = this.props.options;
 
     // if neither current Start date and end date, then set selection to both
     if(!currentStartDate && !currentEndDate){
@@ -72,12 +72,12 @@ class FilterDateRange extends Filter {
   }
 
   resetStartDate(){
-    let sortedOptions = this.props.options.sort((a,b)=>+a.value - b.value);
+    let sortedOptions = this.props.options;
     this.props.updateQuery({ 'startDate': sortedOptions[0].value });
   }
 
   resetEndDate(){
-    let sortedOptions = this.props.options.sort((a,b)=>+a.value - b.value);
+    let sortedOptions = this.props.options;
     this.props.updateQuery({ 'endDate': sortedOptions[sortedOptions-1].value });
   }
 
@@ -117,7 +117,7 @@ class FilterDateRange extends Filter {
 
   updateDragBar(id, value){
     let index = Math.round(value / itemHeight);
-    let sortedOptions = this.props.options.sort((a,b)=>+a.value - b.value);
+    let sortedOptions = this.props.options;
     if(id === 0){
       this.setStartDateIndex(sortedOptions, index);
       this.props.updateQuery({ 'startDate': sortedOptions[index].value});
@@ -151,7 +151,7 @@ class FilterDateRange extends Filter {
               </div>
               <div className='list'>
                 <div className='options'>
-                  {this.props.options.sort((a,b)=>+a.value - b.value).map((option, i)=>
+                  {this.props.options.map((option, i)=>
                         <div key={i}>{this.renderCondition(option, i)}</div>
                   )}
                 </div>
