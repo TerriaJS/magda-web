@@ -14,21 +14,18 @@
   padding-right: 0px;
 }
 
-.facet-wrapper .btn-reset, .facet-wrapper .btn-toggle{
+.facet-wrapper .btn-reset, .facet-wrapper .btn-toggle-expand{
     color: rgb(102, 181, 252);
     line-height: 2;
     font-weight: 600;
 }
 
-.facet-wrapper .btn-toggle{
-  padding-left: 0;
-}
 
 .btn-facet-option{
    width: 100%;
    overflow: hidden;
    text-align: left;
-   margin: 0 0 3px 0;
+   margin: 0 0 1px 0;
    color: #777;
    border-radius: 2px;
    position: relative;
@@ -57,6 +54,7 @@
 
 .btn-facet-option__action{
   display: none;
+  padding: 2px;
   width: 30px;
   float: right;
   background: #27AE60;
@@ -65,13 +63,22 @@
 }
 
 .btn-facet-option.is-active .btn-facet-option__action{
+  display: block;
+  background: #3498DB;
+}
+
+.btn-facet-option.is-active:hover .btn-facet-option__action,
+.btn-facet-option.is-active:focus .btn-facet-option__action{
   background: #E74C3C;
 }
+
 
 .btn-facet-option:hover .btn-facet-option__action,
 .btn-facet-option:focus .btn-facet-option__action{
   display: block;
 }
+
+
 
 .btn-facet-option.is-active{
     background: #3498DB;
@@ -95,7 +102,7 @@
     float: left;
     text-overflow: ellipsis;
     overflow: hidden;
-    padding: 0 5px 0 10px;
+    padding: 2px 5px 2px 12px;
 }
 
 .btn-facet-option__location .btn-facet-option__name{
@@ -108,7 +115,7 @@
     width: 40px;
     float: right;
     text-align: right;
-    padding: 0 5px;
+    padding: 2px 5px;
     font-weight: 600;
     color: #2b2b2b;
 }
