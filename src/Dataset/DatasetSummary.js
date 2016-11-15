@@ -11,11 +11,22 @@ export default class DatasetSummary extends Component {
 
   render(){
     let dataset = this.props.dataset;
-    return <div className='dataset-summray'>
+    return <div className='dataset-summray' onClick={(e)=>{window.open(dataset.landingPage, '_blank');}}>
               <div className='dataset-summray-main'>
-                <h3 className='result-title'>
-                  <button className='btn dataset-summray-title' onClick={this.props.clickDataset} type='button'>{dataset.title}</button>
-                  <Star/>
+                <h3 className='result-header'>
+                  <div className='result-header-left'>
+                    <a href={dataset.landingPage} target='_blank' className='dataset-summray-title' type='button'>{dataset.title}</a>
+                  </div>
+                  <div className='result-header-middle'>
+                    <Star/>
+                  </div>
+                  <div className='result-header-right'>
+                    {!this.props.isExpanded && <button className='dataset-summray-toggle-info-btn'
+                                                       onClick={this.props.onClickDataset}
+                                                       type='button'>
+                        <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    </button>}
+                  </div>
                 </h3>
                 {defined(dataset.publisher) && <label className='search-result--publisher'>{dataset.publisher.name}</label>}
                 <div className='dataset-description'>
@@ -24,7 +35,7 @@ export default class DatasetSummary extends Component {
                 <ul className='list-unstyled tags'>
                   {
                     dataset.keyword.map((tag)=>
-                      <li key={tag} className='search-result--tag'><a href={`/?q=${tag}`}>#{tag}</a></li>
+                      <li key={tag} className='search-result--tag'><a href={`/?q=${tag}`} onClick={(e)=>{e.stopPropagation()}}>#{tag}</a></li>
                     )
                   }
                 </ul>

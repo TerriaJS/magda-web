@@ -7,13 +7,14 @@ export default class DatasetInfo extends Component {
     return <div className='dataset-info'>
               <div className='traingle'></div>
               <div className='dataset-info-inner'>
+                <button className='dataset-info-close-btn'><i className="fa fa-times" aria-hidden="true" onClick={this.props.onClickClose}></i></button>
                 <div className='dataset-info--content clearfix'>
                 <h5>Contents</h5>
                   <ul className='list-unstyled'>
                     {dataset.distributions.map((d, i)=>
                       <li key={d.downloadURL + i} className={`dataset-info--download-link clearfix ${d.format}`}>
                         <i className='fa fa-file-pdf-o' aria-hidden="true"></i>
-                        <a href={d.downloadURL}>{d.description}({d.format})</a>
+                        <a href={d.downloadURL} target='_blank'>{d.description}({d.format})</a>
                       </li>
                     )}
                   </ul>
