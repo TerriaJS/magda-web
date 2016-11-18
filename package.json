@@ -2,13 +2,15 @@
   "name": "magda-web",
   "version": "0.0.1",
   "private": true,
-  "homepage": "http://terria.io/magda-web/build",
+  "homepage": "http://magda-dev.terria.io",
   "devDependencies": {
     "react-scripts": "0.2.2"
   },
   "dependencies": {
     "d3-drag": "^1.0.1",
     "d3-selection": "^1.0.2",
+    "deep-freeze": "0.0.1",
+    "expect": "^1.20.2",
     "isomorphic-fetch": "^2.2.1",
     "leaflet": "^0.7.7",
     "leaflet-mapbox-vector-tile": "steve9164/Leaflet.MapboxVectorTile",

@@ -11,7 +11,7 @@ import { createStore, applyMiddleware} from 'redux';
 
 
 
-let baseurl = location.hostname === "localhost" ? '/' : '/magda-web/build/';
+let baseurl = location.hostname !== "terria.io" ? '/' : '/magda-web/build/';
 //<Route path="/magda-web/build/" component={Search}>
 
 const loggerMiddleware = createLogger()
