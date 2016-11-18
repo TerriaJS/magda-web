@@ -1,7 +1,7 @@
 import findIndex from 'lodash.findindex';
 import find from 'lodash.find';
 import defined from '../helpers/defined';
-
+import findOptionFromList from '../helpers/findOptionFromList';
 
 const initialData = {
   isFetching: false,
@@ -9,7 +9,7 @@ const initialData = {
   hitCount: 0,
   activePublishers: [],
   activeFormats: [],
-  activeRegions: [],
+  activeRegion: {regionId: undefined, regionType: undefined},
   activeDateFrom: undefined,
   activeDateTo:undefined,
   publisherOptions: [],
@@ -36,13 +36,13 @@ const results = (state=initialData, action) => {
       let formatOptions = data.facets[2].options;
 
 
-      let activePublishers = query.publishers.map(item=> find(data.facets[0].options, o=>o.value === item));
+      let activePublishers = query.publishers.map(item=> findOptionFromList(item,data.facets[0].options));
       let activeDateFrom = defined(query.dateFrom) ? {value: query.dateFrom.slice(0, 4), hitCount: null} : undefined;
       let activeDateTo = defined(query.dateTo) ? {value: query.dateTo.slice(0, 4), hitCount: null} : undefined;
 
-      let activeFormats = query.formats.map(item=>find(data.facets[2].options, o=>o.value === item));
+      let activeFormats = query.formats.map(item=> findOptionFromList(item,data.facets[2].options));
       // temp
-      let activeRegions = [{regionId: '302', regionType: 'SA4'}];
+      let activeRegion = {regionId: undefined, regionType: undefined};
 
       return Object.assign({}, state, {
         isFetching: false,
@@ -54,7 +54,7 @@ const results = (state=initialData, action) => {
         formatOptions,
 
         activePublishers,
-        activeRegions,
+        activeRegion,
         activeDateFrom,
         activeDateTo,
         activeFormats
@@ -73,20 +73,16 @@ const results = (state=initialData, action) => {
       })
 
     case 'RESET_PUBLISHER':
-      return Object.assign({}, state, {
-        activePublishers: []
-      })
+      return Object.assign({}, state, initialData.activePublishers)
 
 
     case 'ADD_REGION':
       return Object.assign({}, state, {
-        activeRegions: [action.item]
+        activeRegion: action.item
       })
 
     case 'RESET_REGION':
-      return Object.assign({}, state, {
-        activeRegions: []
-      })
+      return Object.assign({}, state, initialData.activeRegion)
 
     case 'SET_DATE_FROM':
       return Object.assign({}, state, {
@@ -97,6 +93,12 @@ const results = (state=initialData, action) => {
       return Object.assign({}, state, {
         activeDateTo: action.item
       })
+
+    case 'RESET_DATE_FROM':
+      return Object.assign({}, state, initialData.activeDateFrom)
+
+    case 'RESET_DATE_TO':
+      return Object.assign({}, state, initialData.activeDateTo)
 
     case 'ADD_FORMAT':
       return Object.assign({}, state, {
@@ -110,9 +112,7 @@ const results = (state=initialData, action) => {
       })
 
     case 'RESET_FORMAT':
-      return Object.assign({}, state, {
-        activeFormats: []
-      })
+      return Object.assign({}, state, initialData.activeFormats)
 
     default:
       return state

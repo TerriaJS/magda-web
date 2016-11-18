@@ -5,6 +5,8 @@ import FacetWrapper from './FacetWrapper';
 import RegionMap from './RegionMap';
 import RegionPopup from './RegionPopup';
 import FacetSearchBox from './FacetSearchBox';
+import defined from '../helpers/defined';
+import RegionSummray from './RegionSummary';
 
 /*
 * the region (location) facet facet, extends Facet class
@@ -14,7 +16,6 @@ class FacetRegion extends Component {
         super(props);
         this.openPopup = this.openPopup.bind(this);
         this.closePopUp = this.closePopUp.bind(this);
-        this.onFeatureClick = this.onFeatureClick.bind(this);
         this.renderOption = this.renderOption.bind(this);
 
         /**
@@ -38,25 +39,15 @@ class FacetRegion extends Component {
         });
     }
 
-    /**
-     * activate a region option by clicking a region on the map
-     * @param {string} regionCode, region code
-     * @param {string} regionType, region type
-     */
-    onFeatureClick(feature){
-        // vector tiles and ABS API has different format for the region object,
-        // need to find a way to unify this
-        this.props.toggleOption(feature);
-    }
 
-    // see Facet.renderOption(option, optionMax, callback, onFocus)
+    // see Facet.renderOption(option, optionMax, onFocus)
     // Here is only for mark up change
-    renderOption(option, optionMax, callback, onFocus){
+    renderOption(option, onClick, onFocus){
       return (
             <button type='button'
                     ref={b=>{if(b != null && onFocus === true){b.focus()}}}
                     className='btn-facet-option btn btn-facet-option__location'
-                    onClick={this.props.toggleOption.bind(this, option, callback)}
+                    onClick={onClick.bind(this, option)}
                     title={option.geographyLabel}>
               <span className='btn-facet-option__name'>{option.geographyLabel} , {option.state}</span>
             </button>);
@@ -64,30 +55,37 @@ class FacetRegion extends Component {
 
 
     render(){
-      console.log(this.props);
+      let activeRegion = this.props.activeRegion;
         return (
             <FacetWrapper onResetFacet={this.props.onResetFacet}
                           title={this.props.title}
-                          activeOptions={[this.props.activeRegionId, this.props.activeRegionType]}
+                          activeRegion={[this.props.activeRegionId, this.props.activeRegionType]}
                           hasQuery={this.props.hasQuery}>
                <FacetSearchBox renderOption={this.renderOption}
+                               onToggleOption={this.props.onToggleOption}
                                options={this.props.facetSearchResults}
                                searchFacet={this.props.searchFacet}/>
-               {this.props.activeOptions.map(r=><div className='active-region' key={r.geographyLabel + r.state}>{r.geographyLabel} {r.state}</div>)}
+               <RegionSummray region={activeRegion}/>
                <div className='preview'>
-                     <RegionMap title='location'
-                                id='location'
-                                onClick={this.openPopup}
-                                interaction={false}
-                                activeRegionId={this.props.activeOptions['regionId']}
-                                activeRegionType={this.props.activeOptions['regionType']}
+                  <RegionMap title='location'
+                             id='location'
+                             onClick={this.openPopup}
+                             interaction={false}
+                             region={activeRegion}
+                             regionMapping={this.props.regionMapping}
                      />
                </div>
-               {this.state.popUpIsOpen && <RegionPopup onFeatureClick={this.props.onFeatureClick}
-                                                             closePopUp={this.closePopUp}
-                                                             renderOption={this.renderOption}
-                                                             searchFacet={this.props.searchFacet}
-                                          />}
+               <div className={this.state.popUpIsOpen ? '' : 'sr-only'}>
+                 <RegionPopup onToggleOption={this.props.onToggleOption}
+                              facetSearchResults={this.props.facetSearchResults}
+                              closePopUp={this.closePopUp}
+                              renderOption={this.renderOption}
+                              onToggleOption={this.props.onToggleOption}
+                              searchFacet={this.props.searchFacet}
+                              regionMapping={this.props.regionMapping}
+                              activeRegion={this.props.activeRegion}
+                  />
+                </div>
           </FacetWrapper>
 
       );

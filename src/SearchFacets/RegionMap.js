@@ -8,6 +8,8 @@ import MVTSource from '../../node_modules/leaflet-mapbox-vector-tile/src/index.j
 import regions from '../dummyData/regions';
 import defined from '../helpers/defined';
 import React from 'react';
+import fetch from 'isomorphic-fetch'
+
 
 class RegionMap extends Facet {
     constructor(props) {
@@ -19,7 +21,7 @@ class RegionMap extends Facet {
 
     componentDidMount(){
         this.map = L.map(this._c, { zoomControl: this.props.interaction});
-        this.map.setView([-27, 133], 3);
+        this.map.setView([-27, 133], 4);
 
         if(this.props.interaction === false){
             this._c.addEventListener('click', ()=>{
@@ -31,8 +33,6 @@ class RegionMap extends Facet {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
         }).addTo(this.map);
 
-        this.addRegion();
-
         if(this.props.interaction === false){
             this.map.dragging.disable();
             this.map.touchZoom.disable();
@@ -43,7 +43,11 @@ class RegionMap extends Facet {
     componentWillReceiveProps(nextProps) {
         // Is this condition needed? Can props be updated before the layer is created?
         if (this.layer) {
-            this.layer.setStyle(this.generateStyle(nextProps.activeRegionId));
+            this.layer.setStyle(this.generateStyle(nextProps.regionId));
+        }
+        // after we have received all the data we need,w e can then display the layer
+        if(defined(nextProps.region.regionType) && defined(nextProps.regionMapping) && (nextProps.region !== this.props.region)){
+          this.addRegion(nextProps);
         }
     }
 
@@ -63,23 +67,19 @@ class RegionMap extends Facet {
         });
     }
 
-    addRegion(){
-        let that = this;
-        let regionType = this.props.activeRegionId;
-        console.log(this.props);
-        let region = regions()[regionType];
-        this.getID = function(feature) { return feature.properties[region.id];};
-
-        if(defined(region)){
+    addRegion(props){
+        let regionData = props.regionMapping[props.region.regionType];
+        this.getID = function(feature) { return feature.properties[regionData.regionProp]};
+        if(defined(regionData)){
           this.layer = new L.TileLayer.MVTSource({
-              url: region.url,
-              style: this.generateStyle(this.props.activeRegionId),
-              hoverInteraction: this.props.interaction,
+              url: regionData.server,
+              style: this.generateStyle(props.region.regionId),
+              hoverInteraction: props.interaction,
               /*onEachFeature: onEachFeature, */
-              clickableLayers: (this.props.interaction) ? undefined : [], // Enable clicks for all layers if interaction
+              clickableLayers: (props.interaction) ? undefined : [], // Enable clicks for all layers if interaction
               mutexToggle: true,
               onClick: function(evt) { if (evt.type === 'click' && evt.feature){
-                  that.props.onClick(evt.feature);
+                  props.onClick(evt.feature);
               }},
               getIDForLayerFeature: this.getID
           });
@@ -92,7 +92,6 @@ class RegionMap extends Facet {
     }
 
     render(){
-
         return (
             <div className='region-map'>
               <div className='map' ref={(c) => {this._c = c}}/>
