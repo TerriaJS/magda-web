@@ -1,9 +1,11 @@
-import fetch from 'isomorphic-fetch'
+import futch from '../helpers/futch';
 import parseQuery from '../helpers/parseQuery'
 
 export const SET_URL_QUERY = 'SET_URL_QUERY'
 export const REQUEST_RESULTS = 'REQUEST_RESULTS'
 export const RECEIVE_RESULTS = 'RECEIVE_RESULTS'
+export const UPDATE_PROGRESS = 'UPDATE_PROGRESS'
+
 export const ADD_PUBLISHER = 'ADD_PUBLISHER'
 export const REMOVE_PUBLISHER = 'REMOVE_PUBLISHER'
 export const RESET_PUBLISHER = 'RESET_PUBLISHER'
@@ -13,6 +15,9 @@ export const RESET_REGION = 'RESET_REGION'
 
 export const SET_DATE_FROM = 'SET_DATE_FROM'
 export const SET_DATE_TO = 'SET_DATE_TO'
+
+export const RESET_DATE_FROM = 'RESET_DATE_FROM';
+export const RESET_DATE_TO = 'RESET_DATE_TO';
 
 export const ADD_FORMAT = 'ADD_FORMAT'
 export const REMOVE_FORMAT = 'REMOVE_FORMAT'
@@ -33,12 +38,21 @@ export function receiveResults(apiQuery, json){
   }
 }
 
+export function updateProgress(progress){
+  return{
+    type: UPDATE_PROGRESS,
+    progress
+  }
+}
+
+
 export function fetchSearchResults(query) {
   return (dispatch)=>{
     console.log(`http://magda-search-api.terria.io/datasets/search?query=${query}`);
     dispatch(requestResults(query))
-    return fetch(`http://magda-search-api.terria.io/datasets/search?query=${query}`)
-    .then(response => response.json())
+    return futch(`http://magda-search-api.terria.io/datasets/search?query=${query}`, (progressEvent)=>{
+      dispatch(updateProgress(progressEvent.loaded / progressEvent.total))
+    })
     .then(json =>
       dispatch(receiveResults(query, json))
     )
