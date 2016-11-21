@@ -19,7 +19,7 @@ function queryToString(preposition, query){
   if(!defined(query)) return '';
   if(Array.isArray(query)){
     return query.map(q=>
-    `${preposition} ${q}`).join(' ')
+    `${preposition} ${q}`).join('')
   } else {
     return `${preposition} ${query}`
   }
