@@ -86,11 +86,14 @@ class FacetBasic extends Component {
                </ul>
                <ul className='list-unstyled'>
                  {inactiveOptions.slice(0, size).map(o=><li key={`${o.value}-${o.hitCount}`}>{that.renderOption(o, this.props.onToggleOption, maxOptionOptionList)}</li>)}
-                 {inactiveOptions.length - tempSize > 0 &&
-                   <li><button onClick={this.toggleExpand}
-                           className='btn btn-toggle-expand'>
-                            {this.state.isExpanded ? `Show less` : `Show ${inactiveOptions.length - tempSize} more`}
-                  </button></li>}
+                 <If condition={inactiveOptions.length - tempSize > 0}>
+                   <li>
+                       <button onClick={this.toggleExpand}
+                               className='btn btn-toggle-expand'>
+                              {this.state.isExpanded ? `Show less` : `Show ${inactiveOptions.length - tempSize} more`}
+                       </button>
+                    </li>
+                  </If>
                </ul>
 
            </FacetWrapper>

@@ -114,13 +114,13 @@ class FacetSearchBox extends Component {
                    value={this.state.searchText}
                    onChange={this.onSearchTextChange}
                    />
-            {this.state.searchText.length > 0 &&
+            <If condition={ this.state.searchText.length > 0 }>
               <button type='button' className='btn btn-clear-search' onClick={this.clearSearch}>
                 <i className="fa fa-times" aria-hidden="true"></i>
-              </button>}
+              </button>
+            </If>
           </form>
-
-          {this.state.searchText.length > 0 &&
+          <If condition={ this.state.searchText.length > 0 }>
             <ul className='faceted-options list-unstyled' onKeyDown={this.handleKeyDown}>
               {this.props.options.map((option, i)=>
                   <li key={`${option.value}-${i}`}>
@@ -128,7 +128,7 @@ class FacetSearchBox extends Component {
                   </li>
               )}
             </ul>
-          }
+          </If>
         </div>);
   }
 }

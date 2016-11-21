@@ -35,14 +35,17 @@ class Star extends Component {
 
     render(){
       return <div className='star'>
-                <button onClick={this.onClick} className={`btn star-btn ${this.state.isActive ? 'is-active' : ''}`}>
+                <button onClick={this.onClick}
+                        className={`btn star-btn ${this.state.isActive ? 'is-active' : ''}`}>
                   <i className="fa fa-star" aria-hidden="true"/>
                 </button>
-                {this.state.showInfo && <div className='star-info'>
-                                            <div className='star-info-text'>
-                                              Saved to starred items
-                                            </div>
-                                          </div>}
+                <If condition={ this.state.showInfo }>
+                  <div className='star-info'>
+                    <div className='star-info-text'>
+                      Saved to starred items
+                    </div>
+                  </div>
+                </If>
              </div>
     }
 }

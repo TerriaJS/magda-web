@@ -16,14 +16,15 @@ class Pagination extends Component {
       let currentPage = this.props.currentPage;
       return (
         <ul className='pagination-group list-unstyled'>
-          {this.props.currentPage !== 1 &&
+          <If condition={ this.props.currentPage !== 1 }>
             <li className='pagination-start pagination-item'>
               <button className='pagination-btn btn' onClick={this.onClick.bind(this, 1)}>
                 <i className="fa fa-angle-double-left" aria-hidden="true"></i>
                 Start
               </button>
-            </li>}
-          {this.props.currentPage > 1 &&
+            </li>
+          </If>
+          <If condition={ this.props.currentPage > 1 }>
             <li className='pagination-previous pagination-item'>
               <button className='pagination-btn btn' onClick={this.onClick.bind(this, currentPage - 1)}>
                 <i className="fa fa-angle-left" aria-hidden="true"></i>
@@ -32,15 +33,17 @@ class Pagination extends Component {
               <div className='pagination-secondary-info'>
                 Page {currentPage - 1} of {this.props.maxPage}
               </div>
-            </li>}
-          {this.props.currentPage < this.props.maxPage &&
+            </li>
+          </If>
+          <If condition={ this.props.currentPage < this.props.maxPage }>
             <li className='pagination-next pagination-item'>
               <button className='pagination-btn btn' onClick={this.onClick.bind(this, currentPage + 1)}>
                 Next
                 <i className="fa fa-angle-right" aria-hidden="true"></i>
               </button>
               <div className='pagination-secondary-info'>Page {currentPage + 1} of {this.props.maxPage}</div>
-          </li>}
+          </li>
+          </If>
         </ul>
       );
     }

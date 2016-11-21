@@ -99,11 +99,11 @@ class RegionPopup extends Facet {
 
                     </div>
                     <div className='col-sm-6'>
-                      {defined(this.props.regionMapping) &&
-                                <DropDown activeOption={defined(this.props.regionMapping[region.regionType]) ? this.props.regionMapping[region.regionType].description : ''}
-                                          options={this.getDropDownOptions()}
-                                          select={this.selectRegionType}/>
-                      }
+                      <If condition={ defined(this.props.regionMapping) }>
+                          <DropDown activeOption={defined(this.props.regionMapping[region.regionType]) ? this.props.regionMapping[region.regionType].description : ''}
+                                    options={this.getDropDownOptions()}
+                                    select={this.selectRegionType}/>
+                      </If>
                     </div>
                   </div>
                   <RegionSummray region={this.state._activeRegion}/>
