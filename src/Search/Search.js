@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {fetchSearchResultsIfNeeded} from '../actions/results';
 import {fetchRegionMapping} from '../actions/regionMapping';
 import {connect} from 'react-redux';
-import config from '../config.js'
+import config from '../config.js';
+import debounce from 'lodash.debounce';
+import defined from '../helpers/defined';
 import './Search.css';
 // eslint-disable-next-line
 import {RouterContext } from 'react-router';
@@ -20,6 +22,14 @@ class Search extends Component {
     this.updateQuery = this.updateQuery.bind(this);
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.goToPage=this.goToPage.bind(this);
+    this.onClickTag = this.onClickTag.bind(this);
+    this.handleSearchFieldEnterKeyPress = this.handleSearchFieldEnterKeyPress.bind(this);
+    this.debounceUpdateSearchQuery = debounce(this.updateSearchQuery, 3000);
+    // it needs to be undefined here, so the default value should be from the url
+    // once this value is set, the value should always be from the user input
+    this.state={
+      searchText: undefined
+    }
   }
 
   componentWillMount(){
@@ -32,15 +42,38 @@ class Search extends Component {
   }
 
   onSearchTextChange(text){
+    this.setState({
+      searchText: text
+    });
+    this.debounceUpdateSearchQuery(text);
+  }
+
+  onClickTag(tag){
+    this.setState({
+      searchText: tag
+    });
+    this.updateSearchQuery(tag);
+  }
+
+  updateSearchQuery(text){
     this.updateQuery({
       q: text,
       publisher: [],
-      regionId: [],
-      regionCode: [],
+      regionId: undefined,
+      regionType: undefined,
       dateFrom: undefined,
       dateTo: undefined,
-      format: []
+      format: [],
+      page: undefined
     });
+  }
+
+  handleSearchFieldEnterKeyPress(event) {
+    // when user hit enter, no need to submit the form
+    if(event.charCode===13){
+        event.preventDefault();
+        this.updateSearchQuery(this.state.searchText)
+    }
   }
 
   goToPage(index){
@@ -57,15 +90,26 @@ class Search extends Component {
     });
   }
 
+  getSearchBoxValue(){
+    if(defined(this.state.searchText)){
+      return this.state.searchText;
+    } else if(defined(this.props.location.query.q)){
+      return this.props.location.query.q
+    }
+    return '';
+  }
+
 
   render() {
     return (
       <div>
-        {this.props.isFetching && <ProgressBar/>}
+        {this.props.isFetching && <ProgressBar progress={this.props.progress}/>}
         <div className='search'>
           <div className='search__search-header'>
             <div className='container'>
-              <SearchBox preloadedSearchText={this.props.location.query.q || ''} updateQuery={this.updateQuery} onSearchTextChange={this.onSearchTextChange}/>
+              <SearchBox value={this.getSearchBoxValue()}
+                         onChange={this.onSearchTextChange}
+                         onKeyPress={this.handleSearchFieldEnterKeyPress}/>
             </div>
           </div>
           <div className='search__search-body container'>
@@ -73,10 +117,11 @@ class Search extends Component {
                 <SearchFacets updateQuery={this.updateQuery} keyword={this.props.location.query.q}/>
             </div>
             <div className='col-sm-8'>
-                {!this.props.isFetching && <div>
+                {!this.props.isFetching && !this.props.hasError && <div>
                   <SearchResults
                       searchResults={this.props.datasets}
                       totalNumberOfResults={this.props.hitCount}
+                      onClickTag={this.onClickTag}
                   />
                   {this.props.hitCount > 20 &&
                       <Pagination
@@ -86,6 +131,9 @@ class Search extends Component {
                       />
                    }
                  </div>
+               }
+               {!this.props.isFetching && this.props.hasError &&
+                 <div className='error'> error in request </div>
                }
             </div>
           </div>
@@ -104,6 +152,8 @@ Search.propTypes = {
   hitCount: React.PropTypes.number.isRequired,
   isFetching: React.PropTypes.bool.isRequired,
   dispatch: React.PropTypes.func.isRequired,
+  progress: React.PropTypes.number.isRequired,
+  hasError: React.PropTypes.bool.isRequired
 }
 
 
@@ -113,6 +163,8 @@ function mapStateToProps(state) {
     datasets: results.datasets,
     hitCount: results.hitCount,
     isFetching: results.isFetching,
+    progress: results.progress,
+    hasError: results.hasError
   }
 }
 

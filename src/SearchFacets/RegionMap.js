@@ -5,11 +5,8 @@ import Facet from './FacetWrapper';
 import L from 'leaflet';
 // eslint-disable-next-line
 import MVTSource from '../../node_modules/leaflet-mapbox-vector-tile/src/index.js';
-import regions from '../dummyData/regions';
 import defined from '../helpers/defined';
 import React from 'react';
-import fetch from 'isomorphic-fetch'
-
 
 class RegionMap extends Facet {
     constructor(props) {
@@ -68,9 +65,15 @@ class RegionMap extends Facet {
     }
 
     addRegion(props){
+        // remove previous layer
+        if(defined(this.layer)){
+          this.map.removeLayer(this.layer);
+        }
+
         let regionData = props.regionMapping[props.region.regionType];
-        this.getID = function(feature) { return feature.properties[regionData.regionProp]};
+
         if(defined(regionData)){
+          this.getID = function(feature) { return feature.properties[regionData.regionProp]};
           this.layer = new L.TileLayer.MVTSource({
               url: regionData.server,
               style: this.generateStyle(props.region.regionId),

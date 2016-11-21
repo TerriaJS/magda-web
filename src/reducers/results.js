@@ -1,5 +1,4 @@
 import findIndex from 'lodash.findindex';
-import find from 'lodash.find';
 import defined from '../helpers/defined';
 import findOptionFromList from '../helpers/findOptionFromList';
 
@@ -7,6 +6,7 @@ const initialData = {
   isFetching: false,
   datasets: [],
   hitCount: 0,
+  progress: 0,
   activePublishers: [],
   activeFormats: [],
   activeRegion: {regionId: undefined, regionType: undefined},
@@ -15,7 +15,8 @@ const initialData = {
   publisherOptions: [],
   temporalOptions: [],
   formatOptions: [],
-  apiQuery: ''
+  apiQuery: '',
+  hasError: false
 }
 
 const results = (state=initialData, action) => {
@@ -23,8 +24,22 @@ const results = (state=initialData, action) => {
     case 'REQUEST_RESULTS':
       return Object.assign({}, state, {
         isFetching: true,
+        hasError: false,
         apiQuery: action.apiQuery
       })
+
+    case 'UPDATE_PROGRESS':
+      return Object.assign({}, state, {
+        isFetching: true,
+        progress: action.progress
+      })
+
+    case 'FETCH_ERROR':
+      return Object.assign({}, state, {
+        isFetching: false,
+        hasError: true
+      })
+
     case 'RECEIVE_RESULTS':
       let data = action.json;
       let query = data.query;
@@ -36,7 +51,7 @@ const results = (state=initialData, action) => {
       let formatOptions = data.facets[2].options;
 
 
-      let activePublishers = query.publishers.map(item=> findOptionFromList(item,data.facets[0].options));
+      let activePublishers = query.publishers.map(p=> findOptionFromList(p,data.facets[0].options));
       let activeDateFrom = defined(query.dateFrom) ? {value: query.dateFrom.slice(0, 4), hitCount: null} : undefined;
       let activeDateTo = defined(query.dateTo) ? {value: query.dateTo.slice(0, 4), hitCount: null} : undefined;
 
@@ -52,7 +67,6 @@ const results = (state=initialData, action) => {
         publisherOptions,
         temporalOptions,
         formatOptions,
-
         activePublishers,
         activeRegion,
         activeDateFrom,
@@ -73,7 +87,8 @@ const results = (state=initialData, action) => {
       })
 
     case 'RESET_PUBLISHER':
-      return Object.assign({}, state, initialData.activePublishers)
+      return Object.assign({}, state,
+        {activePublishers: initialData.activePublishers})
 
 
     case 'ADD_REGION':
@@ -82,7 +97,8 @@ const results = (state=initialData, action) => {
       })
 
     case 'RESET_REGION':
-      return Object.assign({}, state, initialData.activeRegion)
+      return Object.assign({}, state,
+        {activeRegion: initialData.activeRegion})
 
     case 'SET_DATE_FROM':
       return Object.assign({}, state, {
@@ -95,10 +111,12 @@ const results = (state=initialData, action) => {
       })
 
     case 'RESET_DATE_FROM':
-      return Object.assign({}, state, initialData.activeDateFrom)
+      return Object.assign({}, state,
+        {activeDateFrom: initialData.activeDateFrom})
 
     case 'RESET_DATE_TO':
-      return Object.assign({}, state, initialData.activeDateTo)
+      return Object.assign({}, state,
+        {activeDateTo: initialData.activeDateTo})
 
     case 'ADD_FORMAT':
       return Object.assign({}, state, {
@@ -112,7 +130,8 @@ const results = (state=initialData, action) => {
       })
 
     case 'RESET_FORMAT':
-      return Object.assign({}, state, initialData.activeFormats)
+      return Object.assign({}, state,
+        {activeFormats: initialData.activeFormats})
 
     default:
       return state
