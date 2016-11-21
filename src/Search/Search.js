@@ -103,7 +103,9 @@ class Search extends Component {
   render() {
     return (
       <div>
-        {this.props.isFetching && <ProgressBar progress={this.props.progress}/>}
+        <If condition={this.props.isFetching}>
+          <ProgressBar progress={this.props.progress}/>
+        </If>
         <div className='search'>
           <div className='search__search-header'>
             <div className='container'>
@@ -117,24 +119,25 @@ class Search extends Component {
                 <SearchFacets updateQuery={this.updateQuery} keyword={this.props.location.query.q}/>
             </div>
             <div className='col-sm-8'>
-                {!this.props.isFetching && !this.props.hasError && <div>
+              <If condition={ !this.props.isFetching && !this.props.hasError }>
+                <div>
                   <SearchResults
                       searchResults={this.props.datasets}
                       totalNumberOfResults={this.props.hitCount}
                       onClickTag={this.onClickTag}
                   />
-                  {this.props.hitCount > 20 &&
+                  <If condition={this.props.hitCount > 20}>
                       <Pagination
                         currentPage={+this.props.location.query.page || 1}
                         maxPage={Math.ceil(this.props.hitCount/config().resultsPerPage)}
                         goToPage={this.goToPage}
                       />
-                   }
+                   </If>
                  </div>
-               }
-               {!this.props.isFetching && this.props.hasError &&
+               </If>
+               <If condition={ !this.props.isFetching && this.props.hasError }>
                  <div className='search-error'> error in request </div>
-               }
+               </If>
             </div>
           </div>
         </div>
