@@ -25,6 +25,8 @@ class Search extends Component {
     this.onClickTag = this.onClickTag.bind(this);
     this.handleSearchFieldEnterKeyPress = this.handleSearchFieldEnterKeyPress.bind(this);
     this.debounceUpdateSearchQuery = debounce(this.updateSearchQuery, 3000);
+    // it needs to be undefined here, so the default value should be from the url
+    // once this value is set, the value should always be from the user input
     this.state={
       searchText: undefined
     }
@@ -88,6 +90,15 @@ class Search extends Component {
     });
   }
 
+  getSearchBoxValue(){
+    if(defined(this.state.searchText)){
+      return this.state.searchText;
+    } else if(defined(this.props.location.query.q)){
+      return this.props.location.query.q
+    }
+    return '';
+  }
+
 
   render() {
     return (
@@ -96,7 +107,7 @@ class Search extends Component {
         <div className='search'>
           <div className='search__search-header'>
             <div className='container'>
-              <SearchBox value={defined(this.state.searchText) ? this.state.searchText : this.props.location.query.q}
+              <SearchBox value={this.getSearchBoxValue()}
                          onChange={this.onSearchTextChange}
                          onKeyPress={this.handleSearchFieldEnterKeyPress}/>
             </div>
@@ -106,7 +117,7 @@ class Search extends Component {
                 <SearchFacets updateQuery={this.updateQuery} keyword={this.props.location.query.q}/>
             </div>
             <div className='col-sm-8'>
-                {!this.props.isFetching && <div>
+                {!this.props.isFetching && !this.props.hasError && <div>
                   <SearchResults
                       searchResults={this.props.datasets}
                       totalNumberOfResults={this.props.hitCount}
@@ -120,6 +131,9 @@ class Search extends Component {
                       />
                    }
                  </div>
+               }
+               {!this.props.isFetching && this.props.hasError &&
+                 <div className='search-error'> error in request </div>
                }
             </div>
           </div>
@@ -139,6 +153,7 @@ Search.propTypes = {
   isFetching: React.PropTypes.bool.isRequired,
   dispatch: React.PropTypes.func.isRequired,
   progress: React.PropTypes.number.isRequired,
+  hasError: React.PropTypes.bool.isRequired
 }
 
 
@@ -148,7 +163,8 @@ function mapStateToProps(state) {
     datasets: results.datasets,
     hitCount: results.hitCount,
     isFetching: results.isFetching,
-    progress: results.progress
+    progress: results.progress,
+    hasError: results.hasError
   }
 }
 
