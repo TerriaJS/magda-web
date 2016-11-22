@@ -58,7 +58,8 @@ const results = (state=initialData, action) => {
 
       let activeFormats = query.formats.map(item=> findOptionFromList(item,data.facets[2].options));
       // temp
-      let activeRegion = {regionID: undefined, regionType: undefined};
+      let activeRegion = {regionID: query.regionId,
+                          regionType: query.regionType};
 
       return Object.assign({}, state, {
         isFetching: false,
