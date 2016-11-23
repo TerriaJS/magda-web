@@ -33,7 +33,7 @@ class FacetSearchBox extends Component {
     window.removeEventListener('keydown', this.onExcKeyDown);
   }
 
-  onClick(option){
+  onClick(option, event){
     this.props.onToggleOption(option);
     this.clearSearch();
   }
@@ -45,6 +45,8 @@ class FacetSearchBox extends Component {
   }
 
   handleKeyDown(e){
+    console.log('keydown');
+    
     if(e.keyCode === 38){
       e.preventDefault();
       this.move('up')
@@ -56,6 +58,7 @@ class FacetSearchBox extends Component {
     }
 
     if(e.keyCode === 13){
+      if(e.target.tagName === 'INPUT')
       e.preventDefault();
       return false;
     }

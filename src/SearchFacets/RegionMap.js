@@ -67,8 +67,6 @@ class RegionMap extends Facet {
         }
 
         let regionData = props.regionMapping[props.region.regionType];
-        console.log(props.region);
-
         if(defined(regionData)){
           this.getID = function(feature) { return feature.properties[regionData.regionProp]};
           this.layer = new L.TileLayer.MVTSource({
