@@ -57,9 +57,9 @@ const results = (state=initialData, action) => {
       let activeDateTo = defined(query.dateTo) ? query.dateTo.slice(0, 4) : undefined;
 
       let activeFormats = query.formats.map(item=> findOptionFromList(item,data.facets[2].options));
-      // temp
-      let activeRegion = {regionID: query.regions[0].regionId,
-                          regionType: query.regions[0].regionType};
+
+      let activeRegion = {regionID: defined(query.regions[0]) ? query.regions[0].regionId : undefined,
+                          regionType: defined(query.regions[0]) ? query.regions[0].regionType : undefined};
 
       return Object.assign({}, state, {
         isFetching: false,

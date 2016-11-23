@@ -18,7 +18,7 @@ class RegionMap extends Facet {
 
     componentDidMount(){
         this.map = L.map(this._c, { zoomControl: this.props.interaction});
-        this.map.setView([-27, 133], 4);
+        this.map.setView([-27, 133], 3);
 
         if(this.props.interaction === false){
             this._c.addEventListener('click', ()=>{
@@ -38,10 +38,6 @@ class RegionMap extends Facet {
     }
 
     componentWillReceiveProps(nextProps) {
-        // Is this condition needed? Can props be updated before the layer is created?
-        if (this.layer) {
-            this.layer.setStyle(this.generateStyle(nextProps.regionID));
-        }
         // after we have received all the data we need,w e can then display the layer
         if(defined(nextProps.region.regionType) && defined(nextProps.regionMapping) && (nextProps.region !== this.props.region)){
           this.addRegion(nextProps);
