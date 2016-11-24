@@ -38,7 +38,7 @@ class Search extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    this.props.dispatch(fetchSearchResultsIfNeeded(this.props.location.query));
+    this.props.dispatch(fetchSearchResultsIfNeeded(nextProps.location.query));
   }
 
   onSearchTextChange(text){
