@@ -1,18 +1,16 @@
 import config from '../config'
-
-export const REQUEST_REGIONS = 'REQUEST_REGIONS'
-export const RECEIVE_REGIONS = 'RECEIVE_REGIONS'
+import {actionTypes} from '../constants/ActionTypes';
 
 export function requestRegions(query){
   return {
-    type: REQUEST_REGIONS,
+    type: actionTypes.REQUEST_REGIONS,
     query
   }
 }
 
 export function receiveRegions(query, json){
   return {
-    type: RECEIVE_REGIONS,
+    type: actionTypes.RECEIVE_REGIONS,
     json: json,
     query
   }

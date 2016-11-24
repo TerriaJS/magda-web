@@ -1,17 +1,15 @@
 import config from '../config'
-
-export const REQUEST_REGION_MAPPING = 'REQUEST_REGION_MAPPING'
-export const RECEIVE_REGION_MAPPING = 'RECEIVE_REGION_MAPPING'
+import {actionTypes} from '../constants/ActionTypes';
 
 export function requestRegionMapping(){
   return {
-    type: REQUEST_REGION_MAPPING,
+    type: actionTypes.REQUEST_REGION_MAPPING,
   }
 }
 
 export function receiveRegionMapping(json){
   return {
-    type: RECEIVE_REGION_MAPPING,
+    type: actionTypes.RECEIVE_REGION_MAPPING,
     json: json,
   }
 }

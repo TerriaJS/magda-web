@@ -1,12 +1,10 @@
 import fetch from 'isomorphic-fetch'
 import config from '../config'
-
-export const REQUEST_FORMATS = 'REQUEST_FORMATS'
-export const RECEIVE_FORMATS = 'RECEIVE_FORMATS'
+import {actionTypes} from '../constants/ActionTypes';
 
 export function requestFormats(generalQuery, facetQuery){
   return {
-    type: REQUEST_FORMATS,
+    type: actionTypes.REQUEST_FORMATS,
     generalQuery,
     facetQuery
   }
@@ -14,7 +12,7 @@ export function requestFormats(generalQuery, facetQuery){
 
 export function receiveFormats(generalQuery, facetQuery, json){
   return {
-    type: RECEIVE_FORMATS,
+    type: actionTypes.RECEIVE_FORMATS,
     json: json,
     generalQuery,
     facetQuery

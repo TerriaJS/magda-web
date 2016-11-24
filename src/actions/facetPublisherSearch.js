@@ -1,12 +1,10 @@
 import fetch from 'isomorphic-fetch'
 import config from '../config'
-
-export const REQUEST_PUBLISHERS = 'REQUEST_PUBLISHERS'
-export const RECEIVE_PUBLISHERS = 'RECEIVE_PUBLISHERS'
+import {actionTypes} from '../constants/ActionTypes';
 
 export function requestPublishers(generalQuery, facetQuery){
   return {
-    type: REQUEST_PUBLISHERS,
+    type: actionTypes.REQUEST_PUBLISHERS,
     generalQuery,
     facetQuery
   }
@@ -14,7 +12,7 @@ export function requestPublishers(generalQuery, facetQuery){
 
 export function receivePublishers(generalQuery, facetQuery, json){
   return {
-    type: RECEIVE_PUBLISHERS,
+    type: actionTypes.RECEIVE_PUBLISHERS,
     json: json,
     generalQuery,
     facetQuery
