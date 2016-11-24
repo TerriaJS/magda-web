@@ -1,5 +1,6 @@
 import futch from '../helpers/futch';
 import parseQuery from '../helpers/parseQuery'
+import config from '../config'
 
 export const SET_URL_QUERY = 'SET_URL_QUERY'
 export const REQUEST_RESULTS = 'REQUEST_RESULTS'
@@ -55,9 +56,9 @@ export function transferFailed(error){
 
 export function fetchSearchResults(query) {
   return (dispatch)=>{
-    console.log(`http://magda-search-api.terria.io/datasets/search?query=${query}`);
+    console.log(config().searchApiBaseUrl + `datasets/search?query=${query}`);
     dispatch(requestResults(query))
-    return futch(`http://magda-search-api.terria.io/datasets/search?query=${query}`,
+    return futch(config().searchApiBaseUrl + `datasets/search?query=${query}`,
       (progressEvent)=>{
       dispatch(updateProgress(progressEvent.loaded / progressEvent.total))
       },
