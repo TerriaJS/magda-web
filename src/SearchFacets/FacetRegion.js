@@ -48,7 +48,8 @@ class FacetRegion extends Component {
                     className='btn-facet-option btn btn-facet-option__location'
                     onClick={onClick.bind(this, option)}
                     title={option.regionName}>
-              <span className='btn-facet-option__name'>{option.regionName} , {option.regionName}</span>
+              <span className='btn-facet-option__name'>{option.regionName}</span><br />
+              <span className='btn-facet-option__detail'>{this.props.regionMapping[option.regionType].description}</span>
             </button>);
     }
 
