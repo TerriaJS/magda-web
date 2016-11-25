@@ -58,8 +58,12 @@ const results = (state=initialData, action) => {
 
       let activeFormats = findMatchingObjs(query.formats, formatOptions);;
 
-      let activeRegion = {regionId: defined(query.regions[0]) ? query.regions[0].regionId : undefined,
-                          regionType: defined(query.regions[0]) ? query.regions[0].regionType : undefined};
+      let activeRegion = query.regions[0] || {
+        regionId: undefined,
+        regionType: undefined,
+        regionName: undefined,
+        boundingBox: undefined
+      };
 
       return Object.assign({}, state, {
         isFetching: false,
