@@ -45,6 +45,16 @@ class RegionMap extends Facet {
       } else if(!defined(nextProps.region.regionType)){
         this.removeRegion();
       }
+
+      if (defined(nextProps.region)) {
+        const bbox = nextProps.region.boundingBox;
+        if (bbox) {
+          this.map.fitBounds([
+            [bbox.south, bbox.west],
+            [bbox.north, bbox.east]
+          ]);
+        }
+      }
     }
 
     componentDidUpdate(previousProps, previousState) {
@@ -104,14 +114,6 @@ class RegionMap extends Facet {
               getIDForLayerFeature: this.getID
           });
           this.layer.addTo(this.map);
-
-          const bbox = props.region.boundingBox;
-          if (bbox) {
-            this.map.fitBounds([
-              [bbox.south, bbox.west],
-              [bbox.north, bbox.east]
-            ]);
-          }
         }
     }
 
