@@ -1,10 +1,10 @@
-import '../../node_modules/leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.css';
 import './RegionMap.css';
 import Facet from './FacetWrapper';
 // eslint-disable-next-line
 import L from 'leaflet';
 // eslint-disable-next-line
-import MVTSource from '../../node_modules/leaflet-mapbox-vector-tile/src/index.js';
+import MVTSource from 'leaflet-mapbox-vector-tile';
 import defined from '../helpers/defined';
 import React from 'react';
 
@@ -17,7 +17,7 @@ class RegionMap extends Facet {
     }
 
     componentDidMount(){
-        this.map = L.map(this._c, { zoomControl: this.props.interaction});
+        this.map = L.map(this._c, { zoomControl: this.props.interaction, maxZoom: 12 });
         this.map.setView([-27, 133], 3);
 
         if(this.props.interaction === false){
