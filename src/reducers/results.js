@@ -62,7 +62,12 @@ const results = (state=initialData, action) => {
         regionId: undefined,
         regionType: undefined,
         regionName: undefined,
-        boundingBox: undefined
+        boundingBox: {
+          west: 105,
+          south: -45,
+          east: 155,
+          north: -5
+        }
       };
 
       return Object.assign({}, state, {
