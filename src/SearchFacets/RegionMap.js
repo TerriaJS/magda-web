@@ -53,15 +53,12 @@ class RegionMap extends Facet {
 
     shouldRegionUpdate(preProps, nextProps){
       if (!defined(nextProps.regionMapping) || !defined(nextProps.region.regionType)) {
-        console.log('next has no region mapping or no region type');
         return false;
       } else if (this.layer &&
                  nextProps.region.regionType === preProps.region.regionType &&
                  nextProps.region.regionId === preProps.region.regionId) {
-        console.log('next has same region type and ID');
         return false;
       }
-      console.log('yep updating');
       return true;
     }
 
