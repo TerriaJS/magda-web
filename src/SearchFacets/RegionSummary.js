@@ -1,14 +1,19 @@
 import defined from '../helpers/defined';
 import React from 'react';
 
-function RegionSummray(props){
-  if(defined(props.region.regionType)){
+function RegionSummary(props){
+  if (defined(props.region)){
+  	const name = props.region.regionName || '';
+  	const typeName = props.regionMapping && props.regionMapping[props.region.regionType] ? props.regionMapping[props.region.regionType].description : '';
     return <div className='active-region'>
-              {props.region.regionName}
+              {name}
+              <div className='region-type'>
+              	{typeName}
+              </div>
             </div>
   } else{
     return null;
   }
 }
 
-export default RegionSummray;
+export default RegionSummary;
