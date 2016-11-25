@@ -35,23 +35,33 @@ class RegionMap extends Facet {
             this.map.touchZoom.disable();
             this.map.scrollWheelZoom.disable();
         }
+
+        this.updateRegion({}, this.props);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.shouldRegionUpdates(this.props, nextProps)){
-          this.addRegion(nextProps);
-        } else if(!defined(nextProps.region.regionType)){
-          this.removeRegion();
-        }
+    updateRegion(previousProps, nextProps) {
+      if(this.shouldRegionUpdate(previousProps, nextProps)) {
+        this.addRegion(nextProps);
+      } else if(!defined(nextProps.region.regionType)){
+        this.removeRegion();
+      }
     }
 
-    shouldRegionUpdates(preProps, nextProps){
-      if(!defined(nextProps.regionMapping) || !defined(nextProps.region.regionType)){
+    componentDidUpdate(previousProps, previousState) {
+      this.updateRegion(previousProps, this.props);
+    }
+
+    shouldRegionUpdate(preProps, nextProps){
+      if (!defined(nextProps.regionMapping) || !defined(nextProps.region.regionType)) {
+        console.log('next has no region mapping or no region type');
         return false;
-      } else if((nextProps.region.regionType === preProps.region.regionType) &&
-                (nextProps.region.regionId === preProps.region.regionId)){
-          return false;
-        }
+      } else if (this.layer &&
+                 nextProps.region.regionType === preProps.region.regionType &&
+                 nextProps.region.regionId === preProps.region.regionId) {
+        console.log('next has same region type and ID');
+        return false;
+      }
+      console.log('yep updating');
       return true;
     }
 
@@ -97,6 +107,14 @@ class RegionMap extends Facet {
               getIDForLayerFeature: this.getID
           });
           this.layer.addTo(this.map);
+
+          const bbox = props.region.boundingBox;
+          if (bbox) {
+            this.map.fitBounds([
+              [bbox.south, bbox.west],
+              [bbox.north, bbox.east]
+            ]);
+          }
         }
     }
 
