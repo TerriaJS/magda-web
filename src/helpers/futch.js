@@ -15,7 +15,8 @@ export default function (url, updateProgress, transferFailed) {
       xhr.onload = function() {
         let status = xhr.status;
         if (status === 200) {
-          resolve(xhr.response);
+          var json = typeof xhr.response === 'string' || xhr.response instanceof String ? JSON.parse(xhr.response) : xhr.response;
+          resolve(json);
         } else {
           reject(status);
         }
