@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {fetchSearchResultsIfNeeded} from '../actions/results';
 import {fetchRegionMapping} from '../actions/regionMapping';
 import {connect} from 'react-redux';
 import config from '../config.js';
@@ -34,12 +33,12 @@ class Search extends Component {
 
   componentWillMount(){
     this.props.dispatch(fetchRegionMapping());
-    this.props.dispatch(fetchSearchResultsIfNeeded(this.props.location.query));
+
   }
 
-  componentWillReceiveProps(nextProps){
-    this.props.dispatch(fetchSearchResultsIfNeeded(nextProps.location.query));
-  }
+  // componentWillReceiveProps(nextProps){
+  //   this.props.dispatch(fetchSearchResultsIfNeeded(nextProps.location.query));
+  // }
 
   onSearchTextChange(text){
     this.setState({

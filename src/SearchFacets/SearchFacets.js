@@ -39,6 +39,10 @@ class SearchFacets extends Component {
   }
 
   toggleBasicOption(option, activeOptions, key,  removeOption, addOption, updateQuery){
+    this.props.updateQuery({
+      page: undefined
+    });
+
     let existingOptions = activeOptions.map(o=>o.value);
     let index = existingOptions.indexOf(option.value);
     if(index > -1){
@@ -52,10 +56,6 @@ class SearchFacets extends Component {
       })
       this.props.dispatch(addOption(option))
     }
-
-    this.props.updateQuery({
-      page: undefined
-    });
   }
 
 
@@ -88,7 +88,6 @@ class SearchFacets extends Component {
 
 
   onToggleRegionOption(region){
-    console.log(region);
     let {regionId, regionType} = region;
     this.props.updateQuery({
       regionId,
