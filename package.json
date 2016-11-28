@@ -15,7 +15,7 @@
     "d3-selection": "^1.0.2",
     "isomorphic-fetch": "^2.2.1",
     "leaflet": "^0.7.7",
-    "leaflet-mapbox-vector-tile": "steve9164/Leaflet.MapboxVectorTile",
+    "leaflet-mapbox-vector-tile": "TerriaJS/Leaflet.MapboxVectorTile",
     "lodash.debounce": "^4.0.8",
     "lodash.find": "^4.6.0",
     "lodash.findindex": "^4.6.0",
