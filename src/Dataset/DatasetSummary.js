@@ -50,7 +50,6 @@ export default class DatasetSummary extends Component {
                   }
                 </ul>
               </div>
-              {this.props.children}
           </div>
   }
 }
