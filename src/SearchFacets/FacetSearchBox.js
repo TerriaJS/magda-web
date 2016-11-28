@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './FacetSearchBox.css';
+import debounce from 'lodash.debounce';
 
 /**
   * Searchbox for facet facet
@@ -12,6 +13,7 @@ class FacetSearchBox extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.onExcKeyDown = this.onExcKeyDown.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.debounceSearchFacet = debounce(this.searchFacet, 200);
 
     /**
      * @type {object}
@@ -97,7 +99,11 @@ class FacetSearchBox extends Component {
       searchText: e.target.value,
       indexOfOptionOnFocus: -1
     });
-    this.props.searchFacet(e.target.value);
+    this.debounceSearchFacet(e.target.value);
+  }
+
+  searchFacet(text) {
+    this.props.searchFacet(text);
   }
 
   clearSearch(){
