@@ -21,13 +21,11 @@ const store = createStore(
    search,
    applyMiddleware(
      thunkMiddleware, // lets us dispatch() functions
-     // loggerMiddleware // neat middleware that logs actions
+     loggerMiddleware // neat middleware that logs actions
    )
 )
 
 browserHistory.listen (location=>{
-  console.log(location);
-  debugger
   store.dispatch(fetchSearchResultsIfNeeded(location.query));
 })
 
