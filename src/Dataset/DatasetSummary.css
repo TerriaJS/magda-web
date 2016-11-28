@@ -9,6 +9,8 @@
 
 .dataset-summray-title{
   background: transparent;
+  color: #000;
+  font-weight: 600;
   padding: 0;
   font-size: 1.2em;
   white-space: normal;
