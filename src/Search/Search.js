@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {fetchSearchResultsIfNeeded} from '../actions/results';
 import {fetchRegionMapping} from '../actions/regionMapping';
 import {connect} from 'react-redux';
 import config from '../config.js';
@@ -24,7 +23,8 @@ class Search extends Component {
     this.goToPage=this.goToPage.bind(this);
     this.onClickTag = this.onClickTag.bind(this);
     this.handleSearchFieldEnterKeyPress = this.handleSearchFieldEnterKeyPress.bind(this);
-    this.debounceUpdateSearchQuery = debounce(this.updateSearchQuery, 3000);
+    this.debounceUpdateSearchQuery = debounce(this.autoUpdateSearchQuery, 3000);
+    this.searched = false;
     // it needs to be undefined here, so the default value should be from the url
     // once this value is set, the value should always be from the user input
     this.state={
@@ -34,17 +34,18 @@ class Search extends Component {
 
   componentWillMount(){
     this.props.dispatch(fetchRegionMapping());
-    this.props.dispatch(fetchSearchResultsIfNeeded(this.props.location.query));
+
   }
 
-  componentWillReceiveProps(nextProps){
-    this.props.dispatch(fetchSearchResultsIfNeeded(nextProps.location.query));
-  }
+  // componentWillReceiveProps(nextProps){
+  //   this.props.dispatch(fetchSearchResultsIfNeeded(nextProps.location.query));
+  // }
 
   onSearchTextChange(text){
     this.setState({
       searchText: text
     });
+    this.searched = false;
     this.debounceUpdateSearchQuery(text);
   }
 
@@ -53,6 +54,12 @@ class Search extends Component {
       searchText: tag
     });
     this.updateSearchQuery(tag);
+  }
+
+  autoUpdateSearchQuery(text){
+    if(this.searched === false){
+      this.updateSearchQuery(text);
+    }
   }
 
   updateSearchQuery(text){
@@ -72,6 +79,7 @@ class Search extends Component {
     // when user hit enter, no need to submit the form
     if(event.charCode===13){
         event.preventDefault();
+        this.searched = true;
         this.updateSearchQuery(this.state.searchText)
     }
   }
