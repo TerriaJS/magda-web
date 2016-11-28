@@ -1,5 +1,6 @@
 import './index.css';
 import { Router, Route, browserHistory, indexRoute } from 'react-router'
+import {fetchSearchResultsIfNeeded} from './actions/results';
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import React from 'react';
@@ -23,6 +24,10 @@ const store = createStore(
      loggerMiddleware // neat middleware that logs actions
    )
 )
+
+browserHistory.listen (location=>{
+  store.dispatch(fetchSearchResultsIfNeeded(location.query));
+})
 
 ReactDOM.render(
   <Provider store={store}>
