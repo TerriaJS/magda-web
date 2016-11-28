@@ -25,7 +25,7 @@ export default class DatasetSummary extends Component {
               <div className='dataset-summray-main'>
                 <h3 className='result-header'>
                   <div className='result-header-left'>
-                    <a href={dataset.landingPage} target='_blank' className='dataset-summray-title' type='button'>{dataset.title}</a>
+                    <span target='_blank' className='dataset-summray-title' type='button'>{dataset.title}</span>
                   </div>
                   <div className='result-header-middle'>
                     <Star/>

@@ -9,7 +9,16 @@ const initialData = {
   progress: 0,
   activePublishers: [],
   activeFormats: [],
-  activeRegion: {regionId: undefined, regionType: undefined},
+  activeRegion: {
+      regionId: undefined,
+      regionType: undefined,
+      boundingBox: {
+      west: 105,
+      south: -45,
+      east: 155,
+      north: -5
+    }
+  },
   activeDateFrom: undefined,
   activeDateTo:undefined,
   publisherOptions: [],
@@ -53,13 +62,12 @@ const results = (state=initialData, action) => {
 
 
       let activePublishers = findMatchingObjs(query.publishers, publisherOptions);
-      let activeDateFrom = defined(query.dateFrom) ? query.dateFrom.slice(0, 4): undefined;
-      let activeDateTo = defined(query.dateTo) ? query.dateTo.slice(0, 4) : undefined;
+      let activeDateFrom = defined(query.dateFrom) ? query.dateFrom.slice(0, 4): initialData.activeDateFrom;
+      let activeDateTo = defined(query.dateTo) ? query.dateTo.slice(0, 4) : initialData.activeDateTo;
 
       let activeFormats = findMatchingObjs(query.formats, formatOptions);;
 
-      let activeRegion = {regionId: defined(query.regions[0]) ? query.regions[0].regionId : undefined,
-                          regionType: defined(query.regions[0]) ? query.regions[0].regionType : undefined};
+      let activeRegion = query.regions[0] || initialData.activeRegion;
 
       return Object.assign({}, state, {
         isFetching: false,

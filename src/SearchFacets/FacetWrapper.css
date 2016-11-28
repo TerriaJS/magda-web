@@ -105,8 +105,23 @@
     padding: 2px 5px 2px 12px;
 }
 
+.btn-facet-option__detail {
+  font-size: small;
+  color: #999;
+  padding: 0px 0px 0px 12px;
+}
+
+.btn-facet-option__location {
+  line-height: initial;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .btn-facet-option__location .btn-facet-option__name{
   width: calc(100% - 50px);
+  float: none;
+  display: inline;
+  padding: 2px 0px 2px 12px;
 }
 
 
