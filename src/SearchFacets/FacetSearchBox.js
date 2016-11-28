@@ -121,7 +121,7 @@ class FacetSearchBox extends Component {
             <input className='form-control'
                    type="text"
                    value={this.state.searchText}
-                   onChange={this.onSearchTextChange}
+                   onInput={this.onSearchTextChange}
                    />
             {this.state.searchText.length > 0 &&
               <button type='button' className='btn btn-clear-search' onClick={this.clearSearch}>
