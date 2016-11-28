@@ -2,7 +2,7 @@ import defined from '../helpers/defined';
 import React from 'react';
 
 function RegionSummary(props){
-	const name = defined(props.region.regionName) || '';
+	const name = props.region.regionName || '';
 	const typeName = defined(props.regionMapping) &&
                    defined(props.regionMapping[props.region.regionType]) ?
                    props.regionMapping[props.region.regionType].description : '';
