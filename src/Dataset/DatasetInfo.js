@@ -12,7 +12,7 @@ export default class DatasetInfo extends Component {
   }
   render(){
     let dataset = this.props.dataset;
-    return <div className='dataset-info'>
+    return <div className={`dataset-info ${this.props.isVisible ? 'is-open' : ''}`}>
               <div className='traingle'></div>
               <div className='dataset-info-inner'>
                 <button className='dataset-info-close-btn'><i className="fa fa-times" aria-hidden="true" onClick={this.props.onClickClose}></i></button>
@@ -47,6 +47,6 @@ export default class DatasetInfo extends Component {
   }
 }
 
-DatasetInfo.propTypes = {isOpen: React.PropTypes.bool,
+DatasetInfo.propTypes = {isVisible: React.PropTypes.bool,
                          dataset: React.PropTypes.object};
-DatasetInfo.defaultProps = {isOpen: false};
+DatasetInfo.defaultProps = {isVisible: false};
