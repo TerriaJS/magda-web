@@ -20,6 +20,7 @@ export function receiveFormats(generalQuery, facetQuery, json){
 }
 
 export function fetchFormatSearchResults(generalQuery, facetQuery) {
+  console.log(config().searchApiBaseUrl + `facets/format/options/search?generalQuery=${generalQuery}&facetQuery=${facetQuery}`);
   return (dispatch)=>{
     dispatch(requestFormats(generalQuery, facetQuery))
     return fetch(config().searchApiBaseUrl + `facets/format/options/search?generalQuery=${generalQuery}&facetQuery=${facetQuery}`)

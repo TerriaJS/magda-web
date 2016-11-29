@@ -12,6 +12,7 @@ import config from '../config.js';
 import debounce from 'lodash.debounce';
 import defined from '../helpers/defined';
 import Pagination from '../UI/Pagination';
+import Notification from '../UI/Notification';
 import ProgressBar from '../UI/ProgressBar';
 import React, { Component } from 'react';
 import SearchBox from './SearchBox';
@@ -40,8 +41,8 @@ class Search extends Component {
     this.onTogglePublisherOption = this.onTogglePublisherOption.bind(this);
     this.onToggleRegionOption = this.onToggleRegionOption.bind(this);
     this.onToggleTemporalOption = this.onToggleTemporalOption.bind(this);
-    this.searched = false;
     this.updateQuery = this.updateQuery.bind(this);
+    this.onDismissError = this.onDismissError.bind(this);
 
     // it needs to be undefined here, so the default value should be from the url
     // once this value is set, the value should always be from the user input
@@ -163,7 +164,7 @@ class Search extends Component {
   }
 
   onSearchPublisherFacet(facetKeyword){
-    this.props.dispatch(fetchPublisherSearchResults(this.props.keyword, facetKeyword))
+    this.props.dispatch(fetchPublisherSearchResults(this.props.location.query.q, facetKeyword))
   }
 
 
@@ -176,7 +177,7 @@ class Search extends Component {
   }
 
   onSearchFormatFacet(facetKeyword){
-    this.props.dispatch(fetchFormatSearchResults(this.props.keyword, facetKeyword))
+    this.props.dispatch(fetchFormatSearchResults(this.props.location.query.q, facetKeyword))
   }
 
 
@@ -223,6 +224,10 @@ class Search extends Component {
     // dispatch event
     this.props.dispatch(resetDateFrom());
     this.props.dispatch(resetDateTo());
+  }
+
+  onDismissError(){
+    this.updateSearchQuery('');
   }
 
 
@@ -296,7 +301,9 @@ class Search extends Component {
                  </div>
                }
                {!this.props.isFetching && this.props.hasError &&
-                 <div className='search-error'>{this.props.errorMessage}</div>
+                  <Notification content={this.props.errorMessage}
+                                type='error'
+                                onDismiss={this.onDismissError}/>
                }
             </div>
           </div>
