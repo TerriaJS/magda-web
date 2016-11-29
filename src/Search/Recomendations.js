@@ -8,7 +8,8 @@ class Recomendations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      isVisible: true
     }
     this.onClick= this.onClick.bind(this);
     this.onClickElseWhere=this.onClickElseWhere.bind(this);
@@ -17,6 +18,9 @@ class Recomendations extends Component {
   componentDidMount(){
     // when esc key is pressed at anytime, clear search box and close the search result list
     window.addEventListener('click', this.onClickElseWhere);
+    this.setState({
+      isVisible: true
+    })
   }
 
   componentWillUnmount(){
@@ -32,7 +36,8 @@ class Recomendations extends Component {
   onClick(e){
     e.stopPropagation();
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
+      isVisible: false
     })
   }
 
