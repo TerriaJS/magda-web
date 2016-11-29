@@ -17,7 +17,7 @@ import React, { Component } from 'react';
 import SearchBox from './SearchBox';
 import SearchFacets from '../SearchFacets/SearchFacets';
 import SearchResults from '../SearchResults/SearchResults';
-import SearchRecomendations from './SearchRecomendations';
+import Recomendations from './Recomendations';
 
 
 class Search extends Component {
@@ -237,7 +237,7 @@ class Search extends Component {
                 <SearchBox value={this.getSearchBoxValue()}
                            onChange={this.onSearchTextChange}
                            onKeyPress={this.handleSearchFieldEnterKeyPress}/>
-                <SearchRecomendations options={this.props.publisherOptions}
+                <Recomendations options={this.props.publisherOptions}
                                       onClick={this.onTogglePublisherOption}
                                       activeOptions={this.props.activePublishers}
                                       description={"Are you searching for items published by"}

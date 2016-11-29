@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import find from 'lodash.find';
 
 
-import './SearchRecomendations.css';
+import './Recomendations.css';
 
-class SearchRecomendations extends Component {
+class Recomendations extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -80,7 +80,7 @@ class SearchRecomendations extends Component {
     }
   }
 }
-SearchRecomendations.propTypes = {};
+Recomendations.propTypes = {};
 
 
-export default SearchRecomendations;
+export default Recomendations;
