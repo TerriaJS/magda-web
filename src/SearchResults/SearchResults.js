@@ -51,7 +51,9 @@ class SearchResults extends Component {
                               isExpanded={this.state.expandedItem === result}
                               onClickTag={this.props.onClickTag}
               />
-              <DatasetInfo dataset={result} onClickClose={this.onCloseDataset} isVisible={this.state.expandedItem === result}/>
+              <div className={`search-result-dataset-info ${this.state.expandedItem === result ? 'is-open' : ''}`}>
+                <DatasetInfo dataset={result} onClickClose={this.onCloseDataset}/>
+              </div>
             </li>
           )
         }

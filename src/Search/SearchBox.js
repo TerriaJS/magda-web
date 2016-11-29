@@ -4,6 +4,13 @@ import React, { Component } from 'react';
 import './SearchBox.css';
 
 class SearchBox extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchText: ''
+    }
+  }
+
   onChange(event){
     this.setState({
       searchText: event.target.value
@@ -11,10 +18,9 @@ class SearchBox extends Component {
     this.debounceSearch(event.target.value);
   }
 
-
   render() {
     return (
-      <form className="search-box col-sm-8 col-sm-offset-4">
+      <form className="search-box">
         <div className='input-group'>
         <input
           type="text"
