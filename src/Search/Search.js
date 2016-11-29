@@ -237,9 +237,10 @@ class Search extends Component {
                 <SearchBox value={this.getSearchBoxValue()}
                            onChange={this.onSearchTextChange}
                            onKeyPress={this.handleSearchFieldEnterKeyPress}/>
-                <SearchRecomendations publisherOptions={this.props.publisherOptions}
-                                      onTogglePublisherOption={this.onTogglePublisherOption}
-                                      activePublishers={this.props.activePublishers}
+                <SearchRecomendations options={this.props.publisherOptions}
+                                      onClick={this.onTogglePublisherOption}
+                                      activeOptions={this.props.activePublishers}
+                                      description={"Are you searching for items published by"}
                 />
               </div>
             </div>

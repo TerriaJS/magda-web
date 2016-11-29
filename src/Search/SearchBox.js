@@ -4,13 +4,19 @@ import React, { Component } from 'react';
 import './SearchBox.css';
 
 class SearchBox extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchText: ''
+    }
+  }
+
   onChange(event){
     this.setState({
       searchText: event.target.value
     })
     this.debounceSearch(event.target.value);
   }
-
 
   render() {
     return (
