@@ -296,7 +296,7 @@ class Search extends Component {
                  </div>
                }
                {!this.props.isFetching && this.props.hasError &&
-                 <div className='search-error'> error in request </div>
+                 <div className='search-error'>{this.props.errorMessage}</div>
                }
             </div>
           </div>
@@ -318,6 +318,7 @@ Search.propTypes = {
   progress: React.PropTypes.number.isRequired,
   hasError: React.PropTypes.bool.isRequired,
   strategy: React.PropTypes.string.isRequired,
+  errorMessage: React.PropTypes.string
 }
 
 
@@ -330,6 +331,7 @@ function mapStateToProps(state) {
     progress: results.progress,
     hasError: results.hasError,
     strategy: results.strategy,
+    errorMessage: results.errorMessage,
 
     publisherOptions: results.publisherOptions,
     formatOptions: results.formatOptions,

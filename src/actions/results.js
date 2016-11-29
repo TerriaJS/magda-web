@@ -26,9 +26,10 @@ export function updateProgress(progress){
   }
 }
 
-export function transferFailed(error){
+export function transferFailed(errorMessage){
   return {
     type: actionTypes.FETCH_ERROR,
+    errorMessage
   }
 }
 
@@ -40,15 +41,12 @@ export function fetchSearchResults(query) {
     return futch(config().searchApiBaseUrl + `datasets/search?query=${query}`,
       (progressEvent)=>{
       dispatch(updateProgress(progressEvent.loaded / progressEvent.total))
-      },
-      (errorEvent)=>{
-        dispatch(transferFailed(errorEvent))
       }
     )
     .then(json =>
       dispatch(receiveResults(query, json))
     )
-    .catch(error=>{
+    .catch((error)=>{
       dispatch(transferFailed(error))
     })
   }
