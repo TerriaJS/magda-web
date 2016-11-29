@@ -14,7 +14,7 @@ class SearchBox extends Component {
 
   render() {
     return (
-      <form className="search-box col-sm-8 col-sm-offset-4">
+      <form className="search-box">
         <div className='input-group'>
         <input
           type="text"

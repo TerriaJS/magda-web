@@ -17,6 +17,7 @@ import React, { Component } from 'react';
 import SearchBox from './SearchBox';
 import SearchFacets from '../SearchFacets/SearchFacets';
 import SearchResults from '../SearchResults/SearchResults';
+import SearchRecomendations from './SearchRecomendations';
 
 
 class Search extends Component {
@@ -232,17 +233,21 @@ class Search extends Component {
         <div className='search'>
           <div className='search__search-header'>
             <div className='container'>
-              <SearchBox value={this.getSearchBoxValue()}
-                         onChange={this.onSearchTextChange}
-                         onKeyPress={this.handleSearchFieldEnterKeyPress}/>
+              <div className='col-sm-8 col-sm-offset-4'>
+                <SearchBox value={this.getSearchBoxValue()}
+                           onChange={this.onSearchTextChange}
+                           onKeyPress={this.handleSearchFieldEnterKeyPress}/>
+                <SearchRecomendations publisherOptions={this.props.publisherOptions}
+                                      onTogglePublisherOption={this.onTogglePublisherOption}
+                                      activePublishers={this.props.activePublishers}
+                />
+              </div>
             </div>
           </div>
           <div className='search__search-body container'>
             <div className='col-sm-4'>
                 {this.getSearchBoxValue().length > 0 &&
-                 <SearchFacets updateQuery={this.updateQuery}
-                               keyword={this.props.location.query.q}
-                               publisherOptions={this.props.publisherOptions}
+                 <SearchFacets publisherOptions={this.props.publisherOptions}
                                formatOptions={this.props.formatOptions}
                                temporalOptions={this.props.temporalOptions}
                                activePublishers={this.props.activePublishers}

@@ -1,0 +1,12 @@
+.search-recomendation-option-btn{
+  background: rgba(255, 255, 255, 0);
+  color: #3498db;
+  padding: 3px 0;
+  line-height: 1;
+}
+
+
+.search-recomendation{
+  margin-top: 20px;
+  font-weight: 600;
+}
