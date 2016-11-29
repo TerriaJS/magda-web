@@ -26,7 +26,8 @@ const initialData = {
   formatOptions: [],
   apiQuery: '',
   hasError: false,
-  strategy: "match-all"
+  strategy: "match-all",
+  errorMessage: ''
 }
 
 const results = (state=initialData, action) => {
@@ -45,9 +46,11 @@ const results = (state=initialData, action) => {
       })
 
     case 'FETCH_ERROR':
+      console.log(action);
       return Object.assign({}, state, {
         isFetching: false,
-        hasError: true
+        hasError: true,
+        errorMessage: action.errorMessage
       })
 
     case 'RECEIVE_RESULTS':
