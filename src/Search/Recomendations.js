@@ -11,7 +11,8 @@ class Recomendations extends Component {
       isOpen: false,
       isVisible: true
     }
-    this.onClick= this.onClick.bind(this);
+    this.onToggle= this.onToggle.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.onClickElseWhere=this.onClickElseWhere.bind(this);
   }
 
@@ -33,16 +34,22 @@ class Recomendations extends Component {
     })
   }
 
-  onClick(e){
+  onClick(option){
+    this.setState({
+      isVisible: false
+    })
+    this.props.onClick(option);
+  }
+
+  onToggle(e){
     e.stopPropagation();
     this.setState({
-      isOpen: !this.state.isOpen,
-      isVisible: false
+      isOpen: !this.state.isOpen
     })
   }
 
   renderOption(option){
-    return <button className='btn-facet-option btn' onClick={this.props.onClick.bind(this, option)}>
+    return <button className='btn-facet-option btn' onClick={this.onClick.bind(this, option)}>
             <span className='btn-facet-option__name'>{option.value}</span>
             <span className='btn-facet-option__count'>{option.hitCount}</span>
           </button>
@@ -54,19 +61,19 @@ class Recomendations extends Component {
 
       let topSugguestion = suggestedOptions[0];
       let restOfOptions = suggestedOptions.slice(1, suggestedOptions.length-1);
-
+      console.log(this.state.isVisible);
       return (
-        <div className='search-recomendation' >
+        <div className={`search-recomendation clearfix ${this.state.isVisible ? '' : 'hidden'}`} >
             <div className='main'>
               {this.props.description}
               <button className='search-recomendation-option-btn btn'
-                      onClick={this.props.onClick.bind(this, topSugguestion)}>
+                      onClick={this.onClick.bind(this, topSugguestion)}>
                       {topSugguestion.value}
               </button> ?
             </div>
           {restOfOptions.length > 0 &&
             <div className='more-options'>
-              <button onClick={this.onClick} className='more-option-btn btn'>
+              <button onClick={this.onToggle} className='more-option-btn btn'>
                 More
                 <i className='fa fa-caret-down' aria-hidden="true"></i>
               </button>
