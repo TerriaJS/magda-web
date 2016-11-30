@@ -56,6 +56,12 @@ class Search extends Component {
     this.props.dispatch(fetchRegionMapping());
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      searchText: nextProps.location.query.q
+    })
+  }
+
   onSearchTextChange(text){
     this.setState({
       searchText: text
