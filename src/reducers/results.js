@@ -21,6 +21,7 @@ const initialData = {
   },
   activeDateFrom: undefined,
   activeDateTo:undefined,
+  freeText: '',
   publisherOptions: [],
   temporalOptions: [],
   formatOptions: [],
@@ -63,7 +64,7 @@ const results = (state=initialData, action) => {
       let temporalOptions = data.facets[1].options.sort((a, b)=>(b.lowerBound - a.lowerBound));
       let formatOptions = data.facets[2].options;
 
-
+      let freeText = query.freeText;
       let activePublishers = findMatchingObjs(query.publishers, publisherOptions);
       let activeDateFrom = defined(query.dateFrom) ? query.dateFrom.slice(0, 4): initialData.activeDateFrom;
       let activeDateTo = defined(query.dateTo) ? query.dateTo.slice(0, 4) : initialData.activeDateTo;
@@ -81,6 +82,7 @@ const results = (state=initialData, action) => {
         publisherOptions,
         temporalOptions,
         formatOptions,
+        freeText, 
         activePublishers,
         activeRegion,
         activeDateFrom,
