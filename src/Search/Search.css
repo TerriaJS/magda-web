@@ -40,3 +40,9 @@
 	width: 10px;
 	height: 10px;
 }
+
+.no-match{
+	padding: 10px;
+	font-weight: 600;
+	background: #ecf0f1;
+}
