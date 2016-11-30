@@ -26,7 +26,7 @@ export default class DatasetInfo extends Component {
                     {dataset.distributions.map((d, i)=>
                       <li key={i} className={`dataset-info--download-link clearfix ${d.format}`}>
                         <img src={this.getIcon(d.format)} alt={d.format} className='dataset-file-icon'/>
-                        <a href={d.downloadURL} target='_blank'>{d.description}({d.format})</a>
+                        <a href={d.downloadURL} target='_blank'>{d.title}({d.format})</a>
                       </li>
                     )}
                   </ul>
