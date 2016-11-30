@@ -1,5 +1,5 @@
 import './index.css';
-import { Router, Route, browserHistory, indexRoute } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import {fetchSearchResultsIfNeeded} from './actions/results';
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
@@ -32,8 +32,8 @@ browserHistory.listen (location=>{
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path={baseurl} component={Search}>
-        <indexRoute component={Search}/>
+      <Route path={baseurl}>
+        <IndexRoute component={Search}/>
       </Route>
     </Router>
   </Provider>,
