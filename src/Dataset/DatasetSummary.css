@@ -101,3 +101,16 @@
 .result-header .star-btn{
   padding: 0;
 }
+
+.search-result-tags li{
+  display: inline-block;
+  margin-right: 8px;
+}
+
+
+.search-result--tag-toggle{
+  background: rgba(255, 255, 255, 0);
+  color: #337ab7;
+  padding: 0;
+  text-decoration: underline;
+}

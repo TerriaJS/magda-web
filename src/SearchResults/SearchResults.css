@@ -18,12 +18,6 @@
   font-weight: normal;
 }
 
-
-.search-result--tag{
-  display: inline-block;
-  margin-right: 8px;
-}
-
 .search-result-dataset-info{
   max-height: 0;
   overflow: hidden;
