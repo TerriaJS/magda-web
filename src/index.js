@@ -11,9 +11,7 @@ import search from './reducers/index';
 import { createStore, applyMiddleware} from 'redux';
 
 
-
-let baseurl = location.hostname === "localhost" ? '/' : '/magda-web/build/';
-//<Route path="/magda-web/build/" component={Search}>
+let baseurl = location.pathname;
 
 const loggerMiddleware = createLogger()
 
