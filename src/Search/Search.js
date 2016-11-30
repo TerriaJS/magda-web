@@ -249,12 +249,6 @@ class Search extends Component {
                 <SearchBox value={this.getSearchBoxValue()}
                            onChange={this.onSearchTextChange}
                            onKeyPress={this.handleSearchFieldEnterKeyPress}/>
-                <Recomendations options={this.props.publisherOptions}
-                                      onClick={this.onTogglePublisherOption}
-                                      activeOptions={this.props.activePublishers}
-                                      description={"Are you searching for items published by"}
-                                      modifyUserSearchString={this.modifyUserSearchString}
-                />
               </div>
             </div>
           </div>
@@ -293,6 +287,13 @@ class Search extends Component {
                  !this.props.isFetching &&
                  !this.props.hasError &&
                  <div>
+
+                   <Recomendations options={this.props.publisherOptions}
+                                   onClick={this.onTogglePublisherOption}
+                                   activeOptions={this.props.activePublishers}
+                                   description={"Are you searching for items published by "}
+                                   modifyUserSearchString={this.modifyUserSearchString}
+                   />
                   {this.noMatchText()}
                   <SearchResults
                       searchResults={this.props.datasets}

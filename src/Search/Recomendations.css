@@ -1,16 +1,20 @@
+.search-recomendation{
+  margin: 0px 10px 20px 10px;
+  /*font-weight: 600;*/
+  background-color: #3498db;
+  color: #FFFFFF;
+  padding: 10px 15px;
+}
+
 .search-recomendation-option-btn{
-  background: rgba(255, 255, 255, 0);
-  color: #3498db;
+  background: none;
+  font-weight: 600;
+  color: #FFFFFF;
   padding: 3px 0;
   line-height: 1;
   display: inline-block;
   width: auto;
-}
-
-
-.search-recomendation{
-  margin-top: 20px;
-  font-weight: 600;
+  vertical-align: baseline;
 }
 
 .more-option-btn{
