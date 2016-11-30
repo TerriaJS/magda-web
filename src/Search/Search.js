@@ -117,8 +117,9 @@ class Search extends Component {
 
   noMatchText(){
     if(defined(this.props.location.query.q) &&
-       this.props.location.query.q > 0 &&
+       this.props.location.query.q.length > 0 &&
        this.props.strategy === 'match-part'){
+         console.log('park');
       return <div className='no-match'>
               Sorry we can not find what you were looking for, you might find the following related datasets useful?
             </div>
@@ -332,7 +333,7 @@ Search.propTypes = {
   progress: React.PropTypes.number.isRequired,
   hasError: React.PropTypes.bool.isRequired,
   strategy: React.PropTypes.string.isRequired,
-  freeText: React.PropTypes.string.isRequired,
+  freeText: React.PropTypes.string,
   errorMessage: React.PropTypes.string
 }
 
