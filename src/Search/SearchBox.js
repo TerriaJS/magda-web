@@ -12,9 +12,7 @@ class SearchBox extends Component {
   }
 
   searchBoxMounted(searchBox) {
-    setTimeout(() =>
-      searchBox.focus()
-    );
+    searchBox.focus();
   }
 
   onChange(event){
