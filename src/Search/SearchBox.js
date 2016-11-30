@@ -11,10 +11,14 @@ class SearchBox extends Component {
     }
   }
 
+  searchBoxMounted(searchBox) {
+    searchBox.focus();
+  }
+
   onChange(event){
     this.setState({
       searchText: event.target.value
-    })
+    });
     this.debounceSearch(event.target.value);
   }
 
@@ -26,9 +30,11 @@ class SearchBox extends Component {
           type="text"
           name="search"
           className='form-control'
+          placeholder="Enter a search term"
           value={this.props.value}
           onChange={(e)=>{this.props.onChange(e.target.value)}}
           onKeyPress={this.props.onKeyPress}
+          ref={this.searchBoxMounted}
         />
         <span className="input-group-addon"><i className="fa fa-search" aria-hidden="true"></i> </span>
         </div>
