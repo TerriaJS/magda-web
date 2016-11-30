@@ -43,6 +43,7 @@ class Search extends Component {
     this.onToggleTemporalOption = this.onToggleTemporalOption.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
     this.onDismissError = this.onDismissError.bind(this);
+    this.modifyUserSearchString = this.modifyUserSearchString.bind(this);
 
     // it needs to be undefined here, so the default value should be from the url
     // once this value is set, the value should always be from the user input
@@ -192,6 +193,11 @@ class Search extends Component {
     this.props.dispatch(addRegion(region));
   }
 
+  modifyUserSearchString(additionalString){
+    let base = this.props.freeText;
+    this.updateSearchQuery(`${base} ${additionalString}`);
+  }
+
   onResetRegionFacet(){
     this.updateQuery({
       regionId: undefined,
@@ -246,6 +252,7 @@ class Search extends Component {
                                       onClick={this.onTogglePublisherOption}
                                       activeOptions={this.props.activePublishers}
                                       description={"Are you searching for items published by"}
+                                      modifyUserSearchString={this.modifyUserSearchString}
                 />
               </div>
             </div>
@@ -325,6 +332,7 @@ Search.propTypes = {
   progress: React.PropTypes.number.isRequired,
   hasError: React.PropTypes.bool.isRequired,
   strategy: React.PropTypes.string.isRequired,
+  freeText: React.PropTypes.string.isRequired,
   errorMessage: React.PropTypes.string
 }
 
@@ -339,6 +347,7 @@ function mapStateToProps(state) {
     hasError: results.hasError,
     strategy: results.strategy,
     errorMessage: results.errorMessage,
+    freeText: results.freeText,
 
     publisherOptions: results.publisherOptions,
     formatOptions: results.formatOptions,

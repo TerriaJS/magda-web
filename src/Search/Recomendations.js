@@ -39,6 +39,7 @@ class Recomendations extends Component {
       isVisible: false
     })
     this.props.onClick(option);
+    this.props.modifyUserSearchString('by ' + option.value);
   }
 
   onToggle(e){
