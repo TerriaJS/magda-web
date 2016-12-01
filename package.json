@@ -44,7 +44,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "bash -c \"npm run build && aws --profile $npm_package_config_awsProfile s3 sync --delete ./build/ $npm_package_config_awsS3BasePath/$(eval echo $npm_package_config_awsS3Dir)\""
+    "deploy": "rm -rf node_modules && npm run deploy-without-reinstall",
+    "deploy-without-reinstall": "npm run build && npm run deploy-current",
+    "deploy-current": "bash -c \"echo $npm_package_config_awsS3BasePath && aws --profile $npm_package_config_awsProfile s3 sync --delete ./build/ $npm_package_config_awsS3BasePath/$(eval echo $npm_package_config_awsS3Dir)\""
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
