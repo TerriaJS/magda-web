@@ -1,8 +1,9 @@
+// eslint-disable-next-line
+import createLogger from 'redux-logger'
 import './index.css';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import {fetchSearchResultsIfNeeded} from './actions/results';
 import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Search from './Search/Search';
@@ -19,7 +20,7 @@ const store = createStore(
    search,
    applyMiddleware(
      thunkMiddleware, // lets us dispatch() functions
-     loggerMiddleware // neat middleware that logs actions
+     // loggerMiddleware // neat middleware that logs actions
    )
 )
 

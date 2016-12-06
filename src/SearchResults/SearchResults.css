@@ -6,7 +6,6 @@
 
 .search-result{
   background: #fff;
-  margin-bottom: 10px;
 }
 
 .search-results-count{
@@ -31,4 +30,10 @@
 
 .search-result-dataset-info.is-open{
   max-height: 600px;
+}
+
+@media (max-width: 768px) {
+  .search-result{
+    margin-bottom: 10px;
+  }
 }

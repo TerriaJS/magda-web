@@ -57,11 +57,16 @@ export default class DatasetSummary extends Component {
 
   render(){
     let dataset = this.props.dataset;
-    return <div className='dataset-summray' onClick={(e)=>{window.open(dataset.landingPage, '_blank');}}>
+    return <div className={`dataset-summray ${this.props.isExpanded ? 'is-expanded': ''}`}>
               <div className='dataset-summray-main'>
                 <h3 className='result-header'>
                   <div className='result-header-left'>
-                    <span target='_blank' className='dataset-summray-title' type='button'>{dataset.title}</span>
+                    <button target='_blank'
+                            className='dataset-summray-title btn'
+                            type='button'
+                            onClick={(e)=>{window.open(dataset.landingPage, '_blank')}}>
+                      {dataset.title}
+                    </button>
                   </div>
                   <div className='result-header-middle hidden-xs'>
                     <Star/>
@@ -75,7 +80,7 @@ export default class DatasetSummary extends Component {
                   </div>
                 </h3>
                 {defined(dataset.publisher) && <label className='search-result--publisher'>{dataset.publisher.name}</label>}
-                <div className='dataset-description'>
+                <div className='dataset-description' onClick={this.props.onClickDataset}>
                   <MarkdownViewer markdown={dataset.description}/>
                 </div>
                 <ul className='list-unstyled tags'>
