@@ -47,6 +47,7 @@ class Search extends Component {
     this.modifyUserSearchString = this.modifyUserSearchString.bind(this);
     this.updateSearchQuery = this.updateSearchQuery.bind(this);
     this.onClearSearch = this.onClearSearch.bind(this);
+    this.onClickSearch = this.onClickSearch.bind(this);
 
     // it needs to be undefined here, so the default value should be from the url
     // once this value is set, the value should always be from the user input
@@ -103,6 +104,10 @@ class Search extends Component {
         event.preventDefault();
         this.debounceUpdateSearchQuery.flush();
     }
+  }
+
+  onClickSearch(){
+    this.debounceUpdateSearchQuery.flush();
   }
 
   goToPage(index){
@@ -263,7 +268,8 @@ class Search extends Component {
                 <SearchBox value={this.getSearchBoxValue()}
                            onChange={this.onSearchTextChange}
                            onKeyPress={this.handleSearchFieldEnterKeyPress}
-                           onClearSearch={this.onClearSearch}/>
+                           onClearSearch={this.onClearSearch}
+                           onClickSearch={this.onClickSearch}/>
                 {this.getSearchBoxValue().length === 0 &&
                   <WelcomeText onClick={this.updateSearchQuery}/>
                 }
