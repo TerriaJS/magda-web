@@ -46,6 +46,8 @@ class Search extends Component {
     this.onDismissError = this.onDismissError.bind(this);
     this.modifyUserSearchString = this.modifyUserSearchString.bind(this);
     this.updateSearchQuery = this.updateSearchQuery.bind(this);
+    this.onClearSearch = this.onClearSearch.bind(this);
+    this.onClickSearch = this.onClickSearch.bind(this);
 
     // it needs to be undefined here, so the default value should be from the url
     // once this value is set, the value should always be from the user input
@@ -92,12 +94,20 @@ class Search extends Component {
     });
   }
 
+  onClearSearch(){
+    this.updateSearchQuery('');
+  }
+
   handleSearchFieldEnterKeyPress(event) {
     // when user hit enter, no need to submit the form
     if(event.charCode===13){
         event.preventDefault();
         this.debounceUpdateSearchQuery.flush();
     }
+  }
+
+  onClickSearch(){
+    this.debounceUpdateSearchQuery.flush();
   }
 
   goToPage(index){
@@ -253,11 +263,14 @@ class Search extends Component {
         <div className='search'>
           <div className='search__search-header'>
             <div className='container'>
+              <div className='row'>
               <div className='col-sm-8 col-sm-offset-4'>
                 <SearchBox value={this.getSearchBoxValue()}
                            onChange={this.onSearchTextChange}
-                           onKeyPress={this.handleSearchFieldEnterKeyPress}/>
-                {this.getSearchBoxValue().length == 0 &&
+                           onKeyPress={this.handleSearchFieldEnterKeyPress}
+                           onClearSearch={this.onClearSearch}
+                           onClickSearch={this.onClickSearch}/>
+                {this.getSearchBoxValue().length === 0 &&
                   <WelcomeText onClick={this.updateSearchQuery}/>
                 }
                 <Recomendations options={this.props.publisherOptions}
@@ -269,7 +282,9 @@ class Search extends Component {
               </div>
             </div>
           </div>
+          </div>
           <div className='search__search-body container'>
+          <div className='row'>
             <div className='col-sm-4 hidden-xs'>
                 {this.getSearchBoxValue().length > 0 &&
                  <SearchFacets publisherOptions={this.props.publisherOptions}
@@ -324,6 +339,7 @@ class Search extends Component {
                                 type='error'
                                 onDismiss={this.onDismissError}/>
                }
+              </div>
             </div>
           </div>
         </div>

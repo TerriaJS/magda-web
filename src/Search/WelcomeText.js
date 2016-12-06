@@ -2,10 +2,11 @@ import './WelcomeText.css';
 import React, { Component } from 'react';
 
 const examples = [
-  'mobile black spots by communication',
-  'population from 2002 to 2005',
+  'mobile black spots',
+  'taxation from 2014 to 2016',
   'water in Melbourne',
-  'health as CSV'
+  'health as CSV',
+  'advisers by Australian securities'
 ];
 
 class WelcomeText extends Component {
@@ -21,7 +22,7 @@ class WelcomeText extends Component {
   render(){
     return (<div className='welcome-text'> <div className='intro'>Try searching for</div>
                 <ul className='list-unstyled'>{examples.map(e=>
-                      <li key = {e}> <a href='#' onClick={this.onClick.bind(this, e)}>{e}</a></li>
+                      <li key={e}> <a href='#' onClick={this.onClick.bind(this, e)}>{e}</a></li>
                     )}
                 </ul>
             </div>);

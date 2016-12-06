@@ -15,7 +15,7 @@ export default class DatasetInfo extends Component {
     return <div className='dataset-info'>
               <div className='traingle hidden-xs'></div>
               <div className='dataset-info-inner'>
-                <button className='dataset-info-close-btn hidden-xs'><i className="fa fa-times" aria-hidden="true" onClick={this.props.onClickClose}></i></button>
+                <button className='dataset-info-close-btn hidden-xs' onClick={this.props.onClickClose}><i className="fa fa-times" aria-hidden="true" ></i></button>
                 <div className='dataset-info--source clearfix'>
                 <h5>Source</h5>
                     {dataset.catalog}
