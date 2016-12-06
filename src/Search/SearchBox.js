@@ -7,6 +7,7 @@ class SearchBox extends Component {
   constructor(props) {
     super(props);
     this.onClearSearch = this.onClearSearch.bind(this);
+    this.onClickSearch = this.onClickSearch.bind(this);
     this.state = {
       searchText: ''
     }
@@ -25,6 +26,10 @@ class SearchBox extends Component {
 
   onClearSearch(){
     this.props.onClearSearch();
+  }
+
+  onClickSearch(){
+    this.props.onClickSearch();
   }
 
   render() {
@@ -47,7 +52,7 @@ class SearchBox extends Component {
           </button>
         }
         </div>
-        <span className="search-icon"><i className="fa fa-search" aria-hidden="true"></i> </span>
+        <button onClick={this.onClickSearch} type='button' className="btn btn-search-icon"><i className="fa fa-search" aria-hidden="true"></i> </button>
       </form>
     );
   }
