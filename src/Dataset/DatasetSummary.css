@@ -2,10 +2,6 @@
   padding: 1.5em 10px;
   border-bottom: 1px solid #eee;
 }
-.dataset-summray:hover{
-  cursor: pointer;
-  background: #f8f8f8;
-}
 
 .dataset-summray-title{
   background: transparent;
@@ -16,6 +12,10 @@
   white-space: normal;
   text-align: left;
   padding-right: 5px;
+}
+
+.dataset-summray-title:hover{
+  color: #0579c7;
 }
 
 .dataset-summray h1{
@@ -47,6 +47,10 @@
   margin-bottom: 10px;
 }
 
+.dataset-description:hover{
+  cursor: pointer;
+}
+
 
 .dataset-description > .markdown:before {
   content:'';
@@ -58,8 +62,9 @@
   background:linear-gradient(rgba(255, 255, 255, 0) 50px, #FFF);
 }
 
-.dataset-summray:hover .dataset-description > .markdown:before{
-  background:linear-gradient(rgba(255, 255, 255, 0) 50px, #f8f8f8);
+
+.dataset-summray.is-expanded .dataset-description > .markdown:before{
+  background: rgba(255, 255, 255, 0);
 }
 
 .dataset-summray-toggle-info-btn{
@@ -114,6 +119,12 @@
   padding: 0;
   text-decoration: underline;
   vertical-align: baseline;
+}
+
+.dataset-summary-mobile-footer{
+  height: 20px;
+  margin-bottom: -10px;
+  margin-top: 10px;
 }
 
 .dataset-summary-mobile-footer .dataset-summray-toggle-info-btn{

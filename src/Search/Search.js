@@ -258,7 +258,7 @@ class Search extends Component {
                 <SearchBox value={this.getSearchBoxValue()}
                            onChange={this.onSearchTextChange}
                            onKeyPress={this.handleSearchFieldEnterKeyPress}/>
-                {this.getSearchBoxValue().length == 0 &&
+                {this.getSearchBoxValue().length === 0 &&
                   <WelcomeText onClick={this.updateSearchQuery}/>
                 }
                 <Recomendations options={this.props.publisherOptions}

@@ -22,7 +22,7 @@ class WelcomeText extends Component {
   render(){
     return (<div className='welcome-text'> <div className='intro'>Try searching for</div>
                 <ul className='list-unstyled'>{examples.map(e=>
-                      <li key = {e}> <a href='#' onClick={this.onClick.bind(this, e)}>{e}</a></li>
+                      <li key={e}> <a href='#' onClick={this.onClick.bind(this, e)}>{e}</a></li>
                     )}
                 </ul>
             </div>);
