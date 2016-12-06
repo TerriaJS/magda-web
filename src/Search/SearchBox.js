@@ -40,7 +40,7 @@ class SearchBox extends Component {
           type="text"
           name="search"
           className='form-control'
-          placeholder="Enter a search term"
+          placeholder="Search"
           value={this.props.value}
           onChange={(e)=>{this.props.onChange(e.target.value)}}
           onKeyPress={this.props.onKeyPress}
