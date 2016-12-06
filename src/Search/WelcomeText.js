@@ -2,10 +2,11 @@ import './WelcomeText.css';
 import React, { Component } from 'react';
 
 const examples = [
-  'mobile black spots by communication',
-  'population from 2002 to 2005',
+  'mobile black spots',
+  'taxation from 2014 to 2016',
   'water in Melbourne',
-  'health as CSV'
+  'health as CSV',
+  'advisers by Australian securities'
 ];
 
 class WelcomeText extends Component {
