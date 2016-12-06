@@ -6,6 +6,7 @@ import './SearchBox.css';
 class SearchBox extends Component {
   constructor(props) {
     super(props);
+    this.onClearSearch = this.onClearSearch.bind(this);
     this.state = {
       searchText: ''
     }
@@ -22,10 +23,14 @@ class SearchBox extends Component {
     this.debounceSearch(event.target.value);
   }
 
+  onClearSearch(){
+    this.props.onClearSearch();
+  }
+
   render() {
     return (
       <form className="search-box">
-        <div className='input-group'>
+        <div className='search-input'>
         <input
           type="text"
           name="search"
@@ -36,8 +41,13 @@ class SearchBox extends Component {
           onKeyPress={this.props.onKeyPress}
           ref={this.searchBoxMounted}
         />
-        <span className="input-group-addon"><i className="fa fa-search" aria-hidden="true"></i> </span>
+        {this.props.value.length > 0 &&
+          <button type='button' className='btn btn-clear-search' onClick={this.onClearSearch}>
+            <i className="fa fa-times" aria-hidden="true"></i>
+          </button>
+        }
         </div>
+        <span className="search-icon"><i className="fa fa-search" aria-hidden="true"></i> </span>
       </form>
     );
   }
