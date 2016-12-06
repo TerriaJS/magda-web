@@ -63,10 +63,10 @@ export default class DatasetSummary extends Component {
                   <div className='result-header-left'>
                     <span target='_blank' className='dataset-summray-title' type='button'>{dataset.title}</span>
                   </div>
-                  <div className='result-header-middle'>
+                  <div className='result-header-middle hidden-xs'>
                     <Star/>
                   </div>
-                  <div className='result-header-right'>
+                  <div className='result-header-right hidden-xs'>
                     {!this.props.isExpanded && <button className='dataset-summray-toggle-info-btn'
                                                        onClick={this.props.onClickDataset}
                                                        type='button'>
@@ -81,6 +81,13 @@ export default class DatasetSummary extends Component {
                 <ul className='list-unstyled tags'>
                   {this.getTags()}
                 </ul>
+              </div>
+              <div className='dataset-summary-mobile-footer visible-xs clearfix'>
+              {!this.props.isExpanded && <button className='dataset-summray-toggle-info-btn'
+                                                 onClick={this.props.onClickDataset}
+                                                 type='button'>
+                  <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
+              </button>}
               </div>
           </div>
   }

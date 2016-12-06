@@ -19,6 +19,7 @@ import SearchBox from './SearchBox';
 import SearchFacets from '../SearchFacets/SearchFacets';
 import SearchResults from '../SearchResults/SearchResults';
 import Recomendations from './Recomendations';
+import WelcomeText from './WelcomeText';
 
 
 class Search extends Component {
@@ -44,6 +45,7 @@ class Search extends Component {
     this.updateQuery = this.updateQuery.bind(this);
     this.onDismissError = this.onDismissError.bind(this);
     this.modifyUserSearchString = this.modifyUserSearchString.bind(this);
+    this.updateSearchQuery = this.updateSearchQuery.bind(this);
 
     // it needs to be undefined here, so the default value should be from the url
     // once this value is set, the value should always be from the user input
@@ -255,6 +257,9 @@ class Search extends Component {
                 <SearchBox value={this.getSearchBoxValue()}
                            onChange={this.onSearchTextChange}
                            onKeyPress={this.handleSearchFieldEnterKeyPress}/>
+                {this.getSearchBoxValue().length == 0 &&
+                  <WelcomeText onClick={this.updateSearchQuery}/>
+                }
                 <Recomendations options={this.props.publisherOptions}
                                       onClick={this.onTogglePublisherOption}
                                       activeOptions={this.props.activePublishers}
@@ -265,7 +270,7 @@ class Search extends Component {
             </div>
           </div>
           <div className='search__search-body container'>
-            <div className='col-sm-4'>
+            <div className='col-sm-4 hidden-xs'>
                 {this.getSearchBoxValue().length > 0 &&
                  <SearchFacets publisherOptions={this.props.publisherOptions}
                                formatOptions={this.props.formatOptions}

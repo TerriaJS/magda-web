@@ -1,6 +1,6 @@
 .dataset-info{
   background: #dcdfe1;
-  margin: 20px 0 30px 0;
+  margin: 20px 0 20px 0;
   position: relative;
 }
 
@@ -89,4 +89,22 @@
   background: transparent;
   border: 0;
   color: #444;
+}
+
+.dataset-info-close-btn--footer{
+  background: transparent;
+  color: #337ab7;
+  border: 0;
+  box-shadow: none;
+  margin: 0 10px;
+}
+
+@media (max-width: 768px) {
+	.dataset-info,
+  .dataset-info-footer{
+		background: #ffffff;
+	}
+  .dataset-info .traingle{
+    display: none;
+  }
 }
