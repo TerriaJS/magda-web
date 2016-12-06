@@ -253,6 +253,7 @@ class Search extends Component {
         <div className='search'>
           <div className='search__search-header'>
             <div className='container'>
+              <div className='row'>
               <div className='col-sm-8 col-sm-offset-4'>
                 <SearchBox value={this.getSearchBoxValue()}
                            onChange={this.onSearchTextChange}
@@ -269,7 +270,9 @@ class Search extends Component {
               </div>
             </div>
           </div>
+          </div>
           <div className='search__search-body container'>
+          <div className='row'>
             <div className='col-sm-4 hidden-xs'>
                 {this.getSearchBoxValue().length > 0 &&
                  <SearchFacets publisherOptions={this.props.publisherOptions}
@@ -324,6 +327,7 @@ class Search extends Component {
                                 type='error'
                                 onDismiss={this.onDismissError}/>
                }
+              </div>
             </div>
           </div>
         </div>
