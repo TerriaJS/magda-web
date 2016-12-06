@@ -5,12 +5,36 @@
   font-size: 18px;
 }
 
-.search-box .input-group-addon{
+.search-box{
+  position: relative;
+}
+
+.search-box .btn-clear-search{
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  height: 100%;
+  background: transparent;
+}
+
+.search-box .search-icon{
 	height: 50px;
   padding: 6px 18px;
   font-size: 18px;
 	border-radius: 1px;
 	background-color: #3498db;
-  border: 1px solid #3498db;
   color: #fff;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.search-input{
+  width: calc(100% - 53px);
+  position: relative;
+}
+
+.search-box .search-icon .fa{
+  vertical-align: bottom;
 }

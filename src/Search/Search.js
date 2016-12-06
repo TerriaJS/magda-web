@@ -46,6 +46,7 @@ class Search extends Component {
     this.onDismissError = this.onDismissError.bind(this);
     this.modifyUserSearchString = this.modifyUserSearchString.bind(this);
     this.updateSearchQuery = this.updateSearchQuery.bind(this);
+    this.onClearSearch = this.onClearSearch.bind(this);
 
     // it needs to be undefined here, so the default value should be from the url
     // once this value is set, the value should always be from the user input
@@ -90,6 +91,10 @@ class Search extends Component {
       format: [],
       page: undefined
     });
+  }
+
+  onClearSearch(){
+    this.updateSearchQuery('');
   }
 
   handleSearchFieldEnterKeyPress(event) {
@@ -257,7 +262,8 @@ class Search extends Component {
               <div className='col-sm-8 col-sm-offset-4'>
                 <SearchBox value={this.getSearchBoxValue()}
                            onChange={this.onSearchTextChange}
-                           onKeyPress={this.handleSearchFieldEnterKeyPress}/>
+                           onKeyPress={this.handleSearchFieldEnterKeyPress}
+                           onClearSearch={this.onClearSearch}/>
                 {this.getSearchBoxValue().length === 0 &&
                   <WelcomeText onClick={this.updateSearchQuery}/>
                 }
