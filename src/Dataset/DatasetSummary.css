@@ -116,6 +116,12 @@
   vertical-align: baseline;
 }
 
+.dataset-summary-mobile-footer{
+  height: 20px;
+  margin-bottom: -10px;
+  margin-top: 10px;
+}
+
 .dataset-summary-mobile-footer .dataset-summray-toggle-info-btn{
   float: left;
   font-size: 20px;
