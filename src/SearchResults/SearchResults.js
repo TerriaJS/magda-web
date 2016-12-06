@@ -31,7 +31,7 @@ class SearchResults extends Component {
   getSummaryText(){
     if(this.props.searchResults.length){
       return (
-          <div className='search-results-count'>
+          <div className='search-results-count hidden-xs'>
             <h4><strong>{this.props.totalNumberOfResults} results found</strong></h4>
           </div>);
     }

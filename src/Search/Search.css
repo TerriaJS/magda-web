@@ -1,7 +1,7 @@
 .search__search-header{
 	background-color: #dcdfe1;
   padding: 23px 0;
-  margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .search__search-body__header{
@@ -45,4 +45,12 @@
 	padding: 10px;
 	font-weight: 600;
 	background: #dcdfe1;
+}
+
+
+
+@media (max-width: 768px) {
+	.search__search-body{
+		background: #dcdfe1;
+	}
 }
