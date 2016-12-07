@@ -1,7 +1,10 @@
 .facet-title{
-    font-weight: bold;
-    text-transform: uppercase;
-    flex-grow: 2;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #2B2B2B ;
+  text-transform: uppercase;
+	font-weight: 700;
+  margin: 15px 0;
 }
 
 .facet-header{

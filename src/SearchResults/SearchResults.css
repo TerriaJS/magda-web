@@ -9,18 +9,15 @@
 }
 
 .search-results-count{
-  font-size: 18px;
-	font-weight: bold;
-	color: #2b2b2b;
-  margin: 15px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #2B2B2B ;
   text-transform: uppercase;
-  padding: 0 10px;
+	font-weight: 700;
+  margin: 15px 0;
 }
 
-.search-result--publisher{
-  color: #95a5a6;
-  font-weight: normal;
-}
+
 
 .search-result-dataset-info{
   max-height: 0;
