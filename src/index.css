@@ -36,7 +36,7 @@ body {
 }
 
 input.form-control{
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.15);
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.15)!important;
 }
 
 @media (max-width: 768px) {
