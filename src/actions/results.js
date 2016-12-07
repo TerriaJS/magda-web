@@ -35,6 +35,7 @@ export function transferFailed(errorMessage){
 
 export function fetchSearchResults(query) {
   return (dispatch)=>{
+    console.log(config().searchApiBaseUrl + `datasets/search?query=${query}`);
     dispatch(requestResults(query))
     return fetch(config().searchApiBaseUrl + `datasets/search?query=${query}`)
     .then(response => response.json())

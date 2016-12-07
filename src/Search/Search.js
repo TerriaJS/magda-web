@@ -96,6 +96,7 @@ class Search extends Component {
 
   onClearSearch(){
     this.updateSearchQuery('');
+    this.debounceUpdateSearchQuery.cancel();
   }
 
   handleSearchFieldEnterKeyPress(event) {
