@@ -9,9 +9,6 @@
    box-shadow: 0;
 }
 
-.facet-wrapper .btn-reset{
-  padding-right: 0px;
-}
 
 .facet-wrapper .btn-reset, .facet-wrapper .btn-toggle-expand{
     color: rgb(102, 181, 252);

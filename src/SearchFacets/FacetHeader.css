@@ -8,5 +8,12 @@
 }
 
 .facet-header{
-    display: flex;
+  position: relative;
+}
+
+.facet-header .btn-reset{
+  position: absolute;
+  right: 0;
+  top: 3px;
+  padding-right: 0;
 }
