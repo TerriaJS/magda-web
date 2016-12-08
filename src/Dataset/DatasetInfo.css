@@ -99,6 +99,11 @@
   margin: 0 10px;
 }
 
+.dataset-info--content{
+  max-height: 400px;
+  overflow-y: auto;
+}
+
 @media (max-width: 768px) {
 	.dataset-info,
   .dataset-info-footer{

@@ -34,11 +34,13 @@ class MarkdownViewer extends Component {
       if(this.props.stripped == true){
         let text = marked(this.props.markdown, { renderer: renderer });
         let length = config().descriptionLength;
+        let array = text.split(" ");
+        let string = array.splice(0, length).join(" ");
 
-        if(text.length > length){
-          text = text.substring(0,config().descriptionLength) + '...';
+        if(array.length > length){
+           string += "...";
         }
-        return <div className='markdown-stripped'>{text}</div>
+        return <div className='markdown-stripped'>{string}</div>
       } else{
         let markdown = {__html: marked(this.props.markdown)};
         return <div className='markdown' dangerouslySetInnerHTML={markdown}/>
