@@ -38,13 +38,15 @@ export function fetchSearchResults(query) {
     console.log(config().searchApiBaseUrl + `datasets/search?query=${query}`);
     dispatch(requestResults(query))
     return fetch(config().searchApiBaseUrl + `datasets/search?query=${query}`)
-    .then(response => response.json())
+    .then(response => {
+      if (response.status >= 400) {
+        dispatch(transferFailed('Bad response from server'))
+      }
+      return response.json()}
+    )
     .then(json =>
       dispatch(receiveResults(query, json))
     )
-    .catch((error)=>{
-      dispatch(transferFailed(error))
-    })
   }
 }
 
