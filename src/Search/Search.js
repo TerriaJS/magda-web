@@ -138,7 +138,6 @@ class Search extends Component {
     if(defined(this.props.location.query.q) &&
        this.props.location.query.q.length > 0 &&
        this.props.strategy === 'match-part'){
-         console.log('park');
       return <div className='no-match'>
               Sorry we can not find what you were looking for, you might find the following related datasets useful?
             </div>
