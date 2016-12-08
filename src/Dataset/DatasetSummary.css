@@ -116,6 +116,10 @@
   margin-right: 8px;
 }
 
+.search-result-tags li a{
+  cursor: pointer;
+}
+
 
 .search-result--tag-toggle{
   background: rgba(255, 255, 255, 0);
