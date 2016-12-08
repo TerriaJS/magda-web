@@ -20,6 +20,7 @@ import SearchFacets from '../SearchFacets/SearchFacets';
 import SearchResults from '../SearchResults/SearchResults';
 import Recomendations from './Recomendations';
 import WelcomeText from './WelcomeText';
+import NoMatching from './NoMatching';
 
 
 class Search extends Component {
@@ -132,16 +133,6 @@ class Search extends Component {
       return this.props.location.query.q
     }
     return '';
-  }
-
-  noMatchText(){
-    if(defined(this.props.location.query.q) &&
-       this.props.location.query.q.length > 0 &&
-       this.props.strategy === 'match-part'){
-      return <div className='no-match'>
-              Sorry we can not find what you were looking for, you might find the following related datasets useful?
-            </div>
-    }
   }
 
   onTogglePublisherOption(publisher){
@@ -319,7 +310,7 @@ class Search extends Component {
                  !this.props.isFetching &&
                  !this.props.hasError &&
                  <div>
-                  {this.noMatchText()}
+                  <NoMatching datasets={this.props.datasets} strategy={this.props.strategy}/>
                   <SearchResults
                       searchResults={this.props.datasets}
                       totalNumberOfResults={this.props.hitCount}
