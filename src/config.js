@@ -3,6 +3,6 @@ export default function() {
         searchApiBaseUrl: 'http://magda-search-api.terria.io/',
         facetListSize: 5,
         resultsPerPage: 10,
-        descriptionLength: 200
+        descriptionLength: 50
     }
 }
