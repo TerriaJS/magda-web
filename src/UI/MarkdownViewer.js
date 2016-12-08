@@ -33,10 +33,10 @@ class MarkdownViewer extends Component {
     render(){
       if(this.props.stripped === true){
         let text = marked(this.props.markdown, { renderer: renderer });
+
         let length = config().descriptionLength;
         let array = text.split(" ");
-        let string = array.splice(0, length).join(" ");
-
+        let string = array.slice(0, length).join(" ");
         if(array.length > length){
            string += "...";
         }
