@@ -310,7 +310,12 @@ class Search extends Component {
                  !this.props.isFetching &&
                  !this.props.hasError &&
                  <div>
-                  <NoMatching datasets={this.props.datasets} strategy={this.props.strategy}/>
+                 {defined(this.props.location.query.q) &&
+                  this.props.location.query.q.length > 0 &&
+                    <NoMatching datasets={this.props.datasets}
+                                strategy={this.props.strategy}
+                    />
+                  }
                   <SearchResults
                       searchResults={this.props.datasets}
                       totalNumberOfResults={this.props.hitCount}
