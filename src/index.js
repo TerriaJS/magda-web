@@ -14,7 +14,8 @@ import { createStore, applyMiddleware} from 'redux';
 
 let baseurl = location.pathname;
 
-const loggerMiddleware = createLogger()
+// eslint-disable-next-line
+const loggerMiddleware = createLogger();
 
 const store = createStore(
    search,
