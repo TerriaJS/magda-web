@@ -31,7 +31,7 @@ LIST.forEach(l=>{
 
 class MarkdownViewer extends Component {
     render(){
-      if(this.props.stripped == true){
+      if(this.props.stripped === true){
         let text = marked(this.props.markdown, { renderer: renderer });
         let length = config().descriptionLength;
         let array = text.split(" ");
