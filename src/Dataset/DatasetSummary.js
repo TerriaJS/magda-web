@@ -14,10 +14,6 @@ export default class DatasetSummary extends Component {
     }
   }
 
-  truncate(s) {
-    return s.substring(0,200) + '...';
-  }
-
   onClick(tag, e){
     e.stopPropagation();
     this.props.onClickTag(tag);
@@ -55,44 +51,85 @@ export default class DatasetSummary extends Component {
     </ul>
   }
 
+  getIcon(format){
+    let fileTypes = ['Default', 'CSV', 'DOC', 'DOCX', 'HTML', 'JSON', 'KML', 'PDF', 'TXT', 'XLS','XLSX', 'ZIP'];
+    let type = 0;
+    if(fileTypes.indexOf(format) > 0){
+      type = fileTypes.indexOf(format)
+    }
+    return `./assets/file-icons/${fileTypes[type]}.png`;
+  }
+
+  renderLinks(){
+    return <div className='dataset-more-info'>
+              <div className='source clearfix'>
+              <h5 className='sub-heading'>Source</h5>
+                  {this.props.dataset.catalog}
+              </div>
+              <div className='content clearfix'>
+              <h5 className='sub-heading'>Contents</h5>
+                <ul className='list-unstyled'>
+                  {this.props.dataset.distributions.map((d, i)=>
+                    <li key={i} className={`media clearfix ${d.format}`}>
+                      <div className='media-left'>
+                        <img src={this.getIcon(d.format)} alt={d.format} className='media-object'/>
+                      </div>
+                      <div className="media-body">
+                        <a className='media-heading' href={d.downloadURL} target='_blank'>{d.title}({d.format})</a>
+                        <div className='license'>{d.license.name}</div>
+                      </div>
+                    </li>
+                  )}
+                </ul>
+              </div>
+           </div>
+  }
+
   render(){
     let dataset = this.props.dataset;
     return <div className={`dataset-summray ${this.props.isExpanded ? 'is-expanded': ''}`}>
-              <div className='dataset-summray-main'>
-                <h3 className='result-header'>
-                  <div className='result-header-left'>
+                <div className='header'>
+                  <div className='header-top clearfix'>
                     <button target='_blank'
                             className='dataset-summray-title btn'
                             type='button'
                             onClick={(e)=>{window.open(dataset.landingPage, '_blank')}}>
                       {dataset.title}
                     </button>
-                  </div>
-                  <div className='result-header-middle hidden-xs'>
-                    <Star/>
-                  </div>
-                  <div className='result-header-right hidden-xs'>
-                    {!this.props.isExpanded && <button className='dataset-summray-toggle-info-btn'
+                    <button className='dataset-summray-toggle-info-btn hidden-xs'
                                                        onClick={this.props.onClickDataset}
                                                        type='button'>
-                        <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
-                    </button>}
+                        {this.props.isExpanded ? <span>Close</span> : <i className="fa fa-ellipsis-h" aria-hidden="true"></i>}
+                    </button>
                   </div>
-                </h3>
-                <label className='search-result--publisher'>{defined(dataset.publisher) ? dataset.publisher.name : 'unspecified'}</label>
-                <div className='dataset-description' onClick={this.props.onClickDataset}>
-                  <MarkdownViewer markdown={dataset.description} stripped={true}/>
+                  {this.props.isExpanded && <div className='middle clearfix'>
+                      <div><a className='btn btn-view-dataset' href={dataset.landingPage} target='_blank'>View dataset</a></div>
+                      <div><Star/></div>
+                      <div>
+                        <a className='btn' href={`https://twitter.com/intent/tweet?url=${dataset.landingPage}`} target='_blank'>
+                          <i className="fa fa-share-alt" aria-hidden="true"></i>
+                        </a>
+                      </div>
+                  </div>}
                 </div>
-                <ul className='list-unstyled tags'>
-                  {this.getTags()}
-                </ul>
-              </div>
-              <div className='dataset-summary-mobile-footer visible-xs clearfix'>
-              {!this.props.isExpanded && <button className='dataset-summray-toggle-info-btn'
-                                                 onClick={this.props.onClickDataset}
-                                                 type='button'>
-                  <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
-              </button>}
+                <div className='body'>
+                  <label className='search-result--publisher'>{defined(dataset.publisher) ? dataset.publisher.name : 'unspecified'}</label>
+                  <div className='dataset-description' onClick={this.props.onClickDataset}>
+                    <MarkdownViewer markdown={dataset.description} stripped={true}/>
+                  </div>
+                  <ul className='list-unstyled tags'>
+                    {this.getTags()}
+                  </ul>
+                </div>
+              <div className='footer'>
+                  {this.props.isExpanded && this.renderLinks()}
+                  <div className='dataset-summary-mobile-footer visible-xs clearfix'>
+                    <button className='dataset-summray-toggle-info-btn'
+                                                       onClick={this.props.onClickDataset}
+                                                       type='button'>
+                        {this.props.isExpanded ? <span>Close</span> : <i className="fa fa-ellipsis-h" aria-hidden="true"></i>}
+                    </button>
+                  </div>
               </div>
           </div>
   }
