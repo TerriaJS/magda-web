@@ -22,7 +22,7 @@ class FacetBasic extends Component {
  * @param {object} option the current option to render
  */
   checkActiveOption(option){
-    return find(this.props.activeOptions, o=> o.value === option.value);
+    return find(this.props.activeOptions, o=> o.value.toLowerCase() === option.value.toLowerCase());
   }
   /**
     * expand the list (reacting to show more less button )
@@ -84,7 +84,7 @@ class FacetBasic extends Component {
                <ul className='list-unstyled'>
                  {that.props.activeOptions.sort((a, b)=>b.hitCount - a.hitCount).map(o=><li key={`${o.value}-${o.hitCount}`}>{that.renderOption(o, this.props.onToggleOption, maxOptionOptionList)}</li>)}
                </ul>
-               <ToggleList list={inactiveOptions} defaultLength={defaultSize} renderFunction= {(o)=>this.renderOption(o, this.props.onToggleOption, maxOptionOptionList)} getKey={(o)=>o.value} className={''}/>
+               <ToggleList list={inactiveOptions} defaultLength={defaultSize} renderFunction={(o)=>this.renderOption(o, this.props.onToggleOption, maxOptionOptionList)} getKey={(o)=>o.value} className={''}/>
            </FacetWrapper>
   }
 }
