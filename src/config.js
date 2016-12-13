@@ -1,8 +1,9 @@
 export default function() {
     return {
-        searchApiBaseUrl: 'http://magda-search-api.terria.io/',
+        searchApiBaseUrl: 'https://api.search.data.gov.au/',
         facetListSize: 5,
         resultsPerPage: 10,
-        descriptionLength: 50
+        descriptionLength: 50,
+        downloadLinksSize: 3
     }
 }
