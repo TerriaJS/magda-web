@@ -155,6 +155,13 @@ class Search extends Component {
         [key]: [...existingOptions.slice(0, index), ...existingOptions.slice(index+1)]
       })
       this.props.dispatch(removeOption(option))
+      // search if search text has this thing, if does, then remove it from search text as well
+      if(this.state.searchText.includes(option.value)){
+        this.updateQuery({
+          q: this.props.freeText
+        })
+      }
+
     } else{
       this.updateQuery({
         [key]: [...existingOptions, option.value]
