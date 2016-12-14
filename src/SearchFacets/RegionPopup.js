@@ -69,7 +69,7 @@ class RegionPopup extends Facet {
       let ids = Object.keys(this.props.regionMapping);
       return ids.map(id=> ({
         id,
-        value: this.props.regionMapping[id].description
+        value: defined(this.props.regionMapping[id].description) ? this.props.regionMapping[id].description : 'States' 
       }))
     }
 
