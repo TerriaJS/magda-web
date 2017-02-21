@@ -108,6 +108,7 @@ export default class DatasetSummary extends Component {
                               className={"dataset-summary-tags"}
                               />
 
+                  <div className='search-result--source'>Source: <span className='search-result--sourceName'>{dataset.catalog}</span></div>
                 </div>
               <div className='footer'>
                   {this.props.isExpanded && this.renderLinks()}
