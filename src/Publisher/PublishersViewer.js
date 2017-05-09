@@ -10,12 +10,11 @@ import Pagination from '../UI/Pagination';
 import './PublishersViewer.css';
 class PublishersViewer extends Component {
     componentWillMount(){
-      this.props.fetchPublishersIfNeeded(this.props.location.query.page);
+      this.props.fetchPublishersIfNeeded(this.props.location.query.page || 1);
     }
     
     componentWillReceiveProps(nextProps){
-      debugger
-      nextProps.fetchPublishersIfNeeded(nextProps.location.query.page);
+      nextProps.fetchPublishersIfNeeded(this.props.location.query.page || 1);
     }
 
     render(){
