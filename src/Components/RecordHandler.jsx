@@ -52,7 +52,7 @@ class RecordHandler extends React.Component {
                   <div>Updated {this.props.distribution.updatedDate}</div>
                 </div>
               </div>
-                <Tabs list = {config.distributionTabList} baseUrl = {`/dataset/${this.props.params.datasetId}/distribution/${this.props.params.distributionId}`}/>
+                <Tabs list={config.distributionTabList} baseUrl={`/dataset/${this.props.params.datasetId}/distribution/${this.props.params.distributionId}`}/>
             </div>
             <div className="tab-content">{this.props.children}</div>
             </div>
@@ -70,7 +70,7 @@ class RecordHandler extends React.Component {
                 <div>Updated {this.props.dataset.updatedDate}</div>
             </div>
           </div>
-          <Tabs list = {config.datasetTabList} baseUrl = {`/dataset/${this.props.params.datasetId}`}/>
+          <Tabs list={config.datasetTabList} baseUrl={`/dataset/${this.props.params.datasetId}`}/>
           <div className="tab-content">{this.props.children}</div>
       </div>
     );

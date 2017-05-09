@@ -7,8 +7,8 @@ import facetPublisherSearch from './facetPublisherSearch';
 import facetRegionSearch from './facetRegionSearch';
 import facetFormatSearch from './facetFormatSearch';
 import regionMapping from './regionMapping';
-import pageStats from './pageStats';
 import record from './recordReducer';
+import publisher from './publisherReducer';
 
 import { combineReducers } from 'redux';
 
@@ -18,7 +18,8 @@ const search = combineReducers({
   facetPublisherSearch,
   facetRegionSearch,
   facetFormatSearch,
-  record
+  record,
+  publisher
 });
 
 export default search;

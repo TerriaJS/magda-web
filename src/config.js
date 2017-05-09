@@ -5,7 +5,7 @@ import Temporal from './SearchFacets/Temporal';
 
 const config = {
         appName: "Australia open data search",
-        searchApiBaseUrl: 'http://104.199.180.124/api/v0/',
+        searchApiBaseUrl: 'http://104.199.180.124/api/v0/search/',
         registryUrl: 'http://104.199.180.124/api/v0/registry/records/',
         facetListSize: 5,
         resultsPerPage: 10,

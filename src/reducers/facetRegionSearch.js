@@ -9,11 +9,11 @@ const initialData = {
 
 const facetRegionSearch = (state: FacetSearchState =initialData, action: Action) => {
   switch (action.type) {
-    case 'REQUEST_REGIONS':
+    case 'FACET_REQUEST_REGIONS':
       return Object.assign({}, state, {
         isFetching: true
       })
-    case 'RECEIVE_REGIONS':
+    case 'FACET_RECEIVE_REGIONS':
       return Object.assign({}, state, {
         isFetching: false,
         data: (action.json && action.json.regions) && action.json.regions,

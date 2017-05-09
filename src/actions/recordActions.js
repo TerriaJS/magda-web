@@ -59,6 +59,32 @@ export function distributiontNotFound(): Action {
   }
 }
 
+export function requestAllDistributions():Action {
+  return {
+    type: actionTypes.REQUEST_ALL_DISTRIBUTIONS,
+  }
+}
+
+export function receiveAllDistributions(json: Object): Action {
+  return {
+    type: actionTypes.RECEIVE_ALL_DISTRIBUTIONS,
+    json,
+  }
+}
+
+export function requestAllDistributionsError(error: Object): Action {
+  return {
+    type: actionTypes.REQUEST_ALL_DISTRIBUTIONS_ERROR,
+    error,
+  }
+}
+
+export function allDistributionsNotFound(): Action {
+  return {
+    type: actionTypes.ALL_DISTRIBUTIONS_NOT_FOUND,
+  }
+}
+
 export function fetchDatasetFromRegistry(id: string):Object{
   return (dispatch: Function)=>{
     dispatch(requestDataset(id))
@@ -96,6 +122,26 @@ export function fetchDistributionFromRegistry(id: string):Object{
         return response.json();
     })
     .then((json: Dataset) => dispatch(receiveDistribution(json))
+    )
+  }
+}
+
+export function fetchAllDistributionsFromRegistry(): Object{
+  return (dispatch: Function)=>{
+    dispatch(requestAllDistributions())
+    let url : string = config.registryUrl + "?optionalAspect=dcat-distribution-strings&optionalAspect=dataset-distributions&dereference=true";
+    console.log(url);
+    return fetch(url)
+    .then(response => {
+        if (response.status >= 400) {
+          if(response.status === 404){
+            return dispatch(allDistributionsNotFound());
+          }
+            return dispatch(requestAllDistributionsError(response));
+        } 
+        return response.json();
+    })
+    .then((json: Dataset) => dispatch(receiveAllDistributions(json))
     )
   }
 }

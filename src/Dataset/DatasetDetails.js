@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import defined from '../helpers/defined';
 import MarkdownViewer from '../UI/MarkdownViewer';
 import TemporalAspectViewer from '../UI/TemporalAspectViewer';
 import SpatialAspectViewer from '../UI/SpatialAspectViewer';
 import CustomIcons from '../UI/CustomIcons';
-import Star from '../UI/Star';
 import { Link } from 'react-router';
 import { connect } from "react-redux";
 import './DatasetDetails.css';

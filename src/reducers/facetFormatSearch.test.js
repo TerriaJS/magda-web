@@ -14,10 +14,10 @@ describe('format search reducer', () => {
     )
   });
 
-  it('should handle REQUEST_FORMATS', () => {
+  it('should handle FACET_REQUEST_FORMATS', () => {
     expect(
       reducer([], {
-        type: actionTypes.REQUEST_FORMATS
+        type: actionTypes.FACET_REQUEST_FORMATS
       })
     ).toEqual(
       {
@@ -26,13 +26,13 @@ describe('format search reducer', () => {
     )
   });
 
-  it('should handle RECEIVE_FORMATS', () => {
+  it('should handle FACET_RECEIVE_FORMATS', () => {
     const json = {
       options: []
     }
     expect(
       reducer([], {
-        type: actionTypes.RECEIVE_FORMATS,
+        type: actionTypes.FACET_RECEIVE_FORMATS,
         generalQuery: '',
         facetQuery: '',
         json

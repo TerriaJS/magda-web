@@ -10,11 +10,11 @@ const initialData = {
 
 const facetFormatSearch = (state: FacetSearchState=initialData, action: Action) => {
   switch (action.type) {
-    case 'REQUEST_FORMATS':
+    case 'FACET_REQUEST_FORMATS':
       return Object.assign({}, state, {
         isFetching: true
       })
-    case 'RECEIVE_FORMATS':
+    case 'FACET_RECEIVE_FORMATS':
       return Object.assign({}, state, {
         isFetching: false,
         data: (action.json && action.json.options) && action.json.options,

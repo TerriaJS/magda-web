@@ -10,7 +10,7 @@ describe('format search actions', () => {
     const generalQuery = '';
     const facetQuery = '';
     const expectedAction = {
-      type: actionTypes.REQUEST_FORMATS,
+      type: actionTypes.FACET_REQUEST_FORMATS,
       generalQuery,
       facetQuery
     }
@@ -24,7 +24,7 @@ describe('format search actions', () => {
     const generalQuery = '';
     const facetQuery = '';
     const expectedAction = {
-      type: actionTypes.RECEIVE_FORMATS,
+      type: actionTypes.FACET_RECEIVE_FORMATS,
       json,
       generalQuery,
       facetQuery
@@ -49,11 +49,11 @@ describe('format search actions', () => {
 //     const generalQuery = '';
 //     const facetQuery = '';
 //     const expectedActions = [
-//       { type: actionTypes.REQUEST_FORMATS,
+//       { type: actionTypes.FACET_REQUEST_FORMATS,
 //         generalQuery,
 //         facetQuery
 //       },
-//       { type: actionTypes.RECEIVE_FORMATS,
+//       { type: actionTypes.FACET_RECEIVE_FORMATS,
 //         json: {},
 //         generalQuery,
 //         facetQuery

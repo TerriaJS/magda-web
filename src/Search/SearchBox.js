@@ -4,7 +4,7 @@ import {RouterContext } from 'react-router';
 import './SearchBox.css';
 import {connect} from 'react-redux';
 import { bindActionCreators } from "redux";
-import {config} from '../config.js';
+// import {config} from '../config.js';
 import debounce from 'lodash.debounce';
 import defined from '../helpers/defined';
 import React, { Component } from 'react';

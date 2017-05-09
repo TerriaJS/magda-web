@@ -2,8 +2,8 @@
 // eslint-disable-next-line
 import createLogger from 'redux-logger'
 import './index.css';
-import { Router, Route, browserHistory, IndexRoute, IndexRedirect, hashHistory} from 'react-router'
-import {fetchSearchResultsIfNeeded} from './actions/results';
+// import {browserHistory} from 'react-router';
+import { Router, Route, IndexRoute, IndexRedirect, hashHistory} from 'react-router';
 import thunkMiddleware from 'redux-thunk'
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -18,6 +18,12 @@ import { staticPageRegister } from './content/register';
 import DatasetDetails from './Dataset/DatasetDetails';
 import DatasetDiscussion from './Dataset/DatasetDiscussion';
 import DatasetPublisher from './Dataset/DatasetPublisher';
+
+import ProjectsViewer from './Project/ProjectsViewer';
+import ProjectDetails from './Project/ProjectDetails';
+
+import PublishersViewer from './Publisher/PublishersViewer';
+import PublisherDetails from './Publisher/PublisherDetails';
 
 import DistributionDetails from './Dataset/DistributionDetails';
 import DistributionMap from './Dataset/DistributionMap';
@@ -58,6 +64,10 @@ ReactDOM.render(
             <Route path="map" component={DistributionMap}/>
             <Route path="chart" component={DistributionChart}/>
         </Route>
+        <Route path="projects" component={ProjectsViewer}/>
+        <Route path="projects/:id" component={ProjectDetails}/>
+        <Route path="publishers" component={PublishersViewer}/>
+        <Route path="publishers/:id" component={PublisherDetails}/>
         {staticPageRegister.map( item => 
         <Route path={item.path} key={item.path} component={item.component}/>)}
       </Route>

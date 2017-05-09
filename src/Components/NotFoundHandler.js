@@ -1,6 +1,4 @@
 import React from 'react';
-import {config} from '../config.js';
-
 
 export default class NotFoundHandler extends React.Component {
   render() {
