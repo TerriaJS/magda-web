@@ -34,7 +34,7 @@ export function publishersNotFound(): Action {
 function fetchPublishers(start){
     return (dispatch: Function) => {
         dispatch(requestPublishers());
-        const url = `${config.searchApiBaseUrl}facets/publisher/options?generalQuery=*&facetQuery=*&limit=${config.resultsPerPage}&start=${start}` 
+        const url = `${config.searchApiBaseUrl}facets/publisher/options?generalQuery=*&facetQuery=*&limit=${config.resultsPerPage}&start=${(start-1)*config.resultsPerPage}` 
         return fetch(url)
             .then(response => {
                 if (response.status >= 400) {
