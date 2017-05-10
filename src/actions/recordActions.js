@@ -88,7 +88,7 @@ export function allDistributionsNotFound(): Action {
 export function fetchDatasetFromRegistry(id: string):Object{
   return (dispatch: Function)=>{
     dispatch(requestDataset(id))
-    let url : string = config.registryUrl + `${encodeURIComponent(id)}?aspect=dcat-dataset-strings&optionalAspect=dcat-distribution-strings&optionalAspect=dataset-distributions&dereference=true`;
+    let url : string = config.registryUrl + `/${encodeURIComponent(id)}?aspect=dcat-dataset-strings&optionalAspect=dcat-distribution-strings&optionalAspect=dataset-distributions&dereference=true`;
     console.log(url);
     return fetch(url)
     .then(response => {
@@ -109,7 +109,7 @@ export function fetchDatasetFromRegistry(id: string):Object{
 export function fetchDistributionFromRegistry(id: string):Object{
   return (dispatch: Function)=>{
     dispatch(requestDistribution(id))
-    let url : string = config.registryUrl + `${encodeURIComponent(id)}?aspect=dcat-distribution-strings`;
+    let url : string = config.registryUrl + `/${encodeURIComponent(id)}?aspect=dcat-distribution-strings`;
     console.log(url);
     return fetch(url)
     .then(response => {

@@ -33,7 +33,6 @@ class AppContainer extends React.Component {
                     </div>
                     <ul className="nav navbar-nav navbar-account col-sm-3">
                       <li><Link to={`/new-account`}>Create an account</Link></li>
-                      <li className="decorator"> or </li>
                       <li><Link to={`/sign-in`}>Sign in</Link></li> 
                     </ul>
 
@@ -70,9 +69,9 @@ class AppContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  let { results, record } = state;
+  let { results, record, publisher } = state;
   return {
-    isFetching: results.isFetching || record.isFetching,
+    isFetching: results.isFetching || record.isFetching || publisher.isFetching,
   }
 }
 

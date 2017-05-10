@@ -9,6 +9,7 @@ import facetFormatSearch from './facetFormatSearch';
 import regionMapping from './regionMapping';
 import record from './recordReducer';
 import publisher from './publisherReducer';
+import project from './projectReducer';
 
 import { combineReducers } from 'redux';
 
@@ -19,7 +20,8 @@ const search = combineReducers({
   facetRegionSearch,
   facetFormatSearch,
   record,
-  publisher
+  publisher,
+  project
 });
 
 export default search;

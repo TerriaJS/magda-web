@@ -5,10 +5,9 @@ import {config} from '../config'
 import {actionTypes} from '../constants/ActionTypes';
 import type { Action } from '../types';
 
-export function requestProjects(id: string):Action {
+export function requestProjects():Action {
   return {
     type: actionTypes.REQUEST_PROJECTS,
-    id
   }
 }
 
@@ -33,10 +32,10 @@ export function projectsNotFound(): Action {
 }
 
 
-export function fetchProjectsFromRegistry(id: string):Object{
+export function fetchProjectsFromRegistry():Object{
   return (dispatch: Function)=>{
-    dispatch(requestProjects(id))
-    let url : string = "";
+    dispatch(requestProjects())
+    let url : string = config.registryUrl;
     return fetch(url)
     .then(response => {
         if (response.status >= 400) {
@@ -52,4 +51,14 @@ export function fetchProjectsFromRegistry(id: string):Object{
   }
 }
 
+
+export function fetchProjectsIfNeeded(){
+  return (dispatch: Function, getState: Function)=>{
+    if(!getState().project.isFetching){
+          return dispatch(fetchProjectsFromRegistry())
+      } else{
+          return Promise.resolve();
+      }
+  }
+}
 

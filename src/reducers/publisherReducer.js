@@ -1,4 +1,5 @@
 // @flow 
+import {parsePublisher} from '../helpers/api';
 
 const initialData = {
     isFetching: false,
@@ -32,8 +33,8 @@ const publisher = (state: PublishersResult = initialData, action: recordAction) 
     case 'RECEIVE_PUBLISHERS':
       return Object.assign({}, state, {
         isFetching: false,
-        publishers: action.json && action.json.options,
-        hitCount: action.json && action.json.hitCount,
+        publishers: action.json && action.json.result &&  action.json.result.map(r=>parsePublisher(r)),
+        hitCount: action.json && 515,
       })
     case 'REQUEST_PUBLISHERS_ERROR':
       return Object.assign({}, state, {

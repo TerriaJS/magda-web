@@ -34,7 +34,8 @@ export function publishersNotFound(): Action {
 function fetchPublishers(start){
     return (dispatch: Function) => {
         dispatch(requestPublishers());
-        const url = `${config.searchApiBaseUrl}facets/publisher/options?generalQuery=*&facetQuery=*&limit=${config.resultsPerPage}&start=${(start-1)*config.resultsPerPage}` 
+        const url = `http://data.gov.au/api/3/action/organization_list?all_fields=true&limit=${config.resultsPerPage}&offset=${(start-1)*config.resultsPerPage}`;
+        console.log(url);
         return fetch(url)
             .then(response => {
                 if (response.status >= 400) {
@@ -59,7 +60,7 @@ function shouldFetchPublishers(state){
 }
 
 
-export function fetchPublishersIfNeeded(start):Object{
+export function fetchPublishersIfNeeded(start: number):Object{
   return (dispatch: Function, getState: Function)=>{
       if(shouldFetchPublishers(getState())){
           return dispatch(fetchPublishers(start))

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {config} from '../config.js';
 import { bindActionCreators } from "redux";
-import {fetchPublishersIfNeeded} from '../actions/publisherActions';
-import PublisherSummray from './PublisherSummray';
+import { fetchPublishersIfNeeded } from '../actions/publisherActions';
+import PublisherSummary from './PublisherSummary';
 import Pagination from '../UI/Pagination';
 
 
@@ -14,15 +14,17 @@ class PublishersViewer extends Component {
     }
     
     componentWillReceiveProps(nextProps){
-      nextProps.fetchPublishersIfNeeded(this.props.location.query.page || 1);
+      if(this.props.location.query.page !== nextProps.location.query.page){
+        nextProps.fetchPublishersIfNeeded(nextProps.location.query.page || 1);
+      }
     }
 
     render(){
       return <div className="container publishers-viewer">
-              {this.props.publishers.map(p=>
-                <PublisherSummray publisher={p} key={p.value}/>
+              {!this.props.isFetching && !this.props.error && this.props.publishers.map(p=>
+                <PublisherSummary publisher={p} key={p.id}/>
               )}  
-              {this.props.hitCount > 20 &&
+              {!this.props.isFetching && !this.props.error &&  this.props.hitCount > config.resultsPerPage &&
                 <Pagination
                   currentPage={+this.props.location.query.page || 1}
                   maxPage={Math.ceil(this.props.hitCount/config.resultsPerPage)}
@@ -34,8 +36,8 @@ class PublishersViewer extends Component {
 }
 
 PublishersViewer.propTypes = {publishers: React.PropTypes.array,
-                            isFetching: React.PropTypes.bool,
-                            error: React.PropTypes.string};
+                              isFetching: React.PropTypes.bool,
+                              error: React.PropTypes.string};
 
 
 function mapDispatchToProps(dispatch) {
@@ -48,9 +50,10 @@ function mapStateToProps(state, ownProps) {
   const publishers= state.publisher.publishers;
   const isFetching= state.publisher.isFetching;
   const hitCount= state.publisher.hitCount;
+  const error = state.publisher.error;
   const location = ownProps.location;
   return {
-    publishers, isFetching, hitCount, location
+    publishers, isFetching, hitCount, location, error
   };
 }
 

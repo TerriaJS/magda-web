@@ -166,7 +166,7 @@ class Search extends Component {
                       onToggleDataset={this.onToggleDataset}
                       openDataset={this.props.location.query.open}
                   />
-                  {this.props.hitCount > 20 &&
+                  {this.props.hitCount > config.resultsPerPage &&
                       <Pagination
                         currentPage={+this.props.location.query.page || 1}
                         maxPage={Math.ceil(this.props.hitCount/config.resultsPerPage)}
