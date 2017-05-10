@@ -14,6 +14,7 @@ import AppContainer from './Components/AppContainer';
 
 import Feedback from './Components/Feedback';
 import Contact from './Components/Contact';
+import Account from './Components/Account';
 
 import { Provider } from 'react-redux';
 import reducer from './reducers/index';
@@ -58,8 +59,8 @@ ReactDOM.render(
         <Route path="search" component={Search} />
         <Route path="feedback" component={Feedback} />
         <Route path="contact" component={Contact} />
-
-
+        <Route path="sign-in" component={Account} />
+        <Route path="new-account" component={Account} />
 
         <Route path="dataset/:datasetId" component={RecordHandler}>
           <IndexRedirect to="details"/>

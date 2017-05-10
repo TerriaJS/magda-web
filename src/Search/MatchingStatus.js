@@ -6,7 +6,7 @@ export default class MatchingStatus extends Component {
     if(this.props.datasets.length > 0){
       if(this.props.strategy === 'match-part'){
         return <div className='no-matching'>
-                Sorry, no datasets match all of your search criteria.
+                Sorry, no dataset match all of your search criteria.
               </div>
       } else{
         return null

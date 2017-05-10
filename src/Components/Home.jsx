@@ -3,9 +3,6 @@ import './Home.css';
 
 
 export default class Home extends React.Component {
-  onSearchTextChange(){
-
-  }
   render() {
     return (
       <div className="container home">
