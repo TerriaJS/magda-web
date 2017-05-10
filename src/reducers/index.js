@@ -13,7 +13,7 @@ import project from './projectReducer';
 
 import { combineReducers } from 'redux';
 
-const search = combineReducers({
+const reducer = combineReducers({
   regionMapping,
   results,
   facetPublisherSearch,
@@ -21,7 +21,7 @@ const search = combineReducers({
   facetFormatSearch,
   record,
   publisher,
-  project
+  project,
 });
 
-export default search;
+export default reducer;

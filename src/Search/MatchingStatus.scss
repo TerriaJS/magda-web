@@ -1,5 +1,7 @@
+@import "../variables";
 .no-matching {
-  padding: 10px 0;
+  padding: 10px 15px;
+  background: $magda-grey;
   font-weight: 600;
   color: #C0392B;
   font-size: 1.1em; }

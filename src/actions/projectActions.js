@@ -35,7 +35,7 @@ export function projectsNotFound(): Action {
 export function fetchProjectsFromRegistry():Object{
   return (dispatch: Function)=>{
     dispatch(requestProjects())
-    let url : string = config.registryUrl;
+    let url : string = config.registryUrl + "?aspect=dcat-dataset-strings";
     return fetch(url)
     .then(response => {
         if (response.status >= 400) {

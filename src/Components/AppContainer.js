@@ -9,7 +9,14 @@ import MarkdownViewer from '../UI/MarkdownViewer';
 import {connect} from 'react-redux';
 import './AppContainer.css';
 
-class AppContainer extends React.Component {  
+class AppContainer extends React.Component {
+  renderLink(link){
+    const regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+    if(!regex .test(link[1])){
+      return <Link to={`/${encodeURI(link[1])}`}>{link[0]}</Link>
+    }
+    return <a target="_blank" href={link[1]}>{link[0]}</a>
+  }
   render() {
     const headerNavs = config.headerNavigation;
     const footerNavs = config.footerNavigation;
@@ -39,7 +46,7 @@ class AppContainer extends React.Component {
                 </div>
                 <div className="row">
                   <div className='col-sm-9'><SearchBox location={this.props.location}/> </div>
-                  <div className='col-sm-3'><div className="appContainer__suggestion"> <MarkdownViewer markdown={config.suggestion}/></div></div>
+                  <div className='col-sm-3'><div className="appContainer__suggestion"> Try Search for <Link to={"/search?q=" + encodeURI(config.suggestion)}>{config.suggestion}</Link></div></div>
                 </div>
                 </div>
                 </nav>
@@ -53,7 +60,7 @@ class AppContainer extends React.Component {
                       <li key={item.category} className="col-md-2 col-sm-3"><span className="nav-title">{item.category}</span>
                         <ul className="nav nav-pills nav-stacked">
                           {item.links.map(link=>
-                          <li key={link[1]}><Link to={`/${encodeURI(link[1])}`}>{link[0]}</Link></li>)
+                          <li key={link[1]}>{this.renderLink(link)}</li>)
                           }
                         </ul>
                       </li>
@@ -69,9 +76,9 @@ class AppContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  let { results, record, publisher } = state;
+  let { results, record, publisher, project } = state;
   return {
-    isFetching: results.isFetching || record.isFetching || publisher.isFetching,
+    isFetching: results.isFetching || record.isFetching || publisher.isFetching || project.isFetching,
   }
 }
 

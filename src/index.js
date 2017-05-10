@@ -11,6 +11,10 @@ import Home from './Components/Home';
 import Search from './Search/Search';
 import RecordHandler from './Components/RecordHandler';
 import AppContainer from './Components/AppContainer';
+
+import Feedback from './Components/Feedback';
+import Contact from './Components/Contact';
+
 import { Provider } from 'react-redux';
 import reducer from './reducers/index';
 import { createStore, applyMiddleware} from 'redux';
@@ -52,6 +56,11 @@ ReactDOM.render(
       <Route path={baseurl} component={AppContainer}>
         <IndexRoute component={Home}/>
         <Route path="search" component={Search} />
+        <Route path="feedback" component={Feedback} />
+        <Route path="contact" component={Contact} />
+
+
+
         <Route path="dataset/:datasetId" component={RecordHandler}>
           <IndexRedirect to="details"/>
           <Route path="details" component={DatasetDetails}/>
@@ -69,7 +78,7 @@ ReactDOM.render(
         <Route path="publishers" component={PublishersViewer}/>
         <Route path="publishers/:id" component={PublisherDetails}/>
         {staticPageRegister.map( item => 
-        <Route path={item.path} key={item.path} component={item.component}/>)}
+        <Route path={`page/:id`} key={item.path} component={item.component}/>)}
       </Route>
     </Router>
   </Provider>,
