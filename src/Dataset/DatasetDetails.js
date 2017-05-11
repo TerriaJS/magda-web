@@ -1,27 +1,14 @@
 import React, { Component } from 'react';
-import MarkdownViewer from '../UI/MarkdownViewer';
+
 import TemporalAspectViewer from '../UI/TemporalAspectViewer';
 import SpatialAspectViewer from '../UI/SpatialAspectViewer';
+import OverviewBox from '../UI/OverviewBox';
 import CustomIcons from '../UI/CustomIcons';
 import Social from '../Components/Social';
 import { Link } from 'react-router';
 import { connect } from "react-redux";
 import './DatasetDetails.css';
 class DatasetDetails extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      isExpanded: false
-    }
-    this.toggleExpand = this.toggleExpand.bind(this);
-  }
-
-  toggleExpand(){
-    this.setState({
-      isExpanded: !this.state.isExpanded
-    })
-
-  }
   renderDistribution(distribution, datasetId){
     return <div className="media" key={distribution.id}>
               {<div className="media-left"> <CustomIcons className="media-object" name={distribution.format}/></div>}
@@ -41,10 +28,7 @@ class DatasetDetails extends Component {
                 <div className='dataset-details__body col-sm-9'>
                   <div className='dataset-details-overview'>
                     <h3>Overview</h3>
-                    <div className="white-box">
-                      {dataset.description && <MarkdownViewer markdown={dataset.description} stripped={!this.state.isExpanded}/>}
-                      <button onClick={this.toggleExpand} className="overview-toggle btn btn-reset"><i className={`fa fa-chevron-${this.state.isExpanded ? "up" : "down"}`} aria-hidden="true"></i></button>
-                    </div>
+                    <OverviewBox content={dataset.description}/>
                   </div>
 
                   <div className='dataset-details-source'>

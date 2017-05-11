@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 class TemporalAspectViewer extends Component {
-    render(){
-       const rows = this.props.data ? this.props.data.intervals : [];
-      return <div className='temporal-aspect-viewer white-box'>
-                <table className="table">
+    renderTable(rows){
+        return  (<table className="table">
                     <tbody>
                             <tr>
                                 <th>End</th>
@@ -17,8 +15,14 @@ class TemporalAspectViewer extends Component {
                         )
                     }
                     </tbody>
-                </table>
-            </div>
+                </table>)
+    }
+    render(){
+        const rows = this.props.data ? this.props.data.intervals : [];
+        return (<div className='temporal-aspect-viewer white-box'>
+                    {rows.length > 0 && this.renderTable(rows)}
+                    {rows.length === 0 && <div>No data available</div>}
+                </div>)
     }
 }
 
