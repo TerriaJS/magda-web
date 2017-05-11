@@ -18,17 +18,11 @@ export function receivePublishers(json: Object): Action {
   }
 }
 
-export function requestPublishersError(error: Object): Action {
+export function requestPublishersError(error: number): Action {
   return {
     type: actionTypes.REQUEST_PUBLISHERS_ERROR,
     error,
   }
-}
-
-export function publishersNotFound(): Action {
-    return {
-        type: actionTypes.PUBLISHERS_NOT_FOUND
-    }
 }
 
 function fetchPublishers(start){
@@ -40,9 +34,9 @@ function fetchPublishers(start){
             .then(response => {
                 if (response.status >= 400) {
                 if(response.status === 404){
-                    return dispatch(publishersNotFound());
+                    return dispatch(requestPublishersError(404));
                 }
-                    return dispatch(requestPublishersError(response));
+                    return dispatch(requestPublishersError(response.status));
                 } 
                 return response.json();
             })

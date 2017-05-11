@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { fetchProjectsIfNeeded } from '../actions/projectActions';
 import ProjectSummary from './ProjectSummary';
 import Pagination from '../UI/Pagination';
+import ErrorHandler from '../Components/ErrorHandler';
 
 
 import './ProjectsViewer.css';
@@ -19,18 +20,26 @@ class ProjectsViewer extends Component {
       }
     }
 
+    renderContent(){
+      if(this.props.error){
+        return <ErrorHandler errorCode={this.props.error}/>
+      }
+      return (<div>
+                {this.props.projects.map(p=>
+                <ProjectSummary project={p} key={p.id}/>)}
+                {this.props.hitCount > config.resultsPerPage &&
+                  <Pagination
+                    currentPage={+this.props.location.query.page || 1}
+                    maxPage={Math.ceil(this.props.hitCount/config.resultsPerPage)}
+                    location={this.props.location}
+                  />
+                }
+              </div>);
+    }
+
     render(){
       return <div className="container projects-viewer">
-              {!this.props.isFetching && !this.props.error && this.props.projects.map(p=>
-                <ProjectSummary project={p} key={p.id}/>
-              )}  
-              {!this.props.isFetching && !this.props.error &&  this.props.hitCount > config.resultsPerPage &&
-                <Pagination
-                  currentPage={+this.props.location.query.page || 1}
-                  maxPage={Math.ceil(this.props.hitCount/config.resultsPerPage)}
-                  location={this.props.location}
-                />
-              }
+              {!this.props.isFetching && this.renderContent()}
              </div>
     }
 }

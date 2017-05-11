@@ -3,6 +3,7 @@ import MarkdownViewer from '../UI/MarkdownViewer';
 import TemporalAspectViewer from '../UI/TemporalAspectViewer';
 import SpatialAspectViewer from '../UI/SpatialAspectViewer';
 import CustomIcons from '../UI/CustomIcons';
+import Social from '../Components/Social';
 import { Link } from 'react-router';
 import { connect } from "react-redux";
 import './DatasetDetails.css';
@@ -54,24 +55,20 @@ class DatasetDetails extends Component {
                   </div>
                   <div className="dataset-details-spatial-coverage">
                       <h3>Spatial coverage</h3>
-                      <SpatialAspectViewer/>
+                      <SpatialAspectViewer data={dataset.spatialCoverage}/>
                   </div>
                   <div className="dataset-details-temporal-coverage">
                       <h3>Temporal coverage</h3>
-                      <TemporalAspectViewer/>
+                      <TemporalAspectViewer data={dataset.temporalCoverage}/>
                   </div>
               </div>
 
               <div className='dataset-details__sidebar col-sm-3'>
                   <div><button className='btn btn-primary'>Add to project</button></div>
-                  <div><button className='btn btn-default'>Star</button></div>
-                  <div><button className='btn btn-default'>Subscribe</button></div>
-                  <div><button className='btn btn-default'>Share</button></div>
+                  <Social/>
                   <div className="tags">
                     <h5>Tags</h5>
-                    {
-                      dataset.tags && dataset.tags.map(t=><Link className="badge" key={t} to={`/search?${t}`}>{t}</Link>)
-                    }
+                    {dataset.tags && dataset.tags.map(t=><Link className="badge" key={t} to={`/search?q=${encodeURIComponent(t)}`}>{t}</Link>)}
                   </div>
               </div>
               </div>

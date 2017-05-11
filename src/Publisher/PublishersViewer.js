@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { fetchPublishersIfNeeded } from '../actions/publisherActions';
 import PublisherSummary from './PublisherSummary';
 import Pagination from '../UI/Pagination';
+import ErrorHandler from '../Components/ErrorHandler';
 
 
 import './PublishersViewer.css';
@@ -14,23 +15,32 @@ class PublishersViewer extends Component {
     }
     
     componentWillReceiveProps(nextProps){
-      if(this.props.location.query.page !== nextProps.location.query.page){
+    if(this.props.location.query.page !== nextProps.location.query.page){
         nextProps.fetchPublishersIfNeeded(nextProps.location.query.page || 1);
+      }
+    }
+
+    renderContent(){
+      if(this.props.error){
+        return <ErrorHandler errorCode={this.props.error}/>
+      } else{
+        return (<div>
+              {this.props.publishers.map(p=>
+                <PublisherSummary publisher={p} key={p.id}/>
+              )}
+              {this.props.hitCount > config.resultsPerPage &&
+                <Pagination
+                  currentPage={+this.props.location.query.page || 1}
+                  maxPage={Math.ceil(this.props.hitCount/config.resultsPerPage)}
+                  location={this.props.location}
+                />}
+              </div>)
       }
     }
 
     render(){
       return <div className="container publishers-viewer">
-              {!this.props.isFetching && !this.props.error && this.props.publishers.map(p=>
-                <PublisherSummary publisher={p} key={p.id}/>
-              )}  
-              {!this.props.isFetching && !this.props.error &&  this.props.hitCount > config.resultsPerPage &&
-                <Pagination
-                  currentPage={+this.props.location.query.page || 1}
-                  maxPage={Math.ceil(this.props.hitCount/config.resultsPerPage)}
-                  location={this.props.location}
-                />
-              }
+              {!this.props.isFetching && this.renderContent()}
              </div>
     }
 }

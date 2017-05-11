@@ -20,7 +20,7 @@ type PublishersResult = {
 
 type recordAction = {
   json: Object,
-  error: boolean,
+  error: any,
   type: boolean
 }
 
@@ -40,11 +40,6 @@ const publisher = (state: PublishersResult = initialData, action: recordAction) 
       return Object.assign({}, state, {
         isFetching: false,
         error: action.error,
-      })
-    case 'PUBLISHERS_NOT_FOUND':
-      return Object.assign({}, state, {
-        isFetching: false,
-        notFound:  true
       })
     default:
       return state
