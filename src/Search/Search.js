@@ -15,7 +15,7 @@ import Publisher from '../SearchFacets/Publisher';
 import SearchResults from '../SearchResults/SearchResults';
 import MatchingStatus from './MatchingStatus';
 import { bindActionCreators } from "redux";
-import { fetchSearchResultsIfNeeded } from '../actions/results';
+import { fetchSearchResultsIfNeeded } from '../actions/datasetSearchActions';
 
 class Search extends Component {
 
@@ -213,16 +213,16 @@ function mapDispatchToProps(dispatch) {
 
 
 function mapStateToProps(state) {
-  let { results } = state;
+  let { datasetSearch } = state;
   return {
-    datasets: results.datasets,
-    hitCount: results.hitCount,
-    isFetching: results.isFetching,
-    progress: results.progress,
-    hasError: results.hasError,
-    strategy: results.strategy,
-    errorMessage: results.errorMessage,
-    freeText: results.freeText,
+    datasets: datasetSearch.datasets,
+    hitCount: datasetSearch.hitCount,
+    isFetching: datasetSearch.isFetching,
+    progress: datasetSearch.progress,
+    hasError: datasetSearch.hasError,
+    strategy: datasetSearch.strategy,
+    errorMessage: datasetSearch.errorMessage,
+    freeText: datasetSearch.freeText,
   }
 }
 

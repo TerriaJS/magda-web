@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import debounce from 'lodash.debounce';
 import defined from '../helpers/defined';
 import React, { Component } from 'react';
-import {fetchRegionMapping} from '../actions/regionMapping';
+import {fetchRegionMapping} from '../actions/regionMappingActions';
 
 class SearchBox extends Component {
   constructor(props) {
@@ -140,9 +140,9 @@ SearchBox.propTypes = {
 
 
 function mapStateToProps(state, ownProps) {
-  let { results } = state;
+  let { datasetSearch } = state;
   return {
-    freeText: results.freeText,
+    freeText: datasetSearch.freeText,
   }
 }
 

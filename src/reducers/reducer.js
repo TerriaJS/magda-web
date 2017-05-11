@@ -2,11 +2,11 @@
 import expect from 'expect';
 // eslint-disable-next-line
 import deepFreeze from 'deep-freeze';
-import results from './results';
-import facetPublisherSearch from './facetPublisherSearch';
-import facetRegionSearch from './facetRegionSearch';
-import facetFormatSearch from './facetFormatSearch';
-import regionMapping from './regionMapping';
+import datasetSearch from './datasetSearchReducer';
+import facetPublisherSearch from './facetPublisherSearchReducer';
+import facetRegionSearch from './facetRegionSearchReducer';
+import facetFormatSearch from './facetFormatSearchReducer';
+import regionMapping from './regionMappingReducer';
 import record from './recordReducer';
 import publisher from './publisherReducer';
 import project from './projectReducer';
@@ -15,7 +15,7 @@ import { combineReducers } from 'redux';
 
 const reducer = combineReducers({
   regionMapping,
-  results,
+  datasetSearch,
   facetPublisherSearch,
   facetRegionSearch,
   facetFormatSearch,

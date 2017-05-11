@@ -17,7 +17,7 @@ import Contact from './Components/Contact';
 import Account from './Components/Account';
 
 import { Provider } from 'react-redux';
-import reducer from './reducers/index';
+import reducer from './reducers/reducer';
 import { createStore, applyMiddleware} from 'redux';
 import { staticPageRegister } from './content/register';
 import DatasetDetails from './Dataset/DatasetDetails';

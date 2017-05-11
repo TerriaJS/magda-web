@@ -5,14 +5,13 @@ import {config} from '../config.js';
 import { Link } from 'react-router';
 import SearchBox from '../Search/SearchBox';
 import ProgressBar from '../UI/ProgressBar';
-import MarkdownViewer from '../UI/MarkdownViewer';
 import {connect} from 'react-redux';
 import './AppContainer.css';
 
 class AppContainer extends React.Component {
   renderLink(link){
     const regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-    if(!regex .test(link[1])){
+    if(!regex.test(link[1])){
       return <Link to={`/${encodeURI(link[1])}`}>{link[0]}</Link>
     }
     return <a target="_blank" href={link[1]}>{link[0]}</a>
@@ -76,9 +75,9 @@ class AppContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  let { results, record, publisher, project } = state;
+  let { datasetSearch, record, publisher, project } = state;
   return {
-    isFetching: results.isFetching || record.isFetching || publisher.isFetching || project.isFetching,
+    isFetching: datasetSearch.isFetching || record.isFetching || publisher.isFetching || project.isFetching,
   }
 }
 

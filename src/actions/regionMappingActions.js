@@ -1,10 +1,8 @@
 // @flow
-
 import fetch from 'isomorphic-fetch'
 import {config} from '../config'
 import {actionTypes} from '../constants/ActionTypes';
 import type { Action, FacetSearchJson } from '../types';
-
 
 
 export function requestRegionMapping(): Action{
