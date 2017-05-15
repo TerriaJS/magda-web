@@ -7,7 +7,8 @@ import CustomIcons from '../UI/CustomIcons';
 import Social from '../Components/Social';
 import { Link } from 'react-router';
 import { connect } from "react-redux";
-import './DatasetDetails.css';
+import './RecordDetails.css';
+
 class DatasetDetails extends Component {
   renderDistribution(distribution, datasetId){
     return <div className="media" key={distribution.id}>
@@ -47,7 +48,7 @@ class DatasetDetails extends Component {
                   </div>
               </div>
 
-              <div className='dataset-details__sidebar col-sm-3'>
+              <div className='record-details__sidebar col-sm-3'>
                   <div><button className='btn btn-primary'>Add to project</button></div>
                   <Social/>
                   <div className="tags">
