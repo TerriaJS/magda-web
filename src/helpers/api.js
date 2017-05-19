@@ -16,7 +16,7 @@ type PublisherRaw = {
     id: string,
     description: string,
     aspects: {
-        organization: {
+        "organization-details": {
             name: string,
             title: string,
             imageUrl : string 
@@ -43,7 +43,7 @@ export function parsePublisher(publisherRaw: PublisherRaw) : Publisher{
     const publisher = {
         title: publisherRaw.name,
         description: publisherRaw.description || "",
-        image_url: publisherRaw.aspects.organization.imageUrl || "http://placehold.it/100x100?text=Image+unavailable",
+        image_url: publisherRaw.aspects["organization-details"]["imageUrl"] || "http://placehold.it/100x100?text=Image+unavailable",
         id: publisherRaw.id
     }
     return publisher

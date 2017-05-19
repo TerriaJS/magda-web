@@ -15,7 +15,7 @@ class PublishersViewer extends Component {
     }
     
     componentWillReceiveProps(nextProps){
-    if(this.props.location.query.page !== nextProps.location.query.page){
+      if(this.props.location.query.page !== nextProps.location.query.page){
         nextProps.fetchPublishersIfNeeded(nextProps.location.query.page || 1);
       }
     }
@@ -58,9 +58,9 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state, ownProps) {
   const publishers= state.publisher.publishers;
-  const isFetching= state.publisher.isFetching;
+  const isFetching= state.publisher.isFetchingPublishers;
   const hitCount= state.publisher.hitCount;
-  const error = state.publisher.error;
+  const error = state.publisher.errorFetchingPublishers;
   const location = ownProps.location;
   return {
     publishers, isFetching, hitCount, location, error

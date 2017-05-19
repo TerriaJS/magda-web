@@ -77,7 +77,7 @@ ReactDOM.render(
         <Route path="projects" component={ProjectsViewer}/>
         <Route path="projects/:id" component={ProjectDetails}/>
         <Route path="publishers" component={PublishersViewer}/>
-        <Route path="publishers/:id" component={PublisherDetails}/>
+        <Route path="publishers/:publisherId" component={PublisherDetails}/>
         {staticPageRegister.map( item => 
         <Route path={`page/:id`} key={item.path} component={item.component}/>)}
       </Route>

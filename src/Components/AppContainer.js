@@ -85,7 +85,7 @@ class AppContainer extends React.Component {
 function mapStateToProps(state) {
   let { datasetSearch, record, publisher, project } = state;
   return {
-    isFetching: datasetSearch.isFetching || record.isFetching || publisher.isFetching || project.isFetching,
+    isFetching: datasetSearch.isFetching || record.isFetching || publisher.isFetchingPublishers || publisher.isFetchingPublisher || project.isFetching,
   }
 }
 
