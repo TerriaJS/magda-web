@@ -51,7 +51,8 @@ class AppContainer extends React.Component {
                       </div>
                     <div className="row nav_second">
                       <div className='col-sm-9'><SearchBox location={this.props.location}/> </div>
-                      <div className='col-sm-3'><div className="appContainer__suggestion"> Try Search for <Link to={"/search?q=" + encodeURI(config.suggestion)}>{config.suggestion}</Link></div></div>
+                      <Small><div className='col-sm-3'><div className="appContainer__suggestion"> Try Search for <Link to={"/search?q=" + encodeURI(config.suggestion)}>{config.suggestion}</Link></div></div>
+                      </Small>
                     </div>
                   </div>
                 </nav>

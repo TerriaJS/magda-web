@@ -28,8 +28,7 @@ export function requestPublishersError(error: number): Action {
 function fetchPublishers(start){
     return (dispatch: Function) => {
         dispatch(requestPublishers());
-        const url = `http://data.gov.au/api/3/action/organization_list?all_fields=true&limit=${config.resultsPerPage}&offset=${(start-1)*config.resultsPerPage}`;
-        console.log(url);
+        const url = `http://104.199.180.124/api/v0/registry/records?aspect=organization&limit=${config.resultsPerPage}&start=${(start-1)*config.resultsPerPage}`;
         return fetch(url)
             .then(response => {
                 if (response.status >= 400) {

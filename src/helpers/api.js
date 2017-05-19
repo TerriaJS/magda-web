@@ -12,10 +12,16 @@ type RegionRaw = {
 }
 
 type PublisherRaw = {
-    display_name: string,
+    name: string,
+    id: string,
     description: string,
-    image_display_url: string,
-    id: string
+    aspects: {
+        organization: {
+            name: string,
+            title: string,
+            imageUrl : string 
+        }
+    }
 }
 
 type ProjectRaw = {
@@ -35,9 +41,9 @@ export function parseRegion(regionRaw : RegionRaw) : Region {
 
 export function parsePublisher(publisherRaw: PublisherRaw) : Publisher{
     const publisher = {
-        title: publisherRaw.display_name,
-        description: publisherRaw.description,
-        image_url: publisherRaw.image_display_url,
+        title: publisherRaw.name,
+        description: publisherRaw.description || "",
+        image_url: publisherRaw.aspects.organization.imageUrl || "http://placehold.it/100x100?text=Image+unavailable",
         id: publisherRaw.id
     }
     return publisher
