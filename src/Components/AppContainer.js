@@ -1,10 +1,12 @@
 import React from 'react';
 import logo from '../assets/logo.svg';
 import ReactDocumentTitle from "react-document-title";
+import MediaQuery from "react-responsive";
 import {config} from '../config.js';
 import { Link } from 'react-router';
 import SearchBox from '../Search/SearchBox';
 import ProgressBar from '../UI/ProgressBar';
+import {Small, Medium, Large} from '../UI/Responsive';
 import {connect} from 'react-redux';
 import './AppContainer.css';
 
@@ -20,35 +22,40 @@ class AppContainer extends React.Component {
     const headerNavs = config.headerNavigation;
     const footerNavs = config.footerNavigation;
     return (
-    
     <ReactDocumentTitle title={config.appName}>
         <div>
           {this.props.isFetching && <ProgressBar/>  }        
             <nav className='appContainer__nav'> 
               <div className="container">
-                <div className="clearfix">
-                  <div className="col-sm-9">
+                <div className="row">
+                  <div className="col-sm-2">
                     <div className="navbar-header">
                       <a className="navbar-brand" href="/"><img className='logo' alt='data.gov.au-alpha' src={logo}/></a>
                     </div>
-                    <ul className="nav navbar-nav">
-                      {headerNavs.map(nav=>
-                        <li key={nav[1]}><Link to={`/${encodeURI(nav[1])}`}>{nav[0]}</Link></li>
-                      )}
-                    </ul>
                     </div>
-                    <ul className="nav navbar-nav navbar-account col-sm-3">
-                      <li><Link to={`/new-account`}>Create an account</Link></li>
-                      <li><Link to={`/sign-in`}>Sign in</Link></li> 
-                    </ul>
-
-                </div>
-                <div className="row">
-                  <div className='col-sm-9'><SearchBox location={this.props.location}/> </div>
-                  <div className='col-sm-3'><div className="appContainer__suggestion"> Try Search for <Link to={"/search?q=" + encodeURI(config.suggestion)}>{config.suggestion}</Link></div></div>
-                </div>
-                </div>
+                    
+                      <Medium>
+                        <div className='col-sm-10 nav-links'>
+                          <ul className="nav navbar-nav navbar-account">
+                            <li><Link to={`/new-account`}>Create an account</Link></li>
+                            <li><Link to={`/sign-in`}>Sign in</Link></li> 
+                          </ul>
+                          <ul className="nav navbar-nav">
+                            {headerNavs.map(nav=>
+                              <li key={nav[1]}><Link to={`/${encodeURI(nav[1])}`}>{nav[0]}</Link></li>
+                            )}
+                          </ul>
+                          
+                        </div>
+                      </Medium>
+                      </div>
+                    <div className="row nav_second">
+                      <div className='col-sm-9'><SearchBox location={this.props.location}/> </div>
+                      <div className='col-sm-3'><div className="appContainer__suggestion"> Try Search for <Link to={"/search?q=" + encodeURI(config.suggestion)}>{config.suggestion}</Link></div></div>
+                    </div>
+                  </div>
                 </nav>
+                
                 
                 <div id="content" className="clearfix">{ this.props.children }</div>
                 <footer className="footer clearfix">

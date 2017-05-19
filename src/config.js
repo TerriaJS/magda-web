@@ -11,6 +11,11 @@ const config = {
         resultsPerPage: 10,
         descriptionLength: 50,
         downloadLinksSize: 3,
+        breakpoints: {
+          small: 768,
+          medium: 992,
+          large: 1200
+        },
         datasetTabList: ["Details", "Discussion", "Publisher"],
         distributionTabList: ["Details", "Map", "Chart"],
         exampleSearch: [

@@ -66,9 +66,6 @@ input[type=text].form-control{
 }
 
 @media (max-width: 768px) {
-	body{
-		background: #dcdfe1;
-	}
   .form-control:focus {
     border: none;
   }
