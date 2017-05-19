@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import  ErrorHandler from "../Components/ErrorHandler";
 import { fetchPublisherIfNeeded } from "../actions/publisherActions";
+import OverviewBox from '../UI/OverviewBox';
 import "./PublisherDetails.css";
 
 class PublisherDetails extends Component {
@@ -17,8 +18,17 @@ class PublisherDetails extends Component {
     }
     
     renderContent(){
+      const publisher = this.props.publisher;
       return <div className="publisher-details container">
-                <h1>{this.props.publisher.title}</h1>
+                <div className="row">
+                    <div className='publisher-details__body col-sm-9'>
+                        <h1>{this.props.publisher.title}</h1>
+                        <div className='publisher-details-overview'>
+                            <h3>Overview</h3>
+                            <OverviewBox content={publisher.description}/>
+                        </div>
+                    </div>
+                </div>
              </div>
     }
 

@@ -14,12 +14,12 @@ type RegionRaw = {
 type PublisherRaw = {
     name: string,
     id: string,
-    description: string,
     aspects: {
         "organization-details": {
             name: string,
             title: string,
-            imageUrl : string 
+            imageUrl : string,
+            description: string
         }
     }
 }
@@ -42,7 +42,7 @@ export function parseRegion(regionRaw : RegionRaw) : Region {
 export function parsePublisher(publisherRaw: PublisherRaw) : Publisher{
     const publisher = {
         title: publisherRaw.name,
-        description: publisherRaw.description || "",
+        description: publisherRaw.aspects["organization-details"]["description"] || "",
         image_url: publisherRaw.aspects["organization-details"]["imageUrl"] || "http://placehold.it/100x100?text=Image+unavailable",
         id: publisherRaw.id
     }
