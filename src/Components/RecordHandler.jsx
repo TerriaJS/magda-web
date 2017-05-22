@@ -42,7 +42,7 @@ class RecordHandler extends React.Component {
               </ul>
               <div className="media">
                 <div className="media-left">
-                  <CustomIcons/>
+                  <CustomIcons imageUrl={this.props.dataset.publisherDetails && this.props.dataset.publisherDetails.imageUrl}/>
                 </div>
                 <div className="media-body">
                   <h1>{this.props.distribution.title}</h1>
@@ -60,7 +60,7 @@ class RecordHandler extends React.Component {
       <div>
           <div className="container media">
             <div className="media-left">
-              <CustomIcons/>
+              <CustomIcons imageUrl={this.props.dataset.publisherDetails && this.props.dataset.publisherDetails.imageUrl}/>
             </div>
              <div className="media-body">
                 <h1>{this.props.dataset.title}</h1>

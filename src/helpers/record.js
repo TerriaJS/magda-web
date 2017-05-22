@@ -25,7 +25,6 @@ export function parseDataset(dataset) {
   const distributions = distribution["distributions"] || [];
   const temporalCoverage = aspect["temporal-coverage"];
   const spatialCoverage = aspect["spatial-coverage"];
-
   const description = datasetInfo.description || 'No description provided';
   const publisher = datasetInfo.publisher || 'Unknown publisher';
   const tags = datasetInfo.keywords || [];
@@ -34,6 +33,7 @@ export function parseDataset(dataset) {
   const issuedDate= datasetInfo.issued || 'Unknown issued date';
   const updatedDate = datasetInfo.modified ? getDateString(datasetInfo.modified) : 'unknown date';
 
+  const publisherDetails=aspect["dataset-publisher"]["publisher"]["aspects"]["organization-details"]
   const source = distributions.map(d=> {
       const distributionAspects = d["aspects"] || {};
       const info = distributionAspects["dcat-distribution-strings"] || {};
@@ -48,6 +48,6 @@ export function parseDataset(dataset) {
       }
   });
   return {
-      title,issuedDate, updatedDate, landingPage, tags, publisher, description, distribution, source, temporalCoverage, spatialCoverage
+      title,issuedDate, updatedDate, landingPage, tags, publisher, description, distribution, source, temporalCoverage, spatialCoverage, publisherDetails
   }
 };

@@ -83,6 +83,13 @@ input[type=text].form-control{
   margin-bottom: 10px;
 }
 
+
+.media-left{
+  img{
+    max-width: 100px;
+  }
+}
+
 .media-body{
   h3, h1, h2{
     margin: 0;

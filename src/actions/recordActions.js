@@ -73,7 +73,7 @@ export function requestAllDistributionsError(error: number): Action {
 export function fetchDatasetFromRegistry(id: string):Object{
   return (dispatch: Function)=>{
     dispatch(requestDataset(id))
-    let url : string = config.registryUrl + `/${encodeURIComponent(id)}?aspect=dcat-dataset-strings&optionalAspect=dcat-distribution-strings&optionalAspect=dataset-distributions&optionalAspect=temporal-coverage&optionalAspect=spatial&dereference=true`;
+    let url : string = config.registryUrl + `/${encodeURIComponent(id)}?aspect=dcat-dataset-strings&optionalAspect=dcat-distribution-strings&optionalAspect=dataset-distributions&optionalAspect=temporal-coverage&optionalAspect=spatial&dereference=true&optionalAspect=dataset-publisher`;
     console.log(url);
     return fetch(url)
     .then(response => {
