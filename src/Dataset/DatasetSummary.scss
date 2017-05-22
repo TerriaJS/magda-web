@@ -72,11 +72,8 @@
 
 .dataset-summary__title-group{
   width: calc(100% - 60px);
-  .star__btn{
-    padding: 1px;
-    font-size: 1.125rem
-  }
 }
+
 
 
 .dataset-summary__title{
@@ -154,24 +151,10 @@
 }
 
 .dataset-summary__dataset-description > .markdown{
-  max-height: 100px;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 10px;
 }
 
 .dataset-summary__dataset-description:hover{
   cursor: pointer;
-}
-
-.dataset-summary__dataset-description > .markdown:before {
-  content:'';
-  width:100%;
-  height:100%;
-  position:absolute;
-  left:0;
-  top:0;
-  background:linear-gradient(rgba(255, 255, 255, 0) 50px, #FFF);
 }
 
 
@@ -188,6 +171,11 @@
   position: absolute;
   right: 20px;
   top: 15px;
+  .star__btn{
+    padding: 1px;
+    font-size: 1.125rem;
+    margin-right: 5px;
+  }
 }
 
 .dataset-summary__toggle-info-btn.mobile{

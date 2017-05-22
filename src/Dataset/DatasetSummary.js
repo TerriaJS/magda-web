@@ -68,14 +68,13 @@ export default class DatasetSummary extends Component {
                     <div className='dataset-summary__title-group'>
                       <Link className='dataset-summary__title btn'
                             to={`/dataset/${dataset.identifier}`}>
-                              
                         {dataset.title}
                       </Link>
-                    {!this.props.isExpanded && <Star onClick={this.onClickStar} isOn={this.state.isFav}/>}
                     </div>
                     <button className='dataset-summary__toggle-info-btn hidden-xs'
                                                        onClick={this.props.onClickDataset}
                                                        type='button'>
+                        {!this.props.isExpanded && <Star onClick={this.onClickStar} isOn={this.state.isFav}/>}
                         {this.props.isExpanded ? <span>Close</span> : <i className="fa fa-ellipsis-h" aria-hidden="true"></i>}
                     </button>
                   </div>
@@ -93,7 +92,7 @@ export default class DatasetSummary extends Component {
                 <div className='dataset-summary__body'>
 
                   <div className='dataset-summary__dataset-description' onClick={this.props.onClickDataset}>
-                    <MarkdownViewer markdown={dataset.description}/>
+                    <MarkdownViewer markdown={this.props.isExpanded ? dataset.description : dataset.description.slice(0, 100) + "..."}/>
                   </div>
                   <label className='dataset-summary__search-result--publisher'>{defined(dataset.publisher) ? dataset.publisher.name : 'unspecified'}</label>
                 </div>
