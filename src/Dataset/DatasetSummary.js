@@ -93,7 +93,7 @@ export default class DatasetSummary extends Component {
                 <div className='dataset-summary__body'>
 
                   <div className='dataset-summary__dataset-description' onClick={this.props.onClickDataset}>
-                    <MarkdownViewer markdown={dataset.description} stripped={true}/>
+                    <MarkdownViewer markdown={dataset.description}/>
                   </div>
                   <label className='dataset-summary__search-result--publisher'>{defined(dataset.publisher) ? dataset.publisher.name : 'unspecified'}</label>
                 </div>
