@@ -165,9 +165,10 @@
 .dataset-summary__toggle-info-btn{
   border: 0;
   background: transparent;
-  font-size: 18px;
   color: #bbb;
-  padding: 2px 10px;
+}
+
+.dataset-summary__toggle{
   position: absolute;
   right: 20px;
   top: 15px;
@@ -175,6 +176,10 @@
     padding: 1px;
     font-size: 1.125rem;
     margin-right: 5px;
+  }
+
+  .fa-ellipsis-h{
+    vertical-align: bottom;
   }
 }
 
@@ -251,10 +256,6 @@
 
 .dataset-summary__star-btn.is-active{
   color: #e67e22;
-}
-
-.dataset-summary .fa{
-  vertical-align: text-top;
 }
 
 @media (max-width: 768px) {

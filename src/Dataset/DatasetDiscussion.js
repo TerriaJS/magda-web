@@ -9,7 +9,7 @@ export default class DatasetDiscussion extends Component {
 
   render() {
     return (
-      <div className="dataset-details container">
+      <div className="dataset-discussion container">
         <CrappyChat datasetId={this.props.params.datasetId} />
       </div>
     );
