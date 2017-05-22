@@ -10,23 +10,18 @@ import CustomIcons from '../UI/CustomIcons';
 
 class RecordHandler extends React.Component {
   componentWillMount(){
-    if(!this.props.params.distributionId){
-      this.props.fetchDataset(this.props.params.datasetId);
-    } else{
+    this.props.fetchDataset(this.props.params.datasetId);
+    if(this.props.params.distributionId){
       this.props.fetchDistribution(this.props.params.distributionId);
     }
   }
-
   componentWillReceiveProps(nextProps){
-    if(!nextProps.params.distributionId){
-      if(!this.props.params.distributionId && (nextProps.params.datasetId !== this.props.params.datasetId)){
+      if(nextProps.params.datasetId !== this.props.params.datasetId){
         nextProps.fetchDataset(nextProps.params.datasetId);
-      } else if(this.props.params.distributionId){
-        nextProps.fetchDataset(nextProps.params.datasetId);
+      } 
+      if(nextProps.params.distributionId !== this.props.params.distributionId){
+        nextProps.fetchDistribution(nextProps.params.distributionId);
       }
-    } else if(nextProps.params.distributionId !== this.props.params.distributionId){
-      nextProps.fetchDistribution(nextProps.params.distributionId);
-    }
   }
 
   renderByState(){

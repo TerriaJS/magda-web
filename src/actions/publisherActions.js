@@ -90,6 +90,7 @@ function fetchPublisher(id){
     return (dispatch: Function) => {
         dispatch(requestPublisher());
         const url = `http://104.199.180.124/api/v0/registry/records/${id}?aspect=organization-details`;
+        console.log(url);
         return fetch(url)
             .then(response => {
                 if (response.status === 200) {
