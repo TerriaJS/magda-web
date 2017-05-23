@@ -1,9 +1,11 @@
+//  @flow
 import React, { Component } from 'react';
 import defined from '../helpers/defined';
 import MarkdownViewer from '../UI/MarkdownViewer';
 import CustomIcons from '../UI/CustomIcons';
 import Star from '../UI/Star';
 import ToggleList from '../UI/ToggleList';
+import renderDistribution from '../UI/Distribution';
 import './DatasetSummary.css';
 import { Link } from 'react-router';
 
@@ -31,19 +33,10 @@ export default class DatasetSummary extends Component {
     })
   }
 
-  renderDownloadLink(d){
-    return <div className={`media clearfix ${d.format} dataset-summary__media-object`}>
-            <div className='media-left'>
-              {<CustomIcons name={d.format}/>}
-            </div>
-            <div className="media-body">
-             <a className='media-heading' href={d.downloadURL} target='_blank'>{d.title}({d.format})</a>
-             <div className='dataset-summary__license'>{defined(d.license) && d.license.name}</div>
-            </div>
-          </div>
-  }
+
 
   renderLinks(){
+    const distribution = this.props.dataset.distributions;
     return <div className='dataset-summary__more-info'>
               <div className='dataset-summary__source clearfix'>
               <h5 className='dataset-summary__sub-heading'>Source</h5>
@@ -52,7 +45,7 @@ export default class DatasetSummary extends Component {
               <div className='dataset-summary__content clearfix'>
                 <h5 className='dataset-summary__sub-heading'>Contents</h5>
                 <ToggleList list={this.props.dataset.distributions}
-                            renderFunction={item=>this.renderDownloadLink(item)}
+                            renderFunction={item=>renderDistribution(item.format, item.id, item.title, item.license.name, this.props.dataset.identifier)}
                             className={''}
                             defaultLength={3}
                             getKey={item=>item.downloadURL}/>
