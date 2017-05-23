@@ -18,16 +18,17 @@ class RecordHandler extends React.Component {
   componentWillReceiveProps(nextProps){
       if(nextProps.params.datasetId !== this.props.params.datasetId){
         nextProps.fetchDataset(nextProps.params.datasetId);
-      } 
-      if(nextProps.params.distributionId !== this.props.params.distributionId){
+      }
+      if(nextProps.params.distributionId && nextProps.params.distributionId !== this.props.params.distributionId){
         nextProps.fetchDistribution(nextProps.params.distributionId);
       }
   }
 
   renderByState(){
-    if(this.props.error){
-      return <ErrorHandler errorCode={this.props.error}/>;
-    } else if (this.props.params.distributionId){
+     if (this.props.params.distributionId && !this.props.distributionIsFetching){
+       if(this.props.distributionFetchError){
+         return <ErrorHandler errorCode={this.props.error}/>;
+       }
       return (
         <div>
           <div className="container">
@@ -50,25 +51,30 @@ class RecordHandler extends React.Component {
             <div className="tab-content">{this.props.children}</div>
             </div>
       )
+    } else if(this.props.params.datasetId && !this.props.datasetIsFetching){
+      if(this.props.datasetFetchError){
+        return <ErrorHandler errorCode={this.props.error}/>;
+      }
+      return (
+        <div>
+            <div className="container media">
+              <div className="media-left">
+                <CustomIcons imageUrl={this.props.dataset.publisherDetails && this.props.dataset.publisherDetails.imageUrl}/>
+              </div>
+               <div className="media-body">
+                  <h1>{this.props.dataset.title}</h1>
+                  <a className="dont-break-out">{this.props.dataset.landingPage}</a>
+                  <div>Updated {this.props.dataset.updatedDate}</div>
+              </div>
+            </div>
+            <Tabs list={config.datasetTabList} baseUrl={`/dataset/${this.props.params.datasetId}`}/>
+            <div className="tab-content">{this.props.children}</div>
+        </div>
+      );
     }
-    return (
-      <div>
-          <div className="container media">
-            <div className="media-left">
-              <CustomIcons imageUrl={this.props.dataset.publisherDetails && this.props.dataset.publisherDetails.imageUrl}/>
-            </div>
-             <div className="media-body">
-                <h1>{this.props.dataset.title}</h1>
-                <a className="dont-break-out">{this.props.dataset.landingPage}</a>
-                <div>Updated {this.props.dataset.updatedDate}</div>
-            </div>
-          </div>
-          <Tabs list={config.datasetTabList} baseUrl={`/dataset/${this.props.params.datasetId}`}/>
-          <div className="tab-content">{this.props.children}</div>
-      </div>
-    );
+
   }
-  
+
   render() {
     return (
       <div>
@@ -82,11 +88,13 @@ function mapStateToProps(state) {
   const record=state.record;
   const dataset=record.dataset;
   const distribution=record.distribution;
-  const isFetching=record.isFetching;
-  const error=record.error;
+  const datasetIsFetching=record.datasetIsFetching;
+  const distributionIsFetching = record.distributionIsFetching;
+  const datasetFetchError = record.datasetFetchError;
+  const distributionFetchError = record.distributionFetchError
 
   return {
-    dataset, distribution, isFetching, error
+    dataset, distribution, datasetIsFetching, distributionIsFetching, distributionFetchError, datasetFetchError
   };
 }
 
@@ -101,12 +109,10 @@ RecordHandler.propTypes = {
   dataset: React.PropTypes.object,
   distribution: React.PropTypes.object,
   location: React.PropTypes.object.isRequired,
-  isFetching: React.PropTypes.bool.isRequired,
-  error: React.PropTypes.number
+  datasetIsFetching: React.PropTypes.bool.isRequired,
+  distributionIsFetching: React.PropTypes.bool.isRequired,
+  distributionFetchError: React.PropTypes.number,
+  datasetFetchError: React.PropTypes.number
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecordHandler);
-
-
-
-

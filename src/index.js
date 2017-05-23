@@ -3,7 +3,9 @@
 import createLogger from 'redux-logger'
 import './index.css';
 // import {browserHistory} from 'react-router';
+import {config} from './config'
 import { Router, Route, IndexRoute, IndexRedirect, hashHistory} from 'react-router';
+import {fetchFeaturedPublishersFromRegistry} from "./actions/featuredPublishersActions";
 import thunkMiddleware from 'redux-thunk'
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -48,13 +50,18 @@ const store = createStore(
 
 hashHistory.listen (location=>{
   window.ga('set', 'location', document.location);
-  window.ga('send', 'pageview');  
+  window.ga('send', 'pageview');
 })
+
+
+function loadDefaultData(store){
+  store.dispatch(fetchFeaturedPublishersFromRegistry(config.featuredPublishers))
+}
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path={baseurl} component={AppContainer}>
+      <Route path={baseurl} component={AppContainer} onEnter={loadDefaultData(store)}>
         <IndexRoute component={Home}/>
         <Route path="search" component={Search} />
         <Route path="feedback" component={Feedback} />
@@ -78,7 +85,7 @@ ReactDOM.render(
         <Route path="projects/:id" component={ProjectDetails}/>
         <Route path="publishers" component={PublishersViewer}/>
         <Route path="publishers/:publisherId" component={PublisherDetails}/>
-        {staticPageRegister.map( item => 
+        {staticPageRegister.map( item =>
         <Route path={`page/:id`} key={item.path} component={item.component}/>)}
       </Route>
     </Router>

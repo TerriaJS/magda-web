@@ -8,6 +8,7 @@ import debounce from 'lodash.debounce';
 import defined from '../helpers/defined';
 import Pagination from '../UI/Pagination';
 import Notification from '../UI/Notification';
+import PublisherBox from '../Components/PublisherBox';
 
 import React, { Component } from 'react';
 import SearchFacets from '../SearchFacets/SearchFacets';
@@ -16,6 +17,7 @@ import SearchResults from '../SearchResults/SearchResults';
 import MatchingStatus from './MatchingStatus';
 import { bindActionCreators } from "redux";
 import { fetchSearchResultsIfNeeded } from '../actions/datasetSearchActions';
+import cripsy from './crispy.gif';
 
 class Search extends Component {
 
@@ -42,7 +44,7 @@ class Search extends Component {
   componentWillMount(){
     this.props.fetchSearchResultsIfNeeded(this.props.location.query);
   }
-  
+
 
   componentWillReceiveProps(nextProps){
     this.props.fetchSearchResultsIfNeeded(nextProps.location.query);
@@ -144,6 +146,7 @@ class Search extends Component {
           </div>
           <div className='row'>
             <div className='col-sm-8'>
+                {searchText.length === 0 && <div><img className="img-responsive img-rounded img-crispy" src={cripsy} alt="crispy"/></div>}
                 {searchText.length > 0 &&
                  !this.props.isFetching &&
                  !this.props.hasError &&
@@ -151,7 +154,7 @@ class Search extends Component {
                  <Publisher updateQuery={this.updateQuery}
                             component={'recommendations'}
                  />
-                 
+
                  {defined(this.props.location.query.q) &&
                   this.props.location.query.q.length > 0 &&
                     <MatchingStatus datasets={this.props.datasets}
@@ -181,6 +184,10 @@ class Search extends Component {
                                 onDismiss={this.onDismissError}/>
                }
               </div>
+
+            <div className='col-sm-4 pull-right'>
+            {this.props.featuredPublishers.map(p=><PublisherBox key={p.id} publisher={p}/>)}
+            </div>
             </div>
           </div>
         </div>
@@ -213,7 +220,7 @@ function mapDispatchToProps(dispatch) {
 
 
 function mapStateToProps(state) {
-  let { datasetSearch } = state;
+  let { datasetSearch, featuredPublishers } = state;
   return {
     datasets: datasetSearch.datasets,
     hitCount: datasetSearch.hitCount,
@@ -223,6 +230,7 @@ function mapStateToProps(state) {
     strategy: datasetSearch.strategy,
     errorMessage: datasetSearch.errorMessage,
     freeText: datasetSearch.freeText,
+    featuredPublishers: featuredPublishers.records
   }
 }
 

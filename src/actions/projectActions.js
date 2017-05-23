@@ -25,12 +25,6 @@ export function requestProjectsError(error: Object): Action {
   }
 }
 
-export function projectsNotFound(): Action {
-    return {
-        type: actionTypes.PROJECTS_NOT_FOUND
-    }
-}
-
 
 export function fetchProjectsFromRegistry():Object{
   return (dispatch: Function)=>{
@@ -39,11 +33,8 @@ export function fetchProjectsFromRegistry():Object{
     return fetch(url)
     .then(response => {
         if (response.status >= 400) {
-          if(response.status === 404){
-            return dispatch(projectsNotFound());
-          }
-            return dispatch(requestProjectsError(response));
-        } 
+            return dispatch(requestProjectsError(response.status));
+        }
         return response.json();
     })
     .then((json) => dispatch(receiveProjects(json))
@@ -61,4 +52,3 @@ export function fetchProjectsIfNeeded(){
       }
   }
 }
-

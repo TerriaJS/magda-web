@@ -1,4 +1,4 @@
-// @flow 
+// @flow
 
 import type { Region, Publisher, Project } from '../types';
 
@@ -25,7 +25,7 @@ type PublisherRaw = {
 }
 
 type ProjectRaw = {
-    id: string, 
+    id: string,
     name: string
 }
 
@@ -42,7 +42,7 @@ export function parseRegion(regionRaw : RegionRaw) : Region {
 export function parsePublisher(publisherRaw: PublisherRaw) : Publisher{
     const publisher = {
         title: publisherRaw.name,
-        description: publisherRaw.aspects["organization-details"]["description"] || "",
+        description: publisherRaw.aspects["organization-details"]["description"] || "A description of this publisher is not available",
         image_url: publisherRaw.aspects["organization-details"]["imageUrl"] || "http://placehold.it/100x100?text=Image+unavailable",
         id: publisherRaw.id
     }

@@ -21,7 +21,7 @@ class PublisherDetails extends Component {
       const publisher = this.props.publisher;
       return <div className="publisher-details container">
                 <div className="row">
-                    <div className='publisher-details__body col-sm-9'>
+                    <div className='publisher-details__body col-sm-8'>
                         <h1>{this.props.publisher.title}</h1>
                         <div className='publisher-details-overview'>
                             <h3>Overview</h3>

@@ -19,7 +19,7 @@ class DatasetDetails extends Component {
     const datasetId = this.props.params.datasetId;
     return <div className="dataset-details container">
               <div className="row">
-                <div className='dataset-details__body col-sm-9'>
+                <div className='dataset-details__body col-sm-8'>
                   <div className='dataset-details-overview'>
                     <h3>Overview</h3>
                     <OverviewBox content={dataset.description}/>
@@ -41,7 +41,7 @@ class DatasetDetails extends Component {
                   </div>
               </div>
 
-              <div className='record-details__sidebar col-sm-3'>
+              <div className='record-details__sidebar col-sm-4'>
                   <div><button className='btn btn-primary'>Add to project</button></div>
                   <Social/>
                   <div className="tags">

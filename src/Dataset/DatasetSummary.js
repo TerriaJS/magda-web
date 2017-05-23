@@ -66,7 +66,7 @@ export default class DatasetSummary extends Component {
                     </div>
                     <span className='hidden-xs dataset-summary__toggle'>
                         {!this.props.isExpanded && <Star onClick={this.onClickStar} isOn={this.state.isFav}/>}
-                        <button className='dataset-summary__toggle-info-btn' onClick={this.props.onClickDataset} type='button'>{this.props.isExpanded ? <span>Close</span> : <i className="fa fa-ellipsis-h" aria-hidden="true"></i>}</button>
+                        {this.props.onClickDataset && <button className='dataset-summary__toggle-info-btn' onClick={this.props.onClickDataset} type='button'>{this.props.isExpanded ? <span>Close</span> : <i className="fa fa-ellipsis-h" aria-hidden="true"></i>}</button>}
                     </span>
                   </div>
                   {this.props.isExpanded && <div className='dataset-summary__middle clearfix'>

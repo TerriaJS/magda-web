@@ -13,7 +13,7 @@ class PublishersViewer extends Component {
     componentWillMount(){
       this.props.fetchPublishersIfNeeded(this.props.location.query.page || 1);
     }
-    
+
     componentWillReceiveProps(nextProps){
       if(this.props.location.query.page !== nextProps.location.query.page){
         nextProps.fetchPublishersIfNeeded(nextProps.location.query.page || 1);
@@ -24,7 +24,7 @@ class PublishersViewer extends Component {
       if(this.props.error){
         return <ErrorHandler errorCode={this.props.error}/>
       } else{
-        return (<div>
+        return (<div className="col-sm-8">
               {this.props.publishers.map(p=>
                 <PublisherSummary publisher={p} key={p.id}/>
               )}
@@ -40,7 +40,9 @@ class PublishersViewer extends Component {
 
     render(){
       return <div className="container publishers-viewer">
-              {!this.props.isFetching && this.renderContent()}
+              <div className="row">
+                {!this.props.isFetching && this.renderContent()}
+              </div>
              </div>
     }
 }

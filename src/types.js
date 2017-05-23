@@ -39,7 +39,7 @@ export type Dataset = {
     },
     end: {
       date: string,
-      text: string 
+      text: string
     }
   },
   language: string,
@@ -112,7 +112,8 @@ export type DataAction = {
   apiQuery? : string,
   errorMessage? : string,
   item?: FacetOption,
-  json: DataSearchJson
+  json: DataSearchJson,
+  error?: number
 }
 
 export type FacetSearchState = {
@@ -162,3 +163,16 @@ export type Project ={
   id: string,
 }
 
+
+export type FeaturedRecords = {
+  records: Array<any>,
+  isFetching: boolean,
+  error: ?number,
+}
+
+
+export type FeaturedAction = {
+  type: string,
+  json: Array<Object>,
+  error: ?number
+}

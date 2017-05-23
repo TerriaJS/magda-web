@@ -24,8 +24,8 @@ class AppContainer extends React.Component {
     return (
     <ReactDocumentTitle title={config.appName}>
         <div>
-          {this.props.isFetching && <ProgressBar/>  }        
-            <nav className='appContainer__nav'> 
+          {this.props.isFetching && <ProgressBar/>  }
+            <nav className='appContainer__nav'>
               <div className="container">
                 <div className="row">
                   <div className="col-sm-2">
@@ -33,38 +33,38 @@ class AppContainer extends React.Component {
                       <a className="navbar-brand" href="/"><img className='logo' alt='data.gov.au-alpha' src={logo}/></a>
                     </div>
                     </div>
-                    
+
                       <Medium>
                         <div className='col-sm-10 nav-links'>
                           <ul className="nav navbar-nav navbar-account">
                             <li><Link to={`/new-account`}>Create an account</Link></li>
-                            <li><Link to={`/sign-in`}>Sign in</Link></li> 
+                            <li><Link to={`/sign-in`}>Sign in</Link></li>
                           </ul>
                           <ul className="nav navbar-nav">
                             {headerNavs.map(nav=>
                               <li key={nav[1]}><Link to={`/${encodeURI(nav[1])}`}>{nav[0]}</Link></li>
                             )}
                           </ul>
-                          
+
                         </div>
                       </Medium>
                       </div>
                     <div className="row nav_second">
-                      <div className='col-sm-9'><SearchBox location={this.props.location}/> </div>
-                      <Small><div className='col-sm-3'><div className="appContainer__suggestion"> Try Search for <Link to={"/search?q=" + encodeURI(config.suggestion)}>{config.suggestion}</Link></div></div>
+                      <div className='col-sm-8'><SearchBox location={this.props.location}/> </div>
+                      <Small><div className='col-sm-4'><div className="appContainer__suggestion"> Try Search for <Link to={"/search?q=" + encodeURI(config.suggestion)}>{config.suggestion}</Link></div></div>
                       </Small>
                     </div>
                   </div>
                 </nav>
-                
-                
+
+
                 <div id="content" className="clearfix">{ this.props.children }</div>
                 <footer className="footer clearfix">
                   <div className="container">
                   <ul className="nav row">
                   {
                     footerNavs.map(item=>
-                      <li key={item.category} className="col-md-2 col-sm-3"><span className="nav-title">{item.category}</span>
+                      <li key={item.category} className="col-md-2 col-sm-4"><span className="nav-title">{item.category}</span>
                         <ul className="nav nav-pills nav-stacked">
                           {item.links.map(link=>
                           <li key={link[1]}>{this.renderLink(link)}</li>)
@@ -90,8 +90,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(AppContainer);
-
-
-
-
-

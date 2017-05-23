@@ -12,14 +12,21 @@ body {
 
 h1{
   font-size: $heading1;
+  font-weight: 800;
 }
 
 h2{
   font-size: $heading2;
+  font-weight: 800;
 }
 
 h3{
   font-size: $heading3;
+  font-weight: 800;
+}
+
+h4{
+  font-weight: 800;
 }
 
 .navbar-header{
@@ -132,5 +139,4 @@ input[type=text].form-control{
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-
 }
