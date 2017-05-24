@@ -1,9 +1,29 @@
+// @flow
 import React, { Component } from 'react';
 import find from 'lodash.find';
 
+type Option = {
+  value: string,
+  hitCount: number,
+  matched: true
+}
+
+type Props = {
+  activeOptions: Array<Option>,
+  description: string,
+  onClick: Function,
+  options: Array<Option>
+}
+
+
 import './Recommendations.css';
 class Recommendations extends Component {
-  constructor(props) {
+  state: {
+    isOpen: boolean,
+    isVisible: boolean
+  }
+
+  constructor(props: Props) {
     super(props);
     this.state = {
       isOpen: false,
@@ -32,22 +52,21 @@ class Recommendations extends Component {
     })
   }
 
-  onClick(option){
+  onClick(option: Option){
     this.setState({
       isVisible: false
     })
     this.props.onClick(option);
-    // this.props.modifyUserSearchString('by ' + option.value);
   }
 
-  onToggle(e){
+  onToggle(e: MouseEvent){
     e.stopPropagation();
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
 
-  renderOption(option){
+  renderOption(option: Option){
     return <button className='btn-facet-option btn' onClick={this.onClick.bind(this, option)}>
             <span className='btn-facet-option__name'>{option.value}</span>
             <span className='btn-facet-option__count'>{option.hitCount}</span>
@@ -73,7 +92,7 @@ class Recommendations extends Component {
             <div className='search-recomendation__more-options'>
               <button onClick={this.onToggle} className='search-recomendation__more-option-btn btn'>
                 More
-              
+
               </button>
               {this.state.isOpen &&
                 <ul className='list-unstyled search-recomendation__more-options-options'>

@@ -1,3 +1,4 @@
+// @flow
 // eslint-disable-next-line
 import {RouterContext } from 'react-router';
 
@@ -11,6 +12,10 @@ import React, { Component } from 'react';
 import {fetchRegionMapping} from '../actions/regionMappingActions';
 
 class SearchBox extends Component {
+  state : {
+    searchText: ?string
+  }
+
   constructor(props) {
     super(props);
     this.debounceUpdateSearchQuery = debounce(this.updateSearchText, 3000);
@@ -135,21 +140,20 @@ SearchBox.contextTypes ={
 
 SearchBox.propTypes = {
   freeText: React.PropTypes.string,
-  errorMessage: React.PropTypes.string
 }
 
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps)=> {
   let { datasetSearch } = state;
   return {
     freeText: datasetSearch.freeText,
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
+const mapDispatchToProps = (dispatch: Dispatch<*>) =>
+   bindActionCreators({
     fetchRegionMapping: fetchRegionMapping,
   }, dispatch);
-}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);

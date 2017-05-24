@@ -1,3 +1,5 @@
+// @flow
+
 // eslint-disable-next-line
 import expect from 'expect';
 // eslint-disable-next-line

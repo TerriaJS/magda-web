@@ -142,14 +142,14 @@ class Search extends Component {
             </div>
             {searchText.length > 0 &&
              !this.props.isFetching &&
-             !this.props.hasError && <div className="results-count">{this.props.hitCount} results found</div>}
+             !this.props.error && <div className="results-count">{this.props.hitCount} results found</div>}
           </div>
           <div className='row'>
             <div className='col-sm-8'>
                 {searchText.length === 0 && <div><img className="img-responsive img-rounded img-crispy" src={cripsy} alt="crispy"/></div>}
                 {searchText.length > 0 &&
                  !this.props.isFetching &&
-                 !this.props.hasError &&
+                 !this.props.error &&
                  <div>
                  <Publisher updateQuery={this.updateQuery}
                             component={'recommendations'}
@@ -178,8 +178,8 @@ class Search extends Component {
                    }
                  </div>
                }
-               {!this.props.isFetching && this.props.hasError &&
-                  <Notification content={this.props.errorMessage}
+               {!this.props.isFetching && this.props.error &&
+                  <Notification content={this.props.error}
                                 type='error'
                                 onDismiss={this.onDismissError}/>
                }
@@ -205,10 +205,9 @@ Search.propTypes = {
   hitCount: React.PropTypes.number.isRequired,
   isFetching: React.PropTypes.bool.isRequired,
   progress: React.PropTypes.number.isRequired,
-  hasError: React.PropTypes.bool.isRequired,
   strategy: React.PropTypes.string.isRequired,
   freeText: React.PropTypes.string,
-  errorMessage: React.PropTypes.string
+  error: React.PropTypes.number
 }
 
 
@@ -226,9 +225,8 @@ function mapStateToProps(state) {
     hitCount: datasetSearch.hitCount,
     isFetching: datasetSearch.isFetching,
     progress: datasetSearch.progress,
-    hasError: datasetSearch.hasError,
     strategy: datasetSearch.strategy,
-    errorMessage: datasetSearch.errorMessage,
+    error: datasetSearch.error,
     freeText: datasetSearch.freeText,
     featuredPublishers: featuredPublishers.records
   }

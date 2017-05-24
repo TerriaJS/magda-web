@@ -110,9 +110,8 @@ export type FacetAction = {
 export type DataAction = {
   type: string,
   apiQuery? : string,
-  errorMessage? : string,
   item?: FacetOption,
-  json: DataSearchJson,
+  json?: DataSearchJson,
   error?: number
 }
 
@@ -145,9 +144,8 @@ export type SearchState = {
   temporalOptions: Array<Object>,
   formatOptions: Array<Object>,
   apiQuery: string,
-  hasError: boolean,
+  error: number,
   strategy: string,
-  errorMessage: string
 }
 
 export type Publisher ={

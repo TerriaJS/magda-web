@@ -2,11 +2,12 @@
 import {parseDataset, parseDistribution} from '../helpers/record';
 
 const initialData = {
-    isFetching: false,
+    datasetIsFetching: false,
+    distributionIsFetching: false,
     dataset: {},
     distribution: {},
-    error: undefined,
-    notFound:  false
+    datasetFetchError: null,
+    distributionFetchError: null,
 }
 
 
@@ -17,7 +18,6 @@ type RecordResult = {
   distributionFetchError: ?number,
   dataset: Object,
   distribution: Object,
-  error: any,
 }
 
 type recordAction = {

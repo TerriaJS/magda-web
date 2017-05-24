@@ -48,13 +48,13 @@ export function requestPublisherError(error: number): Action {
 function fetchPublishers(start){
     return (dispatch: Function) => {
         dispatch(requestPublishers());
-        const url = `http://104.199.180.124/api/v0/registry/records?aspect=organization-details&limit=${config.resultsPerPage}&start=${(start-1)*config.resultsPerPage}`;
+        const url = `${config.searchApiBaseUrl}?aspect=organization-details&limit=${config.resultsPerPage}&start=${(start-1)*config.resultsPerPage}`;
         return fetch(url)
             .then(response => {
                 if (response.status === 200) {
                     return response.json();
-                } 
-                return dispatch(requestPublishersError(response.status))    
+                }
+                return dispatch(requestPublishersError(response.status))
             })
             .then(json => {
                 if(!json.error){
@@ -84,19 +84,17 @@ export function fetchPublishersIfNeeded(start: number):Object{
 }
 
 
-
-
 function fetchPublisher(id){
     return (dispatch: Function) => {
         dispatch(requestPublisher());
-        const url = `http://104.199.180.124/api/v0/registry/records/${id}?aspect=organization-details`;
+        const url = `${config.searchApiBaseUrl}/${id}?aspect=organization-details`;
         console.log(url);
         return fetch(url)
             .then(response => {
                 if (response.status === 200) {
                     return response.json()
-                } 
-                return dispatch(requestPublisherError(response.status))    
+                }
+                return dispatch(requestPublisherError(response.status))
             })
             .then(json => {
                 if(!json.error){
@@ -124,5 +122,3 @@ export function fetchPublisherIfNeeded(id: number):Object{
       }
   }
 }
-
-

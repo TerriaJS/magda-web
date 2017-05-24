@@ -18,7 +18,7 @@ export function receiveProjects(json: Object): Action {
   }
 }
 
-export function requestProjectsError(error: Object): Action {
+export function requestProjectsError(error: number): Action {
   return {
     type: actionTypes.REQUEST_PROJECTS_ERROR,
     error,
