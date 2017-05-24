@@ -40,7 +40,7 @@ let baseurl = location.pathname;
 // eslint-disable-next-line
 const loggerMiddleware = createLogger();
 
-const store = createStore(
+const store: Store = createStore(
    reducer,
    applyMiddleware(
      thunkMiddleware, // lets us dispatch() functions

@@ -111,7 +111,7 @@ export type DataAction = {
   type: string,
   apiQuery? : string,
   item?: FacetOption,
-  json?: DataSearchJson,
+  json: DataSearchJson,
   error?: number
 }
 
@@ -144,7 +144,7 @@ export type SearchState = {
   temporalOptions: Array<Object>,
   formatOptions: Array<Object>,
   apiQuery: string,
-  error: number,
+  error: ?number,
   strategy: string,
 }
 

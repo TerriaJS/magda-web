@@ -18,19 +18,24 @@ class SearchBox extends Component {
 
   constructor(props) {
     super(props);
-    this.debounceUpdateSearchQuery = debounce(this.updateSearchText, 3000);
-    this.handleSearchFieldEnterKeyPress = this.handleSearchFieldEnterKeyPress.bind(this);
-    this.updateQuery = this.updateQuery.bind(this);
-    this.updateSearchText = this.updateSearchText.bind(this);
-    this.onClickSearch = this.onClickSearch.bind(this);
-    this.onSearchTextChange = this.onSearchTextChange.bind(this);
-    this.getSearchBoxValue = this.getSearchBoxValue.bind(this);
+    const self: any = this;
+
+    self.handleSearchFieldEnterKeyPress = this.handleSearchFieldEnterKeyPress.bind(this);
+    self.updateQuery = this.updateQuery.bind(this);
+    self.updateSearchText = this.updateSearchText.bind(this);
+    self.onClickSearch = this.onClickSearch.bind(this);
+    self.onSearchTextChange = this.onSearchTextChange.bind(this);
+    self.getSearchBoxValue = this.getSearchBoxValue.bind(this);
 
     // it needs to be undefined here, so the default value should be from the url
     // once this value is set, the value should always be from the user input
     this.state={
       searchText: undefined
     }
+  }
+
+  debounceUpdateSearchQuery(){
+    debounce(this.updateSearchText, 3000)
   }
 
   componentWillMount(){

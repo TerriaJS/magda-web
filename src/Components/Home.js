@@ -35,14 +35,14 @@ class Home extends React.Component {
   }
 }
 
-function mapStateToProps(state){
+const mapStateToProps = (state) => {
   const datasets= state.featuredDatasets.records;
   const isFetching= state.featuredDatasets.isFetching;
   const error = state.featuredDatasets.error;
   return {datasets, isFetching, error}
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch: Dispatch<*>) => {
   return bindActionCreators({
     fetchFeaturedDatasets: fetchFeaturedDatasetsFromRegistry,
   }, dispatch);

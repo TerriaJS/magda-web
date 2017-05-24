@@ -34,11 +34,11 @@ export function fetchSearchResults(query: string): Store {
     let url : string = config.searchApiBaseUrl + `datasets?query=${query}`;
     dispatch(requestResults(query))
     return fetch(url)
-    .then(response => {
+    .then((response: Object) => {
       if (response.status === 200) {
           return response.json();
       }
-      dispatch(transferFailed(response.status))
+      return dispatch(transferFailed(response.status))
     })
     .then((json: DataSearchJson) =>{
         if(!json.error){

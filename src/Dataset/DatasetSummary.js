@@ -9,19 +9,36 @@ import renderDistribution from '../UI/Distribution';
 import './DatasetSummary.css';
 import { Link } from 'react-router';
 
+type Props = {
+  onClickTag: Function,
+  onClickDataset: Function,
+  dataset: Object,
+  isExpanded: boolean
+}
+
+type DefaultProps = {
+  datasets: Object
+}
 
 export default class DatasetSummary extends Component {
-  constructor(props) {
+  state: {
+    tagsExpanded: boolean,
+    isFav: boolean
+  }
+
+  constructor(props: Props) {
     super(props);
-    this.onClick = this.onClick.bind(this);
-    this.onClickStar = this.onClickStar.bind(this);
+    const self: any = this;
+
+    self.onClick = this.onClick.bind(this);
+    self.onClickStar = this.onClickStar.bind(this);
     this.state ={
       tagsExpanded: false,
       isFav: false
     }
   }
 
-  onClick(tag, e){
+  onClick(tag: string, e: Event){
     e.stopPropagation();
     this.props.onClickTag(tag);
   }
@@ -100,6 +117,3 @@ export default class DatasetSummary extends Component {
           </div>
   }
 }
-
-DatasetSummary.propTypes = {dataset: React.PropTypes.object};
-DatasetSummary.defaultProps = {dataset: {}};

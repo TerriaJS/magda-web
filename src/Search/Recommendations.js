@@ -29,9 +29,12 @@ class Recommendations extends Component {
       isOpen: false,
       isVisible: true
     }
-    this.onToggle= this.onToggle.bind(this);
-    this.onClick = this.onClick.bind(this);
-    this.onClickElseWhere=this.onClickElseWhere.bind(this);
+    // flow type workaround: https://github.com/facebook/flow/issues/1517
+    const self: any = this;
+
+    self.onToggle= this.onToggle.bind(this);
+    self.onClick = this.onClick.bind(this);
+    self.onClickElseWhere=this.onClickElseWhere.bind(this);
   }
 
   componentDidMount(){
