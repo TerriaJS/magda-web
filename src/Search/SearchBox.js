@@ -20,6 +20,8 @@ class SearchBox extends Component {
     super(props);
     const self: any = this;
 
+
+
     self.handleSearchFieldEnterKeyPress = this.handleSearchFieldEnterKeyPress.bind(this);
     self.updateQuery = this.updateQuery.bind(this);
     self.updateSearchText = this.updateSearchText.bind(this);
@@ -34,9 +36,7 @@ class SearchBox extends Component {
     }
   }
 
-  debounceUpdateSearchQuery(){
-    debounce(this.updateSearchText, 3000)
-  }
+  debounceUpdateSearchQuery = debounce(this.updateSearchText, 3000);
 
   componentWillMount(){
     this.props.fetchRegionMapping();
@@ -47,6 +47,7 @@ class SearchBox extends Component {
       searchText: nextProps.location.query.q
     })
   }
+
 
   onSearchTextChange(event){
     const text = event.target.value;

@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -98,7 +99,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+const  mapDispatchToProps = (dispatch: Dispatch<*>) => {
   return bindActionCreators({
     fetchDataset: fetchDatasetFromRegistry,
     fetchDistribution: fetchDistributionFromRegistry
