@@ -3,10 +3,6 @@ import CrappyChat from '../Components/CrappyChat/CrappyChat'
 import './RecordDetails.css';
 
 export default class DatasetDiscussion extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="dataset-discussion container">

@@ -30,6 +30,11 @@ class RecordHandler extends React.Component {
        if(this.props.distributionFetchError){
          return <ErrorHandler errorCode={this.props.error}/>;
        }
+       const tabList = [
+         {id: "details", name: "Details", isActive: true},
+         {id: "map", name: "Maps", isActive: this.props.distribution.format && this.props.distribution.format.toLowerCase() === "geojson"},
+         {id: "chart", name: "Chart", isActive: this.props.distribution.format && (this.props.distribution.format.toLowerCase() === "csv" || this.props.distribution.format.toLowerCase() === "json")}
+       ]
       return (
         <div>
           <div className="container">
@@ -43,11 +48,11 @@ class RecordHandler extends React.Component {
                 </div>
                 <div className="media-body">
                   <h1>{this.props.distribution.title}</h1>
-                  <a className="dont-break-out">{this.props.distribution.downloadUrl}</a>
+                  <a className="dont-break-out" href={this.props.distribution.downloadUrl} >{this.props.distribution.downloadUrl}</a>
                   <div>Updated {this.props.distribution.updatedDate}</div>
                 </div>
               </div>
-                <Tabs list={config.distributionTabList} baseUrl={`/dataset/${this.props.params.datasetId}/distribution/${this.props.params.distributionId}`}/>
+                <Tabs list={tabList} baseUrl={`/dataset/${this.props.params.datasetId}/distribution/${this.props.params.distributionId}`}/>
             </div>
             <div className="tab-content">{this.props.children}</div>
             </div>
@@ -56,6 +61,9 @@ class RecordHandler extends React.Component {
       if(this.props.datasetFetchError){
         return <ErrorHandler errorCode={this.props.error}/>;
       }
+      const datasetTabs = [{id: "details", name: "Deatils", isActive: true},
+                           {id:  "discussion", name: "Discussion", isActive: true},
+                           {id: "publisher", name: "About " + this.props.dataset.publisher, isActive: true}];
       return (
         <div>
             <div className="container media">
@@ -64,11 +72,11 @@ class RecordHandler extends React.Component {
               </div>
                <div className="media-body">
                   <h1>{this.props.dataset.title}</h1>
-                  <a className="dont-break-out">{this.props.dataset.landingPage}</a>
+                  <a className="dont-break-out" href={this.props.dataset.landingPage}>{this.props.dataset.landingPage}</a>
                   <div>Updated {this.props.dataset.updatedDate}</div>
               </div>
             </div>
-            <Tabs list={config.datasetTabList} baseUrl={`/dataset/${this.props.params.datasetId}`}/>
+            <Tabs list={datasetTabs} baseUrl={`/dataset/${this.props.params.datasetId}`}/>
             <div className="tab-content">{this.props.children}</div>
         </div>
       );
