@@ -26,7 +26,7 @@ export type Dataset = {
   spatial: Object,
   identifier: string,
   description: string,
-  accrualPeriodicity: Object,
+  accrualPeriodicity: ?Object,
   landingPage: string,
   keyword: Array<string>,
   modified: string,

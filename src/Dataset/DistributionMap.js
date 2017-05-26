@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import generatePreviewData from "../helpers/generatePreviewData";
+import fetch from 'isomorphic-fetch';
+import ol from "openlayers";
 
 class DistributionMap extends Component {
   constructor(props){
@@ -12,11 +14,17 @@ class DistributionMap extends Component {
     }
   }
   componentWillMount(){
-    if(this.props.distribution.id && this.props.datasetId){
-      const data = generatePreviewData(this.props.distribution, this.props.datasetId);
-      this.setState({
-        mapData: data
+    const parser = new ol.format.WMSCapabilities();
+    if(this.props.distribution.id){
+      // preload the data to figure out how to display
+      // generate url config
+      fetch(this.props.distribution.downloadUrl).then(response => response.text()).then(text=>{
+        const result = parser.read(text);
+        this.setState({
+          mapData: generatePreviewData(this.props.distribution.downloadUrl, result)
+        })
       })
+
     }
   }
 
@@ -29,9 +37,8 @@ class DistributionMap extends Component {
 
 function mapStateToProps(state, ownProps) {
   const distribution = state.record.distribution;
-  const datasetId = ownProps.params.datasetId
   return {
-    distribution, datasetId
+    distribution
   };
 }
 

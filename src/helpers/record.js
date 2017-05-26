@@ -1,3 +1,4 @@
+// @flow
 import getDateString from './getDateString';
 
 export function parseDistribution(record) {

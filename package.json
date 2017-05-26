@@ -39,6 +39,7 @@
     "markdown-with-front-matter-loader": "^0.1.0",
     "marked": "^0.3.6",
     "node-sass": "^4.5.0",
+    "openlayers": "^4.1.1",
     "pretty-date": "^0.2.0",
     "re-base": "^2.7.0",
     "react": "^15.3.1",

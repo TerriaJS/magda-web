@@ -1,5 +1,5 @@
 // @flow
-export default function generatePreviewData(distribution, datasetId){
+export default function generatePreviewData(url, preloadedData){
     const config = {
       "version":"0.0.03",
       "initSources":[
@@ -11,13 +11,13 @@ export default function generatePreviewData(distribution, datasetId){
           "isOpen":true,
           "items":[
             {
-            "type":distribution.format.toLowerCase(),
+            "type":preloadedData["Service"]["Name"].toLowerCase(),
             "name":"User Data",
             "isUserSupplied":true,
             "isOpen":true,
             "isEnabled":true,
-            "url":distribution.downloadUrl,
-            "layers": getLayers(distribution, datasetId)
+            "url":url,
+            "layers": preloadedData["Capability"]["Layer"]["Layer"][0]["Name"]
           }
         ]
       }],
@@ -31,12 +31,6 @@ export default function generatePreviewData(distribution, datasetId){
 
     }]}
 
-    function getLayers(distribution, datasetId){
-      debugger
-      if(distribution.format.toLowerCase() === 'wms' || distribution.format.toLowerCase() === 'wfs'){
-        return `ckan_${datasetId.split('-').join('_')}`
-      }
-    }
 
 
     // if (config["initSources"][0]['catalog'][0]['items'][0]['type'] == 'arcgis rest api') {
