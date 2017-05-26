@@ -1,5 +1,8 @@
 // @flow
 export default function generatePreviewData(url, preloadedData){
+  const format = preloadedData["Service"]["Name"].toLowerCase();
+  const boundingBox = preloadedData["Capability"]["Layer"]["Layer"][0]["BoundingBox"][0]["extent"];
+  debugger
     const config = {
       "version":"0.0.03",
       "initSources":[
@@ -11,7 +14,7 @@ export default function generatePreviewData(url, preloadedData){
           "isOpen":true,
           "items":[
             {
-            "type":preloadedData["Service"]["Name"].toLowerCase(),
+            "type": format === "arcgis rest api" ?  "esri-mapServer-group" : format,
             "name":"User Data",
             "isUserSupplied":true,
             "isOpen":true,
@@ -23,19 +26,13 @@ export default function generatePreviewData(url, preloadedData){
       }],
       "catalogIsUserSupplied":true,
       "homeCamera": {
-                        "west": 105,
-                        "south": -45,
-                        "east": 155,
-                        "north": -5
+                        "west": boundingBox[0] || 105,
+                        "south":boundingBox[1] ||  -45,
+                        "east": boundingBox[2] || 155,
+                        "north": boundingBox[3] || -5
                     }
 
     }]}
-
-
-
-    // if (config["initSources"][0]['catalog'][0]['items'][0]['type'] == 'arcgis rest api') {
-    //     config["initSources"][0]['catalog'][0]['items'][0]['type'] = 'esri-mapServer-group';
-    // }
 
     // if (spatial != '') {
     //             extent = geojsonExtent(JSON.parse(spatial)); //[WSEN]
