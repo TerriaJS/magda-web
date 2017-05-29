@@ -174,3 +174,12 @@ export type FeaturedAction = {
   json: Array<Object>,
   error: ?number
 }
+
+export type WMSParser = {
+  read: (text: string) => Object
+}
+
+
+export type Location = {
+
+}

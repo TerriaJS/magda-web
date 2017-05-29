@@ -1,7 +1,7 @@
 // @flow
-export default function generatePreviewData(url, preloadedData){
-  const format = preloadedData["Service"]["Name"].toLowerCase();
-  const boundingBox = preloadedData["Capability"]["Layer"]["Layer"][0]["BoundingBox"][0]["extent"];
+export default function generatePreviewData(url: string, preloadedData: Object): string{
+  const format: string = preloadedData["Service"]["Name"].toLowerCase();
+  const boundingBox: Object = preloadedData["Capability"]["Layer"]["Layer"][0]["BoundingBox"][0]["extent"];
   debugger
     const config = {
       "version":"0.0.03",

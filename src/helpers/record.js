@@ -1,7 +1,7 @@
 // @flow
 import getDateString from './getDateString';
 
-export function parseDistribution(record) {
+export function parseDistribution(record: Object) {
   const id = record["id"];
   const title = record["name"];
 
@@ -10,16 +10,16 @@ export function parseDistribution(record) {
   const info = aspect["dcat-distribution-strings"] || {};
 
   const format = info.format || "Unknown format";
-  const downloadUrl = info.downloadURL || "No downloads available";
+  const downloadURL = info.downloadURL || "No downloads available";
   const updatedDate = info.modified ? getDateString(info.modified) : "unknown date";
   const license = info.license || "License restrictions unknown";
   const description = info.description || "No description provided";
 
-  return { id, title, description, format, downloadUrl, updatedDate, license }
+  return { id, title, description, format, downloadURL, updatedDate, license }
 };
 
 
-export function parseDataset(dataset) {
+export function parseDataset(dataset: Object) {
   const aspect = dataset["aspects"] || {};
   const identifier =dataset.id;
   const datasetInfo = aspect["dcat-dataset-strings"] || {};
@@ -42,7 +42,7 @@ export function parseDataset(dataset) {
 
       return {
           id: d["id"] || "",
-          downloadUrl: info.downloadURL || "No download url provided",
+          downloadURL: info.downloadURL || "No download url provided",
           format: info.format || "Unknown format",
           license: (!info.license || info.license === "notspecified") ? "License restrictions unknown" : info.license,
           title: info.title || "",

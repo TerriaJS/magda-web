@@ -48,7 +48,7 @@ class RecordHandler extends React.Component {
                 </div>
                 <div className="media-body">
                   <h1>{this.props.distribution.title}</h1>
-                  <a className="dont-break-out" href={this.props.distribution.downloadUrl} >{this.props.distribution.downloadUrl}</a>
+                  <a className="dont-break-out" href={this.props.distribution.downloadURL} >{this.props.distribution.downloadURL}</a>
                   <div>Updated {this.props.distribution.updatedDate}</div>
                 </div>
               </div>
