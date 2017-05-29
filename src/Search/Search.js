@@ -19,8 +19,10 @@ import SearchResults from '../SearchResults/SearchResults';
 import MatchingStatus from './MatchingStatus';
 import { bindActionCreators } from "redux";
 import { fetchSearchResultsIfNeeded } from '../actions/datasetSearchActions';
+import type { SearchState} from '../types';
 import queryString from 'query-string';
 import cripsy from './crispy.gif';
+
 
 class Search extends Component {
   state: {
@@ -55,7 +57,7 @@ class Search extends Component {
   }
 
 
-  onClickTag(tag){
+  onClickTag(tag: string){
     this.setState({
       searchText: tag
     });
@@ -65,7 +67,7 @@ class Search extends Component {
   /**
    * update only the search text, remove all facets
    */
-  updateSearchText(text){
+  updateSearchText(text: string){
     this.updateQuery({
       q: text,
       publisher: [],

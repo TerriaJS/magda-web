@@ -1,13 +1,69 @@
 // @flow
 import getDateString from './getDateString';
 
-export function parseDistribution(record: Object) {
+
+
+type dcatDistributionStrings = {
+  format: string,
+  downloadURL: string,
+  modified: string,
+  license: string,
+  description: string,
+  apsects?: aspects
+}
+
+type dcatDatasetStrings = {
+  description: string,
+  keywords: Array<string>,
+  landingPage: string,
+  title: string,
+  issued: string,
+  modified: string
+}
+
+type datasetDistributions = {
+  distributions: Array<Distribution>
+}
+
+type datasetPublisher = {
+  publisher: {
+    aspects: {
+      "organization-details": Object
+    }
+  }
+}
+
+
+type Distribution = {
+  description: string,
+  title: string,
+  id: string,
+  downloadURL: string,
+  format: string
+}
+
+type aspects = {
+  "dcat-distribution-strings"?: dcatDistributionStrings,
+  "dcat-dataset-strings"?:dcatDatasetStrings,
+  "dataset-distributions"?:datasetDistributions,
+  "temporal-coverage"?: string,
+  "spatial-coverage"?: string,
+  "dataset-publisher"?: datasetPublisher
+}
+
+type Record = {
+  id: string,
+  name: string,
+  aspects: aspects
+}
+
+export function parseDistribution(record: Record) {
   const id = record["id"];
   const title = record["name"];
 
-  const aspect = record["aspects"] || {};
+  const aspects = record["aspects"] || {};
 
-  const info = aspect["dcat-distribution-strings"] || {};
+  const info = aspects["dcat-distribution-strings"] || {};
 
   const format = info.format || "Unknown format";
   const downloadURL = info.downloadURL || "No downloads available";
@@ -19,14 +75,14 @@ export function parseDistribution(record: Object) {
 };
 
 
-export function parseDataset(dataset: Object) {
-  const aspect = dataset["aspects"] || {};
+export function parseDataset(dataset: Record) {
+  const aspects = dataset["aspects"] || {};
   const identifier =dataset.id;
-  const datasetInfo = aspect["dcat-dataset-strings"] || {};
-  const distribution = aspect["dataset-distributions"] || {};
+  const datasetInfo = aspects["dcat-dataset-strings"] || {};
+  const distribution = aspects["dataset-distributions"] || {};
   const distributions = distribution["distributions"] || [];
-  const temporalCoverage = aspect["temporal-coverage"];
-  const spatialCoverage = aspect["spatial-coverage"];
+  const temporalCoverage = aspects["temporal-coverage"];
+  const spatialCoverage = aspects["spatial-coverage"];
   const description = datasetInfo.description || 'No description provided';
   const publisher = datasetInfo.publisher || 'Unknown publisher';
   const tags = datasetInfo.keywords || [];
@@ -35,7 +91,8 @@ export function parseDataset(dataset: Object) {
   const issuedDate= datasetInfo.issued || 'Unknown issued date';
   const updatedDate = datasetInfo.modified ? getDateString(datasetInfo.modified) : 'unknown date';
 
-  const publisherDetails=aspect["dataset-publisher"] && aspect["dataset-publisher"]["publisher"]["aspects"] ? aspect["dataset-publisher"]["publisher"]["aspects"]["organization-details"] : {}
+  const publisherDetails=aspects["dataset-publisher"] && aspects["dataset-publisher"]["publisher"]["aspects"] ? aspects["dataset-publisher"]["publisher"]["aspects"]["organization-details"] : {}
+
   const source = distributions.map(d=> {
       const distributionAspects = d["aspects"] || {};
       const info = distributionAspects["dcat-distribution-strings"] || {};
