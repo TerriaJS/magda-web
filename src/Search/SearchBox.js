@@ -22,9 +22,6 @@ class SearchBox extends Component {
   constructor(props) {
     super(props);
     const self: any = this;
-
-
-
     self.handleSearchFieldEnterKeyPress = this.handleSearchFieldEnterKeyPress.bind(this);
     self.updateQuery = this.updateQuery.bind(this);
     self.updateSearchText = this.updateSearchText.bind(this);

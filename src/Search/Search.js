@@ -1,3 +1,5 @@
+// @flow
+
 // eslint-disable-next-line
 import {RouterContext } from 'react-router';
 
@@ -21,19 +23,19 @@ import queryString from 'query-string';
 import cripsy from './crispy.gif';
 
 class Search extends Component {
+  state: {
+    searchText: ?string
+  }
 
   constructor(props) {
     super(props);
-    this.debounceUpdateSearchQuery = debounce(this.updateSearchText, 3000);
-    this.handleSearchFieldEnterKeyPress = this.handleSearchFieldEnterKeyPress.bind(this);
-    this.onClickTag = this.onClickTag.bind(this);
-    this.updateQuery = this.updateQuery.bind(this);
-    this.onDismissError = this.onDismissError.bind(this);
-    this.updateSearchText = this.updateSearchText.bind(this);
-    this.onClearSearch = this.onClearSearch.bind(this);
-    this.onClickSearch = this.onClickSearch.bind(this);
-    this.onSearchTextChange = this.onSearchTextChange.bind(this);
-    this.onToggleDataset = this.onToggleDataset.bind(this);
+    const self: any = this;
+
+    self.onClickTag = this.onClickTag.bind(this);
+    self.updateQuery = this.updateQuery.bind(this);
+    self.onDismissError = this.onDismissError.bind(this);
+    self.updateSearchText = this.updateSearchText.bind(this);
+    self.onToggleDataset = this.onToggleDataset.bind(this);
 
     // it needs to be undefined here, so the default value should be from the url
     // once this value is set, the value should always be from the user input
@@ -41,6 +43,7 @@ class Search extends Component {
       searchText: undefined
     }
   }
+
 
   componentWillMount(){
     this.props.fetchSearchResultsIfNeeded(queryString.parse(this.props.location.search));
@@ -51,12 +54,6 @@ class Search extends Component {
     this.props.fetchSearchResultsIfNeeded(nextProps.location.query);
   }
 
-  onSearchTextChange(text){
-    this.setState({
-      searchText: text
-    });
-    this.debounceUpdateSearchQuery(text);
-  }
 
   onClickTag(tag){
     this.setState({
@@ -80,29 +77,6 @@ class Search extends Component {
       page: undefined
     });
   }
-
-  onClearSearch(){
-    this.updateSearchText('');
-    // cancle any future requests from debounce
-    this.debounceUpdateSearchQuery.cancel();
-  }
-
-  handleSearchFieldEnterKeyPress(event) {
-    // when user hit enter, no need to submit the form
-    if(event.charCode===13){
-        event.preventDefault();
-        this.debounceUpdateSearchQuery.flush();
-    }
-  }
-
-  /**
-   * If the search button is clicked, we do the search immediately
-   */
-  onClickSearch(){
-    this.debounceUpdateSearchQuery.flush();
-  }
-
-
 
   /**
    * query in this case, is one or more of the params
