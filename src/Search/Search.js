@@ -17,6 +17,7 @@ import SearchResults from '../SearchResults/SearchResults';
 import MatchingStatus from './MatchingStatus';
 import { bindActionCreators } from "redux";
 import { fetchSearchResultsIfNeeded } from '../actions/datasetSearchActions';
+import queryString from 'query-string';
 import cripsy from './crispy.gif';
 
 class Search extends Component {
@@ -42,7 +43,7 @@ class Search extends Component {
   }
 
   componentWillMount(){
-    this.props.fetchSearchResultsIfNeeded(this.props.location.query);
+    this.props.fetchSearchResultsIfNeeded(queryString.parse(this.props.location.search));
   }
 
 
@@ -111,7 +112,7 @@ class Search extends Component {
     let {router} = this.context;
     router.push({
       pathname: this.props.location.pathname,
-      query: Object.assign(this.props.location.query, query)
+      query: Object.assign(queryString.parse(this.props.location.search), query)
     });
   }
 
@@ -122,12 +123,12 @@ class Search extends Component {
 
   onToggleDataset(datasetIdentifier){
     this.updateQuery({
-      open: datasetIdentifier === this.props.location.query.open ? '' : datasetIdentifier
+      open: datasetIdentifier === queryString.parse(this.props.location.search).open ? '' : datasetIdentifier
     })
   }
 
   render() {
-    const searchText = this.props.location.query.q || '';
+    const searchText = queryString.parse(this.props.location.search).q || '';
     return (
       <div>
         <div className='search'>
@@ -155,8 +156,8 @@ class Search extends Component {
                             component={'recommendations'}
                  />
 
-                 {defined(this.props.location.query.q) &&
-                  this.props.location.query.q.length > 0 &&
+                 {defined(queryString.parse(this.props.location.search).q) &&
+                  queryString.parse(this.props.location.search).q.length > 0 &&
                     <MatchingStatus datasets={this.props.datasets}
                                     strategy={this.props.strategy}
                     />
@@ -167,11 +168,11 @@ class Search extends Component {
                       searchResults={this.props.datasets}
                       onClickTag={this.onClickTag}
                       onToggleDataset={this.onToggleDataset}
-                      openDataset={this.props.location.query.open}
+                      openDataset={queryString.parse(this.props.location.search).open}
                   />
                   {this.props.hitCount > config.resultsPerPage &&
                       <Pagination
-                        currentPage={+this.props.location.query.page || 1}
+                        currentPage={+queryString.parse(this.props.location.search).page || 1}
                         maxPage={Math.ceil(this.props.hitCount/config.resultsPerPage)}
                         location={this.props.location}
                       />

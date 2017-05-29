@@ -10,6 +10,9 @@ import debounce from 'lodash.debounce';
 import defined from '../helpers/defined';
 import React, { Component } from 'react';
 import {fetchRegionMapping} from '../actions/regionMappingActions';
+import { fetchSearchResultsIfNeeded } from '../actions/datasetSearchActions';
+import queryString from 'query-string';
+
 
 class SearchBox extends Component {
   state : {
@@ -97,7 +100,7 @@ class SearchBox extends Component {
     let {router} = this.context;
     router.push({
       pathname: '/search',
-      query: Object.assign(this.props.location.query, query)
+      query: Object.assign(queryString.parse(this.props.location.search), query)
     });
   }
 
@@ -107,8 +110,8 @@ class SearchBox extends Component {
   getSearchBoxValue(){
     if(defined(this.state.searchText)){
       return this.state.searchText;
-    } else if(defined(this.props.location.query.q)){
-      return this.props.location.query.q
+    } else if(defined(queryString.parse(this.props.location.search).q)){
+      return queryString.parse(this.props.location.search).q
     }
     return '';
   }
