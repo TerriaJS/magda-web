@@ -1,9 +1,13 @@
+//@flow
 import React from 'react';
 import {config} from '../config.js';
 import ReactDocumentTitle from "react-document-title";
 
 export default class ErrorHandler extends React.Component {
-  interpretateErrorCode(code){
+  props: {
+    errorCode: ?number
+  }
+  interpretateErrorCode(code: ?number){
     switch(code){
       case 404:
         return "record not found";

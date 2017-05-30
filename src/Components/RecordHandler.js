@@ -7,7 +7,7 @@ import Tabs from '../UI/Tabs';
 import {config} from '../config';
 import { Link } from 'react-router';
 import ErrorHandler from '../Components/ErrorHandler';
-import ReactDocumentTitle from "react-document-title";
+import ReactDocumentTitle from 'react-document-title';
 import CustomIcons from '../UI/CustomIcons';
 
 class RecordHandler extends React.Component {
@@ -74,7 +74,7 @@ class RecordHandler extends React.Component {
                <div className="media-body">
                   <h1>{this.props.dataset.title}</h1>
                   <a className="dont-break-out" href={this.props.dataset.landingPage}>{this.props.dataset.landingPage}</a>
-                  <div>Updated {this.props.dataset.updatedDate}</div>
+                  <div className="updated-date">Updated {this.props.dataset.updatedDate}</div>
               </div>
             </div>
             <Tabs list={datasetTabs} baseUrl={`/dataset/${this.props.params.datasetId}`}/>

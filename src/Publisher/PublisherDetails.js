@@ -1,3 +1,4 @@
+//@flow
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -6,9 +7,14 @@ import {config} from '../config.js';
 import ReactDocumentTitle from "react-document-title";
 import { fetchPublisherIfNeeded } from "../actions/publisherActions";
 import OverviewBox from '../UI/OverviewBox';
+import type { Publisher } from '../types';
 import "./PublisherDetails.css";
 
 class PublisherDetails extends Component {
+    props:{
+      error: number,
+      publisher: Publisher,
+    }
     componentWillMount(){
         this.props.fetchPublisherIfNeeded(this.props.params.publisherId);
     }
@@ -44,17 +50,17 @@ class PublisherDetails extends Component {
 }
 
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Function) {
   return bindActionCreators({
     fetchPublisherIfNeeded: fetchPublisherIfNeeded,
   }, dispatch);
 }
 
-function mapStateToProps(state, ownProps) {
-  const publisher= state.publisher.publisher;
-  const isFetching= state.publisher.isFetchingPublisher;
-  const error = state.publisher.errorFetchingPublisher;
-  const location = ownProps.location;
+function mapStateToProps(state: Object, ownProps: Object) {
+  const publisher: Object= state.publisher.publisher;
+  const isFetching: boolean = state.publisher.isFetchingPublisher;
+  const error: number = state.publisher.errorFetchingPublisher;
+  const location: Location = ownProps.location;
   return {
     publisher, isFetching, location, error
   };

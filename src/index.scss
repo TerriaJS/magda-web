@@ -103,7 +103,7 @@ input[type=text].form-control{
   }
   h1{
     font-weight: normal;
-    
+
   }
 }
 
@@ -116,7 +116,7 @@ input[type=text].form-control{
   background: transparent;
 }
 
-.badge{
+a.badge{
   background: $badge-bg;
   margin-bottom: 5px;
   color: #000;
@@ -124,6 +124,9 @@ input[type=text].form-control{
   border-radius: 5px;
   padding: 7px;
   margin-right: 5px;
+  &:hover, &:focus{
+    background: $magda-blue;
+  }
 }
 
 .dont-break-out {
@@ -147,4 +150,10 @@ input[type=text].form-control{
 
 .btn.active, .btn:active{
   box-shadow: none;
+}
+
+.updated-date{
+  font-size: 0.9rem;
+  color: #444;
+  margin-top: 5px;
 }
