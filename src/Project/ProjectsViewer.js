@@ -8,6 +8,7 @@ import ProjectSummary from './ProjectSummary';
 import Pagination from '../UI/Pagination';
 import ErrorHandler from '../Components/ErrorHandler';
 import getPageNumber from '../helpers/getPageNumber';
+import ProgressBar from '../UI/ProgressBar';
 
 
 import './ProjectsViewer.css';
@@ -41,7 +42,9 @@ class ProjectsViewer extends Component {
 
     render(){
       return  <ReactDocumentTitle title={"Projects | " + config.appName}>
+
                 <div className="container projects-viewer">
+                  {this.props.isFetching && <ProgressBar/>}
                   <div className='row'>
                     {!this.props.isFetching && this.renderContent()}
                   </div>

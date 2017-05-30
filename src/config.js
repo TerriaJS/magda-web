@@ -1,3 +1,4 @@
+// @flow
 import Publisher from './SearchFacets/Publisher';
 import Format from './SearchFacets/Format';
 import Region from './SearchFacets/Region';

@@ -22,6 +22,7 @@ import { fetchSearchResultsIfNeeded } from '../actions/datasetSearchActions';
 import type { SearchState} from '../types';
 import queryString from 'query-string';
 import cripsy from './crispy.gif';
+import ProgressBar from '../UI/ProgressBar';
 
 
 class Search extends Component {
@@ -108,6 +109,7 @@ class Search extends Component {
     return (
       <ReactDocumentTitle title={`Searching for ${searchText} | ${config.appName}` }>
       <div>
+      {this.props.isFetching && <ProgressBar/>}
         <div className='search'>
           <div className='search__search-body container'>
           <div className='row'>
@@ -197,7 +199,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   let { datasetSearch, featuredPublishers } = state;
   return {
     datasets: datasetSearch.datasets,

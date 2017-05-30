@@ -71,7 +71,9 @@ export default class DatasetSummary extends Component {
   }
 
   render(){
-    let dataset = this.props.dataset;
+    const dataset = this.props.dataset;
+    const publisher = defined(dataset.publisher) ? dataset.publisher.name ? dataset.publisher.name : dataset.publisher : 'unspecified';
+
     return <div className={`dataset-summary ${this.props.isExpanded ? 'is-expanded': ''}`}>
                 <div className='dataset-summary__header'>
                   <div className='dataset-summary__header-top clearfix'>
@@ -100,7 +102,7 @@ export default class DatasetSummary extends Component {
                   <div className='dataset-summary__dataset-description' onClick={this.props.onClickDataset}>
                     <MarkdownViewer markdown={this.props.isExpanded ? dataset.description : dataset.description.slice(0, 100) + "..."}/>
                   </div>
-                  <label className='dataset-summary__search-result--publisher'>{defined(dataset.publisher) ? dataset.publisher.name : 'unspecified'}</label>
+                  <label className='dataset-summary-publisher'>{publisher}</label>
                 </div>
               <div className='dataset-summary__footer'>
                   {this.props.isExpanded && this.renderLinks()}

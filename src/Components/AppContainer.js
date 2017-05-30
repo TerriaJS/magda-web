@@ -1,3 +1,4 @@
+//@flow
 import React from 'react';
 import logo from '../assets/logo.svg';
 import ReactDocumentTitle from "react-document-title";
@@ -5,13 +6,13 @@ import MediaQuery from "react-responsive";
 import {config} from '../config.js';
 import { Link } from 'react-router';
 import SearchBox from '../Search/SearchBox';
-import ProgressBar from '../UI/ProgressBar';
+
 import {Small, Medium, Large} from '../UI/Responsive';
 import {connect} from 'react-redux';
 import './AppContainer.css';
 
 class AppContainer extends React.Component {
-  renderLink(link){
+  renderLink(link: string){
     const regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
     if(!regex.test(link[1])){
       return <Link to={`/${encodeURI(link[1])}`}>{link[0]}</Link>
@@ -19,12 +20,11 @@ class AppContainer extends React.Component {
     return <a target="_blank" href={link[1]}>{link[0]}</a>
   }
   render() {
-    const headerNavs = config.headerNavigation;
-    const footerNavs = config.footerNavigation;
+    const headerNavs: Array <string> = config.headerNavigation;
+    const footerNavs: Array<string> = config.footerNavigation;
     return (
     <ReactDocumentTitle title={config.appName}>
         <div>
-          {this.props.isFetching && <ProgressBar/>  }
             <nav className='appContainer__nav'>
               <div className="container">
                 <div className="row">
@@ -63,7 +63,7 @@ class AppContainer extends React.Component {
                   <div className="container">
                   <ul className="nav row">
                   {
-                    footerNavs.map(item=>
+                    footerNavs.map((item)=>
                       <li key={item.category} className="col-md-2 col-sm-4"><span className="nav-title">{item.category}</span>
                         <ul className="nav nav-pills nav-stacked">
                           {item.links.map(link=>
@@ -85,7 +85,6 @@ class AppContainer extends React.Component {
 function mapStateToProps(state) {
   let { datasetSearch, record, publisher, project } = state;
   return {
-    isFetching: datasetSearch.isFetching || record.isFetching || publisher.isFetchingPublishers || publisher.isFetchingPublisher || project.isFetching,
   }
 }
 
