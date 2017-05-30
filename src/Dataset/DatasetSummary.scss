@@ -2,6 +2,10 @@
 .dataset-summary{
   border: 1px solid #fff;
   margin-bottom: 15px;
+  border-bottom: 1px solid #ecf0f1;
+  &:last-of-type{
+    border-bottom: 1px solid #fff;
+  }
 }
 
 .dataset-summary__header,

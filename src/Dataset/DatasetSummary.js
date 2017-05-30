@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import defined from '../helpers/defined';
 import MarkdownViewer from '../UI/MarkdownViewer';
 import CustomIcons from '../UI/CustomIcons';
-import Star from '../UI/Star';
+// import Star from '../UI/Star';
 import ToggleList from '../UI/ToggleList';
 import renderDistribution from '../UI/Distribution';
 import './DatasetSummary.css';
@@ -31,7 +31,7 @@ export default class DatasetSummary extends Component {
     const self: any = this;
 
     self.onClick = this.onClick.bind(this);
-    self.onClickStar = this.onClickStar.bind(this);
+    // self.onClickStar = this.onClickStar.bind(this);
     this.state ={
       tagsExpanded: false,
       isFav: false
@@ -44,11 +44,11 @@ export default class DatasetSummary extends Component {
   }
 
 
-  onClickStar(){
-    this.setState({
-      isFav: !this.state.isFav
-    })
-  }
+  // onClickStar(){
+  //   this.setState({
+  //     isFav: !this.state.isFav
+  //   })
+  // }
 
 
 
@@ -82,14 +82,12 @@ export default class DatasetSummary extends Component {
                       </Link>
                     </div>
                     <span className='hidden-xs dataset-summary__toggle'>
-                        {!this.props.isExpanded && <Star onClick={this.onClickStar} isOn={this.state.isFav}/>}
                         {this.props.onClickDataset && <button className='dataset-summary__toggle-info-btn' onClick={this.props.onClickDataset} type='button'>{this.props.isExpanded ? <span>Close</span> : <i className="fa fa-ellipsis-h" aria-hidden="true"></i>}</button>}
                     </span>
                   </div>
                   {this.props.isExpanded && <div className='dataset-summary__middle clearfix'>
                       <div><Link className='btn dataset-summary__btn-view-dataset'
                                  to={`/dataset/${dataset.identifier}`}>View dataset</Link></div>
-                      <div><Star onClick={this.onClickStar} isOn={this.state.isFav}/></div>
                       <div>
                         <a className='btn dataset-summary__btn-share' href={``} target='_blank'>
                           <i className="fa fa-share-alt" aria-hidden="true"></i>

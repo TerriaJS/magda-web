@@ -5,7 +5,7 @@
     .nav-tabs{
         border-bottom: 0;
     }
-    
+
     .active{
         border-bottom: 3px solid $magda-blue;
     }
@@ -13,4 +13,5 @@
 
 .tab-content{
     background: $magda-grey;
+    min-height: 400px;
 }

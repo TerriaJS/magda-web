@@ -9,7 +9,6 @@ type dcatDistributionStrings = {
   modified: string,
   license: string,
   description: string,
-  apsects?: aspects
 }
 
 type dcatDatasetStrings = {
@@ -39,7 +38,10 @@ type Distribution = {
   title: string,
   id: string,
   downloadURL: string,
-  format: string
+  format: string,
+  aspects: {
+    "dcat-distribution-strings": dcatDistributionStrings
+  }
 }
 
 type aspects = {

@@ -35,7 +35,7 @@ class SearchFacets extends Component {
 
   render() {
     return (
-      <div className="row search-facets">
+      <div className="clearfix search-facets">
         {config.facets.map(c=>
           <div className="col-sm-3 search-facet" key={c.id} onClick={(ev)=>ev.stopPropagation()}>
             <c.component

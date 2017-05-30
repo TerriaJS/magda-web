@@ -30,7 +30,7 @@ class SearchResults extends Component {
           <div className='search-recomendations__count'>
             The following {this.props.totalNumberOfResults} datasets match some but not all of your search criteria
           </div>);
-      } 
+      }
     }
     return null;
   }

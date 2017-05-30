@@ -140,3 +140,7 @@ input[type=text].form-control{
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
+.btn.active, .btn:active{
+  box-shadow: none;
+}

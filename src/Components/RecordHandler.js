@@ -61,7 +61,7 @@ class RecordHandler extends React.Component {
       if(this.props.datasetFetchError){
         return <ErrorHandler errorCode={this.props.error}/>;
       }
-      const datasetTabs = [{id: "details", name: "Deatils", isActive: true},
+      const datasetTabs = [{id: "details", name: "Details", isActive: true},
                            {id:  "discussion", name: "Discussion", isActive: true},
                            {id: "publisher", name: "About " + this.props.dataset.publisher, isActive: true}];
       return (
