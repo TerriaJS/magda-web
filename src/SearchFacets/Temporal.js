@@ -13,13 +13,15 @@ class Temporal extends Component {
   }
 
   onToggleTemporalOption(datesArray){
+    const dateTo = datesArray[1] ? datesArray[1] : undefined;
+    const dateFrom = datesArray[0] ? datesArray[0] : undefined;
     this.props.updateQuery({
-      dateFrom: defined(datesArray[0]) ? datesArray[0]: undefined,
-      dateTo: defined(datesArray[1]) ? datesArray[1]: undefined,
+      dateFrom: dateFrom,
+      dateTo: dateTo,
       page: undefined
     });
-    this.props.dispatch(setDateTo(datesArray[1]));
-    this.props.dispatch(setDateFrom(datesArray[0]));
+    this.props.dispatch(setDateTo(dateTo));
+    this.props.dispatch(setDateFrom(dateFrom));
   }
 
   onResetTemporalFacet(){

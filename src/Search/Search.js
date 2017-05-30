@@ -11,7 +11,7 @@ import defined from '../helpers/defined';
 import Pagination from '../UI/Pagination';
 import Notification from '../UI/Notification';
 import PublisherBox from '../Components/PublisherBox';
-
+import ReactDocumentTitle from "react-document-title";
 import React, { Component } from 'react';
 import SearchFacets from '../SearchFacets/SearchFacets';
 import Publisher from '../SearchFacets/Publisher';
@@ -106,6 +106,7 @@ class Search extends Component {
   render() {
     const searchText = queryString.parse(this.props.location.search).q || '';
     return (
+      <ReactDocumentTitle title={`Searching for ${searchText} | ${config.appName}` }>
       <div>
         <div className='search'>
           <div className='search__search-body container'>
@@ -169,6 +170,7 @@ class Search extends Component {
           </div>
         </div>
       </div>
+      </ReactDocumentTitle>
     );
   }
 }

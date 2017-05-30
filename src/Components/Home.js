@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from "redux";
 import {fetchFeaturedDatasetsFromRegistry} from "../actions/featuredDatasetsActions";
 import DatasetSummary from '../Dataset/DatasetSummary';
+import ReactDocumentTitle from "react-document-title";
 import './Home.css';
 
 class Home extends React.Component {
@@ -15,6 +16,7 @@ class Home extends React.Component {
   }
   render() {
     return (
+      <ReactDocumentTitle title={"Welcome | " + config.appName}>
       <div className="container home">
         <div className="row">
           <div className="col-sm-8">
@@ -31,6 +33,7 @@ class Home extends React.Component {
           </div>
         </div>
       </div>
+      </ReactDocumentTitle>
     );
   }
 }

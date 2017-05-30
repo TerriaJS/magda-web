@@ -3,6 +3,8 @@ import "./Account.css";
 import firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 import base from "../Base";
+import {config} from '../config.js';
+import ReactDocumentTitle from "react-document-title";
 
 const authUi = new firebaseui.auth.AuthUI(base.auth());
 
@@ -64,7 +66,9 @@ export default class Account extends React.Component {
   }
 
   render() {
+    const title = this.state.user ? "Sign in " : "Sign up";
     return (
+      <ReactDocumentTitle title={title + " | " + config.appName}>
       <div className="container account">
         <h2>Account</h2>
         {!this.state.user && (
@@ -77,6 +81,7 @@ export default class Account extends React.Component {
           </div>
         )}
       </div>
+      </ReactDocumentTitle>
     );
   }
 }

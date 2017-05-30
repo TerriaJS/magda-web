@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import  ErrorHandler from "../Components/ErrorHandler";
+import {config} from '../config.js';
+import ReactDocumentTitle from "react-document-title";
 import { fetchPublisherIfNeeded } from "../actions/publisherActions";
 import OverviewBox from '../UI/OverviewBox';
 import "./PublisherDetails.css";
@@ -16,7 +18,7 @@ class PublisherDetails extends Component {
             nextProps.fetchPublisherIfNeeded(nextProps.params.publisherId);
         }
     }
-    
+
     renderContent(){
       const publisher = this.props.publisher;
       return <div className="publisher-details container">
@@ -33,10 +35,11 @@ class PublisherDetails extends Component {
     }
 
     render(){
+
         if(this.props.error){
             return <ErrorHandler errorCode ={this.props.error} />
         }
-        return this.renderContent();
+        return <ReactDocumentTitle title={this.props.publisher.title + " | " + config.appName}>this.renderContent()</ReactDocumentTitle>;
     }
 }
 

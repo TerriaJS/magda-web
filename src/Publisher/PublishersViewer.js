@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {config} from '../config.js';
 import { bindActionCreators } from "redux";
 import { fetchPublishersIfNeeded } from '../actions/publisherActions';
+import ReactDocumentTitle from "react-document-title";
 import PublisherSummary from './PublisherSummary';
 import Pagination from '../UI/Pagination';
 import ErrorHandler from '../Components/ErrorHandler';
@@ -49,11 +50,13 @@ class PublishersViewer extends Component {
     }
 
     render(){
-      return <div className="container publishers-viewer">
+      return <ReactDocumentTitle title={"Publishers | " + config.appName}>
+              <div className="container publishers-viewer">
               <div className="row">
                 {!this.props.isFetching && this.renderContent()}
               </div>
              </div>
+             </ReactDocumentTitle>
     }
 }
 

@@ -7,6 +7,7 @@ import Tabs from '../UI/Tabs';
 import {config} from '../config';
 import { Link } from 'react-router';
 import ErrorHandler from '../Components/ErrorHandler';
+import ReactDocumentTitle from "react-document-title";
 import CustomIcons from '../UI/CustomIcons';
 
 class RecordHandler extends React.Component {
@@ -85,10 +86,13 @@ class RecordHandler extends React.Component {
   }
 
   render() {
+    const title = this.props.params.distributionId ? this.props.distribution.title : this.props.dataset.title;
     return (
-      <div>
-          {!this.props.isFetching && this.renderByState()}
-      </div>
+      <ReactDocumentTitle title={title + "|" + config.appName}>
+        <div>
+            {!this.props.isFetching && this.renderByState()}
+        </div>
+      </ReactDocumentTitle>
     );
   }
 }

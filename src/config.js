@@ -4,7 +4,7 @@ import Region from './SearchFacets/Region';
 import Temporal from './SearchFacets/Temporal';
 
 const config = {
-        appName: "Australia open data search",
+        appName: "data.gov.au",
         searchApiBaseUrl: 'http://104.199.180.124/api/v0/search/',
         registryUrl: 'http://104.199.180.124/api/v0/registry/records',
         facetListSize: 5,

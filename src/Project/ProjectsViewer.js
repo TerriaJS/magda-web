@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {config} from '../config.js';
 import { bindActionCreators } from "redux";
 import { fetchProjectsIfNeeded } from '../actions/projectActions';
+import ReactDocumentTitle from "react-document-title";
 import ProjectSummary from './ProjectSummary';
 import Pagination from '../UI/Pagination';
 import ErrorHandler from '../Components/ErrorHandler';
@@ -39,11 +40,13 @@ class ProjectsViewer extends Component {
     }
 
     render(){
-      return <div className="container projects-viewer">
-              <div className='row'>
-                {!this.props.isFetching && this.renderContent()}
-              </div>
-             </div>
+      return  <ReactDocumentTitle title={"Projects | " + config.appName}>
+                <div className="container projects-viewer">
+                  <div className='row'>
+                    {!this.props.isFetching && this.renderContent()}
+                  </div>
+               </div>
+             </ReactDocumentTitle>
     }
 }
 

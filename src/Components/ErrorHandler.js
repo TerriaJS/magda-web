@@ -1,24 +1,24 @@
 import React from 'react';
+import {config} from '../config.js';
+import ReactDocumentTitle from "react-document-title";
 
 export default class ErrorHandler extends React.Component {
   interpretateErrorCode(code){
     switch(code){
       case 404:
         return "record not found";
-      default: 
+      default:
         return "Error occured"
     }
-  } 
+  }
   render() {
     return (
-      <div className="container">
-        <h1>{this.props.errorCode}</h1>
-        {this.interpretateErrorCode(this.props.errorCode)}
-      </div>
+      <ReactDocumentTitle title={"Error | " + config.appName}>
+        <div className="container">
+          <h1>{this.props.errorCode}</h1>
+          {this.interpretateErrorCode(this.props.errorCode)}
+        </div>
+      </ReactDocumentTitle>
     );
   }
 }
-
-
-
-
