@@ -21,22 +21,22 @@ class DatasetDetails extends Component {
               <div className="row">
                 <div className='dataset-details__body col-sm-8'>
                   <div className='dataset-details-overview'>
-                    <h3>Overview</h3>
+                    <h3 className="section-heading">Overview</h3>
                     <OverviewBox content={dataset.description}/>
                   </div>
 
                   <div className='dataset-details-source'>
-                      <h3>Data and APIs</h3>
+                      <h3 className="section-heading">Data and APIs</h3>
                       <div className="white-box">{
                         dataset.source && dataset.source.map(s=> renderDistribution(s.format, s.id, s.title, s.license, datasetId))
                       }</div>
                   </div>
                   <div className="dataset-details-spatial-coverage">
-                      <h3>Spatial coverage</h3>
+                      <h3 className="section-heading">Spatial coverage</h3>
                       <SpatialAspectViewer data={dataset.spatialCoverage}/>
                   </div>
                   <div className="dataset-details-temporal-coverage">
-                      <h3>Temporal coverage</h3>
+                      <h3 className="section-heading">Temporal coverage</h3>
                       <TemporalAspectViewer data={dataset.temporalCoverage}/>
                   </div>
               </div>

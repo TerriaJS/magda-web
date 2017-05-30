@@ -45,7 +45,7 @@ class PublisherDetails extends Component {
         if(this.props.error){
             return <ErrorHandler errorCode ={this.props.error} />
         }
-        return <ReactDocumentTitle title={this.props.publisher.title + " | " + config.appName}>this.renderContent()</ReactDocumentTitle>;
+        return <ReactDocumentTitle title={this.props.publisher.title + " | " + config.appName}>{this.renderContent()}</ReactDocumentTitle>;
     }
 }
 

@@ -163,7 +163,7 @@ class Search extends Component {
                }
               </div>
 
-            <div className='col-sm-4 pull-right'>
+            <div className='col-sm-4'>
             {this.props.featuredPublishers.map(p=><PublisherBox key={p.id} publisher={p}/>)}
             </div>
             </div>
