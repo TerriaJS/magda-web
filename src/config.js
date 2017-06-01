@@ -4,7 +4,7 @@ import Format from './SearchFacets/Format';
 import Region from './SearchFacets/Region';
 import Temporal from './SearchFacets/Temporal';
 
-const config = {
+export const config = {
         appName: "data.gov.au",
         searchApiBaseUrl: 'http://104.199.180.124/api/v0/search/',
         registryUrl: 'http://104.199.180.124/api/v0/registry/records',
@@ -43,5 +43,3 @@ const config = {
                     {category: "About", links: [["About data.gov.au", "page/about"], ["Contact us", "contact"], ["Blog", "https://blog.data.gov.au/"]]},
                     {category: "Feedback", links: [["How can we improve data.gov.au", "feedback"]]}]
         }
-
- export{config}

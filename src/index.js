@@ -28,6 +28,7 @@ import DatasetPublisher from './Dataset/DatasetPublisher';
 
 import ProjectsViewer from './Project/ProjectsViewer';
 import ProjectDetails from './Project/ProjectDetails';
+import CreateProject from './Project/CreateProject';
 
 import PublishersViewer from './Publisher/PublishersViewer';
 import PublisherDetails from './Publisher/PublisherDetails';
@@ -83,6 +84,7 @@ ReactDOM.render(
         </Route>
         <Route path="projects" component={ProjectsViewer}/>
         <Route path="projects/:id" component={ProjectDetails}/>
+        <Route path="project/new" component={CreateProject}/>
         <Route path="publishers" component={PublishersViewer}/>
         <Route path="publishers/:publisherId" component={PublisherDetails}/>
         {staticPageRegister.map( item =>

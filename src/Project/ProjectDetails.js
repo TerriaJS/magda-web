@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {config} from '../config.js';
+import config from '../config.js';
 import ReactDocumentTitle from "react-document-title";
 
 class ProjectDetails extends Component {

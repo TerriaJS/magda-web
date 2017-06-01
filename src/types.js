@@ -159,7 +159,19 @@ export type Project ={
   title: string,
   description: string,
   id: string,
+  members: Array<string>,
+  datasets:Array<string>,
+  status: boolean
 }
+
+export type projectAction = {
+  json: Object,
+  error: ?number,
+  type: boolean,
+  project: Project,
+  fieldErrors: Project
+}
+
 
 
 export type FeaturedRecords = {

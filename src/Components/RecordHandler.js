@@ -9,8 +9,16 @@ import { Link } from 'react-router';
 import ErrorHandler from '../Components/ErrorHandler';
 import ReactDocumentTitle from 'react-document-title';
 import CustomIcons from '../UI/CustomIcons';
+import type { Dataset, DatasetDistribution } from '../types';
 
 class RecordHandler extends React.Component {
+  props: {
+    distributionFetchError: number,
+    datasetFetchError: number,
+    children: React$Element<any>,
+    fetchDataset: Function,
+    fetchDistribution: Function
+  }
   componentWillMount(){
     this.props.fetchDataset(this.props.params.datasetId);
     if(this.props.params.distributionId){
@@ -29,7 +37,7 @@ class RecordHandler extends React.Component {
   renderByState(){
      if (this.props.params.distributionId && !this.props.distributionIsFetching){
        if(this.props.distributionFetchError){
-         return <ErrorHandler errorCode={this.props.error}/>;
+         return <ErrorHandler errorCode={this.props.distributionFetchError}/>;
        }
        const tabList = [
          {id: "details", name: "Details", isActive: true},
@@ -50,7 +58,7 @@ class RecordHandler extends React.Component {
                 <div className="media-body">
                   <h1>{this.props.distribution.title}</h1>
                   <a className="dont-break-out" href={this.props.distribution.downloadURL} >{this.props.distribution.downloadURL}</a>
-                  <div>Updated {this.props.distribution.updatedDate}</div>
+                  <div className="updated-date">Updated {this.props.distribution.updatedDate}</div>
                 </div>
               </div>
                 <Tabs list={tabList} baseUrl={`/dataset/${this.props.params.datasetId}/distribution/${this.props.params.distributionId}`}/>
@@ -97,14 +105,24 @@ class RecordHandler extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const record=state.record;
-  const dataset=record.dataset;
-  const distribution=record.distribution;
-  const datasetIsFetching=record.datasetIsFetching;
+
+type Record = {
+  dataset: Dataset,
+  distribution: DatasetDistribution,
+  datasetIsFetching: boolean,
+  distributionIsFetching: boolean,
+  datasetFetchError: ?number,
+  distributionFetchError: ?number
+}
+
+function mapStateToProps(state: {record: Record}) {
+  const record = state.record;
+  const dataset =record.dataset;
+  const distribution =record.distribution;
+  const datasetIsFetching =record.datasetIsFetching;
   const distributionIsFetching = record.distributionIsFetching;
   const datasetFetchError = record.datasetFetchError;
-  const distributionFetchError = record.distributionFetchError
+  const distributionFetchError= record.distributionFetchError
 
   return {
     dataset, distribution, datasetIsFetching, distributionIsFetching, distributionFetchError, datasetFetchError
@@ -117,15 +135,4 @@ const  mapDispatchToProps = (dispatch: Dispatch<*>) => {
     fetchDistribution: fetchDistributionFromRegistry
   }, dispatch);
 }
-
-RecordHandler.propTypes = {
-  dataset: React.PropTypes.object,
-  distribution: React.PropTypes.object,
-  location: React.PropTypes.object.isRequired,
-  datasetIsFetching: React.PropTypes.bool.isRequired,
-  distributionIsFetching: React.PropTypes.bool.isRequired,
-  distributionFetchError: React.PropTypes.number,
-  datasetFetchError: React.PropTypes.number
-}
-
 export default connect(mapStateToProps, mapDispatchToProps)(RecordHandler);
