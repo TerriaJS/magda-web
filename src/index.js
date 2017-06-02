@@ -83,7 +83,7 @@ ReactDOM.render(
             <Route path="chart" component={DistributionChart}/>
         </Route>
         <Route path="projects" component={ProjectsViewer}/>
-        <Route path="projects/:id" component={ProjectDetails}/>
+        <Route path="projects/:projectId" component={ProjectDetails}/>
         <Route path="project/new" component={CreateProject}/>
         <Route path="publishers" component={PublishersViewer}/>
         <Route path="publishers/:publisherId" component={PublisherDetails}/>

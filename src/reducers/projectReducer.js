@@ -47,6 +47,21 @@ const projects = (state: ProjectsResult = initialData, action: projectAction) =>
         isFetching: false,
         error: action.error,
       })
+    case 'REQUEST_PROJECT':
+      return Object.assign({}, state, {
+        isFetching: true,
+        error: null
+      })
+    case 'RECEIVE_PROJECT':
+      return Object.assign({}, state, {
+        isFetching: false,
+        projects: action.json  && parseProject(action.json),
+      })
+    case 'REQUEST_PROJECT_ERROR':
+      return Object.assign({}, state, {
+        isFetching: false,
+        error: action.error,
+      })
     case 'CREATE_PROJECT':
     	return Object.assign({}, state, {
         isFetching: false,

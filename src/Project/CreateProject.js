@@ -10,6 +10,8 @@ import { validateFields, resetProjectFields } from '../actions/projectActions';
 import { fetchDatasetFromRegistry } from "../actions/recordActions";
 import Notification from '../UI/Notification';
 import { Link } from 'react-router';
+import Immutable from 'immutable';
+const uuidV1 = require('uuid/v1');
 import './CreateProject.css';
 
 
@@ -20,25 +22,29 @@ class CreateProject extends Component {
     }
     constructor(props: props) {
       super(props);
-      this.state = {project: {
-        title: '',
-        description: '',
-        id: '',
+
+      const project = Immutable.Map({
+        description: "",
         members: [],
-        datasets:[],
-        status: 'open'
-      }};
+        datasets: [],
+        status: "open"
+      })
+      this.state = {project: Immutable.Map({
+        id: uuidV1(),
+        name: '',
+        aspects: Immutable.Map({
+          project: project
+        })
+      })}
     }
 
     componentWillMount(){
       const datasetId: string = queryString.parse(this.props.location.search).dataset;
       if(datasetId){
-        this.setState({
-          project: Object.assign({}, this.state.project, {
-            datasets: [datasetId]
-          })
-        })
         this.props.fetchDataset(datasetId);
+        this.setState({
+          project: this.state.project.setIn(["aspects", 'project', 'datasets'], [datasetId])
+        })
       }
     }
     componentWillReceiveProps(nextProps){
@@ -46,9 +52,7 @@ class CreateProject extends Component {
       const prevDatasetId: string = queryString.parse(this.props.location.search).dataset;
       if(datasetId && prevDatasetId !== datasetId){
         this.setState({
-          project: Object.assign({}, this.state.project, {
-            datasets: [datasetId]
-          })
+          project: this.state.project.setIn(["aspects", 'project', 'datasets'], [datasetId])
         })
         nextProps.fetchDataset(datasetId);
       }
@@ -62,25 +66,29 @@ class CreateProject extends Component {
     }
 
     handleChange(event: MouseEvent, id: string){
-      const project: Project = Object.assign({}, this.state.project, {
-          [id]: event.target.value
-      })
-      this.setState({
-        project
-      })
+      const value = event.target.value;
+
+      if(id === 'name'){
+        this.setState({
+          project: this.state.project.set('name', value)
+        })
+      }
+      if(id === 'description'){
+        this.setState({
+          project: this.state.project.setIn(['aspects', 'project', 'description'], value)
+        })
+      }
     }
 
     datasetActive(){
-      return this.state.project.datasets.indexOf(this.props.dataset.identifier) !== -1;
+      const datasets = this.state.project.getIn(["aspects", 'project', 'datasets']);
+      return datasets.indexOf(this.props.dataset.identifier) !== -1;
     }
 
     toggleDataset(){
-      const dataset = this.datasetActive() ? []: [this.props.dataset.identifier];
-
+      const datasets = this.datasetActive() ? []: [this.props.dataset.identifier];
       this.setState({
-        project: Object.assign({}, this.state.project, {
-          datasets: dataset
-        })
+        project: this.state.project.setIn(["aspects", 'project', 'datasets'], datasets)
       })
     }
 
@@ -103,8 +111,8 @@ class CreateProject extends Component {
                   <form>
                     <label className="input-group">
                       Project title * :
-                      {this.props.fieldErrors.title && <div className="field-error">{this.props.fieldErrors.title}</div>}
-                      <input type="text" name="title" className={`form-control ${this.props.fieldErrors.title ? "form-error" : ""}`} value={this.state.title} onChange={(e: MouseEvent)=>this.handleChange(e, "title")}/>
+                      {this.props.fieldErrors.name && <div className="field-error">{this.props.fieldErrors.name}</div>}
+                      <input type="text" name="name" className={`form-control ${this.props.fieldErrors.name ? "form-error" : ""}`} value={this.state.name} onChange={(e: MouseEvent)=>this.handleChange(e, "name")}/>
                     </label>
                     <label className="input-group">
                       Project description * :

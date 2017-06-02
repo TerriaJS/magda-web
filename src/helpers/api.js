@@ -26,7 +26,15 @@ type PublisherRaw = {
 
 type ProjectRaw = {
     id: string,
-    name: string
+    name: string,
+    aspects: {
+      project: {
+        status: string,
+        members: string,
+        datasets: Array<string>,
+        description: string
+      }
+    }
 }
 
 export function parseRegion(regionRaw : RegionRaw) : Region {
@@ -51,8 +59,11 @@ export function parsePublisher(publisherRaw: PublisherRaw) : Publisher{
 
 export function parseProject(projectRaw: ProjectRaw) : Project {
     return {
-        title: projectRaw.name,
+        name: projectRaw.name,
         id: projectRaw.id,
-        description: "project description"
+        description: projectRaw.aspects.project.description,
+        status: projectRaw.aspects.project.status,
+        members: projectRaw.aspects.project.members,
+        datasets: projectRaw.aspects.project.datasets
     }
 }

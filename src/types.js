@@ -156,12 +156,16 @@ export type Publisher ={
 }
 
 export type Project ={
-  title: string,
-  description: string,
   id: string,
-  members: Array<string>,
-  datasets:Array<string>,
-  status: boolean
+  name: string,
+  aspects: {
+    project: {
+      description: string,
+      members: Array<string>,
+      datasets: Array<string>,
+      status: string
+    }
+  }
 }
 
 export type projectAction = {
@@ -190,9 +194,6 @@ export type FeaturedAction = {
 export type WMSParser = {
   read: (text: string) => Object
 }
-
-
-
 
 
 export type StateRecord = {
