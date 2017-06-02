@@ -192,6 +192,14 @@ export type WMSParser = {
 }
 
 
-export type Location = {
 
+
+
+export type StateRecord = {
+  dataset: Dataset,
+  distribution: DatasetDistribution,
+  datasetIsFetching: boolean,
+  distributionIsFetching: boolean,
+  datasetFetchError: ?number,
+  distributionFetchError: ?number
 }

@@ -9,7 +9,7 @@ import { Link } from 'react-router';
 import ErrorHandler from '../Components/ErrorHandler';
 import ReactDocumentTitle from 'react-document-title';
 import CustomIcons from '../UI/CustomIcons';
-import type { Dataset, DatasetDistribution } from '../types';
+import type { Dataset, DatasetDistribution, StateRecord } from '../types';
 
 class RecordHandler extends React.Component {
   props: {
@@ -106,16 +106,9 @@ class RecordHandler extends React.Component {
 }
 
 
-type Record = {
-  dataset: Dataset,
-  distribution: DatasetDistribution,
-  datasetIsFetching: boolean,
-  distributionIsFetching: boolean,
-  datasetFetchError: ?number,
-  distributionFetchError: ?number
-}
 
-function mapStateToProps(state: {record: Record}) {
+
+function mapStateToProps(state: {record: StateRecord}) {
   const record = state.record;
   const dataset =record.dataset;
   const distribution =record.distribution;

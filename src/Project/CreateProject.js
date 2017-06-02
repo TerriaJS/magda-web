@@ -7,7 +7,9 @@ import { connect } from "react-redux";
 import {config} from '../config.js';
 import { bindActionCreators } from "redux";
 import { validateFields, resetProjectFields } from '../actions/projectActions';
+import { fetchDatasetFromRegistry } from "../actions/recordActions";
 import Notification from '../UI/Notification';
+import { Link } from 'react-router';
 import './CreateProject.css';
 
 
@@ -28,6 +30,30 @@ class CreateProject extends Component {
       }};
     }
 
+    componentWillMount(){
+      const datasetId: string = queryString.parse(this.props.location.search).dataset;
+      if(datasetId){
+        this.setState({
+          project: Object.assign({}, this.state.project, {
+            datasets: [datasetId]
+          })
+        })
+        this.props.fetchDataset(datasetId);
+      }
+    }
+    componentWillReceiveProps(nextProps){
+      const datasetId: string = queryString.parse(nextProps.location.search).dataset;
+      const prevDatasetId: string = queryString.parse(this.props.location.search).dataset;
+      if(datasetId && prevDatasetId !== datasetId){
+        this.setState({
+          project: Object.assign({}, this.state.project, {
+            datasets: [datasetId]
+          })
+        })
+        nextProps.fetchDataset(datasetId);
+      }
+    }
+
 
     onDismissError(){
       // reset form on error
@@ -44,13 +70,26 @@ class CreateProject extends Component {
       })
     }
 
+    datasetActive(){
+      return this.state.project.datasets.indexOf(this.props.dataset.identifier) !== -1;
+    }
+
+    toggleDataset(){
+      const dataset = this.datasetActive() ? []: [this.props.dataset.identifier];
+
+      this.setState({
+        project: Object.assign({}, this.state.project, {
+          datasets: dataset
+        })
+      })
+    }
+
     handleSubmit(e){
       e.preventDefault();
       // dispatch validating and submission
       this.props.validateFields(this.state.project);
     }
     render(){
-      const datasetId: string = queryString.parse(this.props.location.search).dataset;
       return <ReactDocumentTitle title={"New project | " + config.appName}>
               <div className="create-project container">
               <div className="row">
@@ -78,7 +117,7 @@ class CreateProject extends Component {
                </div>
                <div className="col-sm-4">
                   <h2>Datasets</h2>
-
+                  <div><h3>{this.props.dataset && <Link className={`${this.datasetActive() ? "dataset-active" : "dataset-non-active"}`} to={`/dataset/${this.props.dataset.identifier}`}>{this.props.dataset.title}</Link>}</h3><button onClick={()=>this.toggleDataset()} className="btn btn-primary">{this.datasetActive() ? "Remove" : "Add"}</button></div>
                </div>
              </div>
              </div>
@@ -89,7 +128,8 @@ class CreateProject extends Component {
 const mapDispatchToProps = (dispatch: Dispatch<*>)=>{
   return bindActionCreators({
     validateFields: validateFields,
-    resetFields: resetProjectFields
+    resetFields: resetProjectFields,
+    fetchDataset: fetchDatasetFromRegistry
   }, dispatch);
 }
 
@@ -97,8 +137,12 @@ function mapStateToProps(state, ownProps) {
   const isFetching= state.project.isFetching;
   const error = state.project.error;
   const fieldErrors = state.project.fieldErrors;
+
+  const record = state.record;
+  const dataset =record.dataset;
+
   return {
-    isFetching, error, fieldErrors
+    isFetching, error, fieldErrors, dataset
   };
 }
 
