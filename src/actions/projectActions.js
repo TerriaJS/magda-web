@@ -3,6 +3,7 @@
 import fetch from 'isomorphic-fetch'
 import {config} from '../config'
 import {actionTypes} from '../constants/ActionTypes';
+import {validateProjectTitle, validateProjectDescription} from '../helpers/validateInput';
 import type { ProjectAction, Project } from '../types';
 
 type Dispatch = ()=> Function
@@ -52,10 +53,10 @@ export function resetProjectFields(): ProjectAction  {
   }
 };
 
-export function createProject(props: Project): ProjectAction  {
+export function createProject(newProject: Project): ProjectAction  {
   return {
     type: actionTypes.CREATE_PROJECT,
-    props
+    newProject
   };
 }
 
@@ -90,23 +91,31 @@ export function postNewProject(props: Project){
       return dispatch(createProjectFailure(response.status))
     })
     .then((result: Project )=> {
-      dispatch(createProjectSuccess(result))
+      if(result.error){
+        return false;
+      }
+      return dispatch(createProjectSuccess(result))
     });
 
   }
 }
 
 
+
 export function validateFields(props: Project){
   return (dispatch: Dispatch) =>{
-    debugger
     dispatch(validateProjectFields(props));
-    if(true){
-      postNewProject(props)
+    const titleError = validateProjectTitle(props.title);
+    const descriptionError = validateProjectDescription(props.description);
+    if( !titleError && !descriptionError){
+      dispatch(postNewProject(props));
     } else {
-      dispatch(validateProjectFieldsFailure({
-
-      }))
+      dispatch(validateProjectFieldsFailure(
+        Object.assign({}, props, {
+          title: titleError,
+          description: descriptionError
+        })
+      ))
     }
   }
 }

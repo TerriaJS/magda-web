@@ -3,20 +3,29 @@ import {parseProject} from '../helpers/api';
 import type {Project, ProjectAction } from '../types';
 
 
+const noFieldError = {
+  title: null,
+  description: null
+}
+
 const initialData = {
     isFetching: false,
     projects: [],
+    project: undefined,
     error: null,
     notFound:  false,
-    hitCount: 0
+    hitCount: 0,
+    fieldErrors: noFieldError
 }
 
 
 type ProjectsResult = {
   isFetching : boolean,
   projects: Array<Project>,
+  project: Project,
   error: ?number,
-  hitCount: number
+  hitCount: number,
+  fieldErrors: Project
 }
 
 
@@ -42,6 +51,7 @@ const projects = (state: ProjectsResult = initialData, action: projectAction) =>
     	return Object.assign({}, state, {
         isFetching: false,
         error: null,
+        project: action.newProject
       })
     case 'CREATE_PROJECT_SUCCESS':
       return Object.assign({}, state, {
@@ -54,10 +64,17 @@ const projects = (state: ProjectsResult = initialData, action: projectAction) =>
         isFetching: false,
         error: action.error,
       })
+    case 'RESET_PROJECT_FIELDS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        error: null,
+        project: undefined
+      })
     case 'VALIDATE_PROJECT_FIELDS':
       return Object.assign({}, state, {
         isFetching: true,
         error: null,
+        fieldErrors: noFieldError
       })
     case 'VALIDATE_PROJECT_FIELDS_FAILURE':
       return Object.assign({}, state, {

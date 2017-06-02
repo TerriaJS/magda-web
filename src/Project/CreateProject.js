@@ -6,7 +6,9 @@ import type {Project } from '../types';
 import { connect } from "react-redux";
 import {config} from '../config.js';
 import { bindActionCreators } from "redux";
-import { validateFields } from '../actions/projectActions';
+import { validateFields, resetProjectFields } from '../actions/projectActions';
+import Notification from '../UI/Notification';
+import './CreateProject.css';
 
 
 class CreateProject extends Component {
@@ -24,6 +26,12 @@ class CreateProject extends Component {
         datasets:[],
         status: 'open'
       }};
+    }
+
+
+    onDismissError(){
+      // reset form on error
+      this.props.resetFields();
 
     }
 
@@ -39,22 +47,30 @@ class CreateProject extends Component {
     handleSubmit(e){
       e.preventDefault();
       // dispatch validating and submission
-      this.props.validateFields(this.state.propject);
+      this.props.validateFields(this.state.project);
     }
     render(){
       const datasetId: string = queryString.parse(this.props.location.search).dataset;
       return <ReactDocumentTitle title={"New project | " + config.appName}>
               <div className="create-project container">
+              <div className="row">
+                {!this.props.isFetching && this.props.error &&
+                   <Notification content={this.props.error}
+                                 type="error"
+                                 onDismiss={()=>this.onDismissError()}/>
+                }
                 <div className="col-sm-8">
                   <h1>Create project</h1>
                   <form>
                     <label className="input-group">
-                      Project name:
-                      <input type="text" name="name" className="form-control" value={this.state.title} onChange={(e: MouseEvent)=>this.handleChange(e, "name")}/>
+                      Project title * :
+                      {this.props.fieldErrors.title && <div className="field-error">{this.props.fieldErrors.title}</div>}
+                      <input type="text" name="title" className={`form-control ${this.props.fieldErrors.title ? "form-error" : ""}`} value={this.state.title} onChange={(e: MouseEvent)=>this.handleChange(e, "title")}/>
                     </label>
                     <label className="input-group">
-                      Project description:
-                      <input type="text" name="description" className="form-control" value={this.state.description} onChange={(e: MouseEvent)=>this.handleChange(e, "description")}/>
+                      Project description * :
+                      {this.props.fieldErrors.description && <div className="field-error">{this.props.fieldErrors.description}</div>}
+                      <input type="text" name="description" className={`form-control ${this.props.fieldErrors.description ? "form-error" : ""}`} value={this.state.description} onChange={(e: MouseEvent)=>this.handleChange(e, "description")}/>
                     </label>
 
                     <input type="submit" value="Submit" className='btn btn-primary'  onClick={(e: MouseEvent)=>this.handleSubmit(e)}/>
@@ -65,6 +81,7 @@ class CreateProject extends Component {
 
                </div>
              </div>
+             </div>
              </ReactDocumentTitle>
     }
 }
@@ -72,6 +89,7 @@ class CreateProject extends Component {
 const mapDispatchToProps = (dispatch: Dispatch<*>)=>{
   return bindActionCreators({
     validateFields: validateFields,
+    resetFields: resetProjectFields
   }, dispatch);
 }
 

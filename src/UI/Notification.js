@@ -15,8 +15,7 @@ class Notification extends Component {
     }
 }
 
-Notification.propTypes = {content: React.PropTypes.string,
-                          type: React.PropTypes.string,
+Notification.propTypes = {type: React.PropTypes.string,
                           onDismiss: React.PropTypes.func};
 Notification.defaultProps = {content: '', type: ''};
 
