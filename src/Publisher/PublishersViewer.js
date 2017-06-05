@@ -9,6 +9,7 @@ import PublisherSummary from './PublisherSummary';
 import Pagination from '../UI/Pagination';
 import ErrorHandler from '../Components/ErrorHandler';
 import getPageNumber from '../helpers/getPageNumber';
+import ProgressBar from '../UI/ProgressBar';
 
 import './PublishersViewer.css';
 class PublishersViewer extends Component {
@@ -54,6 +55,7 @@ class PublishersViewer extends Component {
               <div className="container publishers-viewer">
               <div className="row">
                 {!this.props.isFetching && this.renderContent()}
+                {this.props.isFetching && <ProgressBar/>}
               </div>
              </div>
              </ReactDocumentTitle>

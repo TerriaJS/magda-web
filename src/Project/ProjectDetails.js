@@ -27,7 +27,6 @@ class ProjectDetails extends Component {
     } else if(!this.props.isFetching && this.props.project){
       return <ReactDocumentTitle title={this.props.project.name + "|" + config.appName}>
               <div className="project-details container">
-
                 <div className="row">
                   <div className="col-sm-8">
                     {this.props.showNotification && <div className="success-message">Project successfully created</div>}

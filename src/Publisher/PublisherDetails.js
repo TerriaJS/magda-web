@@ -8,6 +8,8 @@ import ReactDocumentTitle from "react-document-title";
 import { fetchPublisherIfNeeded } from "../actions/publisherActions";
 import OverviewBox from '../UI/OverviewBox';
 import type { Publisher } from '../types';
+import ProgressBar from '../UI/ProgressBar';
+
 import "./PublisherDetails.css";
 
 class PublisherDetails extends Component {
@@ -28,6 +30,7 @@ class PublisherDetails extends Component {
     renderContent(){
       const publisher = this.props.publisher;
       return <div className="publisher-details container">
+                {this.props.isFetching && <ProgressBar/>}
                 <div className="row">
                     <div className='publisher-details__body col-sm-8'>
                         <h1>{this.props.publisher.title}</h1>
@@ -41,7 +44,6 @@ class PublisherDetails extends Component {
     }
 
     render(){
-
         if(this.props.error){
             return <ErrorHandler errorCode ={this.props.error} />
         }
