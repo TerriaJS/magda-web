@@ -11,7 +11,7 @@ const noFieldError = {
 const initialData = {
     isFetching: false,
     projects: [],
-    project: undefined,
+    project: null,
     error: null,
     notFound:  false,
     hitCount: 0,
@@ -22,7 +22,7 @@ const initialData = {
 type ProjectsResult = {
   isFetching : boolean,
   projects: Array<Project>,
-  project: Project,
+  project: ?Project,
   error: ?number,
   hitCount: number,
   fieldErrors: Project
@@ -55,7 +55,8 @@ const projects = (state: ProjectsResult = initialData, action: projectAction) =>
     case 'RECEIVE_PROJECT':
       return Object.assign({}, state, {
         isFetching: false,
-        projects: action.json  && parseProject(action.json),
+        project: action.json  && parseProject(action.json),
+        error: null
       })
     case 'REQUEST_PROJECT_ERROR':
       return Object.assign({}, state, {

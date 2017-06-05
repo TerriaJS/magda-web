@@ -1,3 +1,5 @@
+
+//@flow
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {config} from '../config.js';
@@ -19,16 +21,21 @@ class ProjectDetails extends Component {
   }
 
   render(){
-    debugger
     if(this.props.error){
       return <ErrorHandler errorCode={this.props.error}/>
-    } else if(!this.props.isFetching){
-      return <ReactDocumentTitle title={this.props.project.name + " | " + config.appName}>
+    } else if(!this.props.isFetching && this.props.project){
+      return <ReactDocumentTitle title={this.props.project.name + "|" + config.appName}>
               <div className="project-details container">
-                <div className="col-sm-8">
-                  <h1></h1>
-                  <p>{this.props.project.description}</p>
-               </div>
+                <div className="row">
+                  <div className="col-sm-8">
+                    <h1>{this.props.project.name}</h1>
+
+                    <div className="white-box">
+                      <h2> Description </h2>
+                      {this.props.project.description}
+                    </div>
+                 </div>
+                 </div>
              </div>
              </ReactDocumentTitle>
     }
@@ -51,7 +58,5 @@ function mapStateToProps(state, ownProps) {
     project, isFetching, location, error
   };
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetails);

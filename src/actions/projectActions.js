@@ -175,7 +175,6 @@ export function fetchProjectsIfNeeded(){
 
 
 export function fetchProjectFromRegistry(projectId):Object{
-  debugger
   return (dispatch: Dispatch)=>{
     dispatch(requestProject())
     let url : string = config.registryUrl + "/" + projectId + "?aspect=project";
