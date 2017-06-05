@@ -9,6 +9,7 @@ import ReactDocumentTitle from "react-document-title";
 import ErrorHandler from '../Components/ErrorHandler';
 import ProgressBar from '../UI/ProgressBar';
 
+
 class ProjectDetails extends Component {
   componentWillMount(){
     this.props.fetchProjectIfNeeded(this.props.params.projectId);
@@ -26,8 +27,10 @@ class ProjectDetails extends Component {
     } else if(!this.props.isFetching && this.props.project){
       return <ReactDocumentTitle title={this.props.project.name + "|" + config.appName}>
               <div className="project-details container">
+
                 <div className="row">
                   <div className="col-sm-8">
+                    {this.props.showNotification && <div className="success-message">Project successfully created</div>}
                     <h1>{this.props.project.name}</h1>
 
                     <div className="white-box">
@@ -54,8 +57,9 @@ function mapStateToProps(state, ownProps) {
   const isFetching= state.project.isFetching;
   const error = state.project.error;
   const location = ownProps.location;
+  const showNotification = state.project.showNotification;
   return {
-    project, isFetching, location, error
+    project, isFetching, location, error, showNotification
   };
 }
 

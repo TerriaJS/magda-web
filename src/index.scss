@@ -175,3 +175,18 @@ a.badge{
 .form-error{
   border: 1px solid red;
 }
+
+
+.success-message{
+  color: #fff;
+  background: $magda-green;
+  border-radius: 5px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+@keyframes hideMessage {
+  0%   { opacity: 1; }
+  90%   { opacity: 1; }
+  100% { opacity: 0; }
+}

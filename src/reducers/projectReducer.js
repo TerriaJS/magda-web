@@ -15,7 +15,8 @@ const initialData = {
     error: null,
     notFound:  false,
     hitCount: 0,
-    fieldErrors: noFieldError
+    fieldErrors: noFieldError,
+    showNotification: false
 }
 
 
@@ -25,7 +26,8 @@ type ProjectsResult = {
   project: ?Project,
   error: ?number,
   hitCount: number,
-  fieldErrors: Project
+  fieldErrors: Project,
+  showNotification?: boolean
 }
 
 
@@ -73,7 +75,8 @@ const projects = (state: ProjectsResult = initialData, action: projectAction) =>
       return Object.assign({}, state, {
         isFetching: false,
         error: null,
-        project: action.newProject
+        project: action.newProject,
+        showNotification: action.showNotification
       })
     case 'CREATE_PROJECT_FAILURE':
       return Object.assign({}, state, {

@@ -5,6 +5,7 @@ import {config} from '../config'
 import {actionTypes} from '../constants/ActionTypes';
 import {validateProjectName, validateProjectDescription} from '../helpers/validateInput';
 import type { ProjectAction, Project } from '../types';
+import { hashHistory} from 'react-router';
 
 type Dispatch = ()=> Function
 type getState = () => {
@@ -80,10 +81,11 @@ export function createProject(newProject: Project): ProjectAction  {
   };
 }
 
-export function createProjectSuccess(newProject: Project): ProjectAction  {
+export function createProjectSuccess(newProject: Project, showNotification: boolean): ProjectAction  {
   return {
     type: actionTypes.CREATE_PROJECT_SUCCESS,
-    newProject
+    newProject,
+    showNotification
   };
 }
 
@@ -98,7 +100,6 @@ export function createProjectFailure(error: number): ProjectAction {
 export function postNewProject(props: Project){
   return (dispatch: Dispatch) => {
     dispatch(createProject(props));
-    console.log(props);
     const url = config.registryUrl;
     return fetch(config.registryUrl,
     {
@@ -119,7 +120,10 @@ export function postNewProject(props: Project){
       if(result.error){
         return false;
       }
-      return dispatch(createProjectSuccess(result))
+      // should change into browserHistory?
+      hashHistory.push(`/projects/${props.id}`);
+      dispatch(createProjectSuccess(result, true))
+      setTimeout(function(){ dispatch(createProjectSuccess(result, false))}, 5000);
     });
 
   }
