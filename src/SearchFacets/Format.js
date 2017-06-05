@@ -32,6 +32,7 @@ class Format extends Component {
       format: [],
       page: undefined
     })
+    this.props.toggleFacet();
     // update redux
     this.props.dispatch(resetFormat());
   }

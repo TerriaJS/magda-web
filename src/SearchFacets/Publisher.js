@@ -31,6 +31,7 @@ class Publisher extends Component {
       publisher: [],
       page: undefined
     })
+    this.props.toggleFacet();
     // update redux
     this.props.dispatch(resetPublisher());
   }

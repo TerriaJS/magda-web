@@ -30,6 +30,7 @@ class Temporal extends Component {
       dateTo: undefined,
       page: undefined
     });
+    this.props.toggleFacet();
     // dispatch event
     this.props.dispatch(resetDateFrom());
     this.props.dispatch(resetDateTo());

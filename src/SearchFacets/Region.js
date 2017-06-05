@@ -31,6 +31,7 @@ class Region extends Component {
       regionType: undefined,
       page: undefined
     });
+    this.props.toggleFacet();
     this.props.dispatch(resetRegion());
   }
 
