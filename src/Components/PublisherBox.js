@@ -12,6 +12,7 @@ export default function PublisherBox(props: Object){
       <div className="inner">
         <h3><Link to={`publishers/${publisher.id}`}>{publisher.title}</Link></h3>
         <div className="">{publisher.description}</div>
+        <Link to={`/search?publisher=${encodeURIComponent(publisher.title)}&q=${encodeURIComponent("*")}`}>View all datasets</Link>
       </div>
   </div>
   )

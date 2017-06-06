@@ -8,6 +8,7 @@ export const config = {
         appName: "data.gov.au",
         searchApiBaseUrl: 'http://104.199.180.124/api/v0/search/',
         registryUrl: 'http://104.199.180.124/api/v0/registry/records',
+        rssUrl: 'https://blog.data.gov.au/blogs/rss.xml',
         facetListSize: 5,
         resultsPerPage: 10,
         descriptionLength: 50,

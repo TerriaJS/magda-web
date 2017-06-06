@@ -9,6 +9,7 @@ import { fetchPublisherIfNeeded } from "../actions/publisherActions";
 import OverviewBox from '../UI/OverviewBox';
 import type { Publisher } from '../types';
 import ProgressBar from '../UI/ProgressBar';
+import {Link} from 'react-router';
 
 import "./PublisherDetails.css";
 
@@ -33,10 +34,11 @@ class PublisherDetails extends Component {
                 {this.props.isFetching && <ProgressBar/>}
                 <div className="row">
                     <div className='publisher-details__body col-sm-8'>
-                        <h1>{this.props.publisher.title}</h1>
+                        <h1>{publisher.title}</h1>
                         <div className='publisher-details-overview'>
                             <h3 className="section-heading">Overview</h3>
                             <OverviewBox content={publisher.description}/>
+                            <Link to={`/search?publisher=${encodeURIComponent(publisher.title)}&q=${encodeURIComponent("*")}`}>View all datasets from {publisher.title}</Link>
                         </div>
                     </div>
                 </div>
