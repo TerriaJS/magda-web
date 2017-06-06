@@ -53,16 +53,6 @@ class Temporal extends Component {
   }
 }
 
-Temporal.propTypes = {
-  temporalOptions: React.PropTypes.array,
-  activeDateFrom: React.PropTypes.number,
-  activeDateTo: React.PropTypes.number,
-  updateQuery: React.PropTypes.func.isRequired,
-  toggleFacet: React.PropTypes.func,
-  isOpen: React.PropTypes.bool
-}
-
-
 function mapStateToProps(state) {
   let { datasetSearch} = state;
   return {

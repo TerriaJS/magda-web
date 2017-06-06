@@ -8,7 +8,7 @@ export const config = {
         appName: 'data.gov.au',
         searchApiBaseUrl: 'http://104.199.180.124/api/v0/search/',
         registryUrl: 'http://104.199.180.124/api/v0/registry/records',
-        rssUrl: 'https://blog.data.gov.au/blogs/rss.xml',
+        rssUrl: 'https://nationalmap.gov.au/proxy/_0d/https://blog.data.gov.au/blogs/rss.xml',
         facetListSize: 5,
         resultsPerPage: 10,
         descriptionLength: 50,
@@ -19,7 +19,6 @@ export const config = {
           large: 1200
         },
         featuredDatasets: ['0f208fbe-8cf4-4408-b39e-07ca9700ffcf', '9804e9c3-304e-4d71-890a-3b0078df0d73'],
-        featuredPublishers: ['4d907503-b2aa-4c38-ac13-1273e791cb08', '9ad7ef22-735a-45c1-9e83-0f702d56984b'],
         exampleSearch: [
           'Business Names by ASIC as CSV',
           'Geocoded National Address File',

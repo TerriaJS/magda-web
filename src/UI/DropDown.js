@@ -28,7 +28,7 @@ class DropDown extends Component {
   }
 
   render(){
-    
+
     return (
       <div className={`dropdown ${this.state.isOpen ? 'is-open': ''}`}>
         <button className='dropdown__toggle-btn btn'
@@ -45,9 +45,6 @@ class DropDown extends Component {
   }
 }
 
-DropDown.propTypes = {options: React.PropTypes.array,
-                      activeOption: React.PropTypes.string,
-                      select: React.PropTypes.func};
 DropDown.defaultProps = {activeOption: {}};
 
 export default DropDown;

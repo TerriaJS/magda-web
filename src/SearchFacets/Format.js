@@ -72,16 +72,6 @@ class Format extends Component {
   }
 }
 
-Format.propTypes = {
-  formatOptions: React.PropTypes.array.isRequired,
-  activeFormats: React.PropTypes.array.isRequired,
-  formatSearchResults: React.PropTypes.array.isRequired,
-  updateQuery: React.PropTypes.func.isRequired,
-  toggleFacet: React.PropTypes.func.isRequired,
-  isOpen: React.PropTypes.bool.isRequired,
-}
-
-
 function mapStateToProps(state) {
   let { datasetSearch , facetFormatSearch} = state;
   return {

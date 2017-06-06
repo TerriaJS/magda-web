@@ -26,8 +26,5 @@ class TemporalAspectViewer extends Component {
     }
 }
 
-TemporalAspectViewer.propTypes = {
-  data: React.PropTypes.object
-}
 
 export default TemporalAspectViewer;

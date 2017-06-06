@@ -57,16 +57,6 @@ class Region extends Component {
   }
 }
 
-Region.propTypes = {
-  activeRegions: React.PropTypes.object,
-  regionSearchResults: React.PropTypes.array.isRequired,
-  updateQuery: React.PropTypes.func.isRequired,
-  regionMapping: React.PropTypes.object,
-  toggleFacet: React.PropTypes.func,
-  isOpen: React.PropTypes.bool,
-}
-
-
 function mapStateToProps(state) {
   let { datasetSearch , facetRegionSearch, regionMapping} = state;
   return {

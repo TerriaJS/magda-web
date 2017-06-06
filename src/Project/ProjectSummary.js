@@ -13,7 +13,6 @@ class ProjectSummary extends Component {
     }
 }
 
-ProjectSummary.propTypes = {project: React.PropTypes.object};
 
 
 export default ProjectSummary;

@@ -57,7 +57,6 @@ Pagination.contextTypes ={
 }
 
 
-Pagination.propTypes = {currentPage: React.PropTypes.number, maxPage: React.PropTypes.number};
 Pagination.defaultProps = { currentPage: 1, maxPage: 10};
 
 export default Pagination;

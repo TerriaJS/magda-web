@@ -36,8 +36,5 @@ class OverviewBox extends Component {
     }
 }
 
-OverviewBox.propTypes = {
-  content: React.PropTypes.string
-}
 
 export default OverviewBox;

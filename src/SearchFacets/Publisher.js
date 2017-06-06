@@ -71,16 +71,6 @@ class Publisher extends Component {
   }
 }
 
-Publisher.propTypes = {
-  publisherOptions: React.PropTypes.array.isRequired,
-  activePublishers: React.PropTypes.array.isRequired,
-  publisherSearchResults: React.PropTypes.array.isRequired,
-  updateQuery: React.PropTypes.func.isRequired,
-  toggleFacet: React.PropTypes.func,
-  isOpen: React.PropTypes.bool,
-}
-
-
 function mapStateToProps(state) {
   let { datasetSearch , facetPublisherSearch} = state;
   return {

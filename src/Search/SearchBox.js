@@ -144,9 +144,6 @@ SearchBox.contextTypes ={
   router: React.PropTypes.object.isRequired,
 }
 
-SearchBox.propTypes = {
-  freeText: React.PropTypes.string,
-}
 
 
 const mapStateToProps = (state, ownProps)=> {

@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './Statistics.css';
 
+// Total number of datasets
+// - Total number of harvested sources
+// - Total number of spatial datasets
+// - If time, ElasticSearch query for total number of open licensed datasets
 
 
 export default function Statistics(props: Object){
@@ -12,16 +16,16 @@ export default function Statistics(props: Object){
 
           <ul className='list-unstyled'>
               <li>
-                  <strong><span title='49,911'>49.9k</span></strong>
+                  <strong><span>49,455</span></strong>
                   discoverable datasets
               </li>
               <li>
-                  <strong><span title='9,052'>9k</span></strong>
-                  API enabled resources
+                  <strong><span>773</span></strong>
+                  harvested sources
               </li>
               <li>
-                  <strong><span>25</span></strong>
-                  unpublished datasets
+                  <strong><span>23,000</span></strong>
+                  spatial datasets
               </li>
           </ul>
       </div>

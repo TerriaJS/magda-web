@@ -56,9 +56,7 @@ class SearchResults extends Component {
     );
   }
 }
-SearchResults.propTypes={searchResults: React.PropTypes.array,
-                         onSearchTextChange: React.PropTypes.func
-                         };
+
 SearchResults.defaultProps={searchResults: []};
 
 export default SearchResults;

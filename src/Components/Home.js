@@ -6,6 +6,7 @@ import {config} from '../config'
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {fetchFeaturedDatasetsFromRegistry} from '../actions/featuredDatasetsActions';
+import {fetchNewsfromRss} from '../actions/NewsActions';
 import DatasetSummary from '../Dataset/DatasetSummary';
 import ReactDocumentTitle from 'react-document-title';
 import './Home.css';
@@ -13,6 +14,7 @@ import './Home.css';
 class Home extends React.Component {
   componentWillMount(){
     this.props.fetchFeaturedDatasets(config.featuredDatasets);
+    this.props.fetchNewsfromRss();
   }
   render() {
     return (
@@ -48,14 +50,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch: Dispatch<*>) => {
   return bindActionCreators({
     fetchFeaturedDatasets: fetchFeaturedDatasetsFromRegistry,
+    fetchNewsfromRss: fetchNewsfromRss
   }, dispatch);
 }
 
-Home.propTypes = {
-  featuredDatasets: React.PropTypes.array,
-  isFetchingFeaturedDatasets: React.PropTypes.bool,
-  isFetchingFeaturedDatasetsError: React.PropTypes.bool,
-  error: React.PropTypes.number
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

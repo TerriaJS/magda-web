@@ -56,9 +56,6 @@ class ProjectsViewer extends Component {
     }
 }
 
-ProjectsViewer.propTypes = {projects: React.PropTypes.array,
-                            isFetching: React.PropTypes.bool,
-                            error: React.PropTypes.string};
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({

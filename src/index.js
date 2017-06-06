@@ -5,7 +5,7 @@ import './index.css';
 // import {browserHistory} from 'react-router';
 import {config} from './config'
 import { Router, Route, IndexRoute, IndexRedirect, hashHistory} from 'react-router';
-import {fetchFeaturedPublishersFromRegistry} from './actions/featuredPublishersActions';
+
 import thunkMiddleware from 'redux-thunk'
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -55,14 +55,11 @@ hashHistory.listen (location=>{
 })
 
 
-function loadDefaultData(store){
-  store.dispatch(fetchFeaturedPublishersFromRegistry(config.featuredPublishers))
-}
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path={baseurl} component={AppContainer} onEnter={loadDefaultData(store)}>
+      <Route path={baseurl} component={AppContainer}>
         <IndexRoute component={Home}/>
         <Route path='search' component={Search} />
         <Route path='feedback' component={Feedback} />

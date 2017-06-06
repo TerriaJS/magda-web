@@ -11,5 +11,3 @@ export default class DatasetDiscussion extends Component {
     );
   }
 }
-
-DatasetDiscussion.propTypes = { dataset: React.PropTypes.object };

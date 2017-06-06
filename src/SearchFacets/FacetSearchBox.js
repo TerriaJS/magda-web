@@ -138,10 +138,6 @@ class FacetSearchBox extends Component {
   }
 }
 
-FacetSearchBox.propTypes = {options: React.PropTypes.array,
-                            searchFacet: React.PropTypes.func,
-                            renderOption: React.PropTypes.func,
-                            onToggleOption: React.PropTypes.func};
 FacetSearchBox.defaultProps = {options: []};
 
 export default FacetSearchBox;

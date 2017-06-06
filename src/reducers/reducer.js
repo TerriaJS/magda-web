@@ -15,6 +15,7 @@ import project from './projectReducer';
 
 import featuredDatasets from './featuredDatasetsReducer';
 import featuredPublishers from './featuredPublishersReducer';
+import news from './newsReducer';
 
 import { combineReducers } from 'redux';
 
@@ -28,7 +29,8 @@ const reducer = combineReducers({
   publisher,
   project,
   featuredDatasets,
-  featuredPublishers
+  featuredPublishers,
+  news
 });
 
 export default reducer;

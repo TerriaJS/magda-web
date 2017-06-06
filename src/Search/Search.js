@@ -19,6 +19,7 @@ import SearchResults from '../SearchResults/SearchResults';
 import MatchingStatus from './MatchingStatus';
 import { bindActionCreators } from 'redux';
 import { fetchSearchResultsIfNeeded } from '../actions/datasetSearchActions';
+import {fetchFeaturedPublishersFromRegistry} from '../actions/featuredPublishersActions';
 import type { SearchState} from '../types';
 import queryString from 'query-string';
 import cripsy from './crispy.gif';
@@ -54,7 +55,10 @@ class Search extends Component {
 
 
   componentWillReceiveProps(nextProps){
-    this.props.fetchSearchResultsIfNeeded(nextProps.location.query);
+    if(nextProps.datasets && nextProps.datasets.length> 0 &&  nextProps.location.search !== this.props.location.search){
+      const featuredPublishers = nextProps.publisherOptions.map(o=> o.identifier);
+      this.props.fetchFeaturedPublishersFromRegistry(featuredPublishers);
+    }
   }
 
 
@@ -181,20 +185,12 @@ Search.contextTypes ={
   router: React.PropTypes.object.isRequired,
 }
 
-Search.propTypes = {
-  datasets: React.PropTypes.array.isRequired,
-  hitCount: React.PropTypes.number.isRequired,
-  isFetching: React.PropTypes.bool.isRequired,
-  progress: React.PropTypes.number.isRequired,
-  strategy: React.PropTypes.string.isRequired,
-  freeText: React.PropTypes.string,
-  error: React.PropTypes.number
-}
 
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchSearchResultsIfNeeded: fetchSearchResultsIfNeeded,
+    fetchFeaturedPublishersFromRegistry: fetchFeaturedPublishersFromRegistry
   }, dispatch);
 }
 
@@ -203,6 +199,7 @@ function mapStateToProps(state, ownProps) {
   let { datasetSearch, featuredPublishers } = state;
   return {
     datasets: datasetSearch.datasets,
+    publisherOptions: datasetSearch.publisherOptions.slice(0, 5),
     hitCount: datasetSearch.hitCount,
     isFetching: datasetSearch.isFetching,
     progress: datasetSearch.progress,

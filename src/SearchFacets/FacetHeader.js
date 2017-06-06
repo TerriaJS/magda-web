@@ -50,7 +50,6 @@ class FacetHeader extends Component {
   }
 }
 
-FacetHeader.propTypes = {title: React.PropTypes.string,  activeOptions: React.PropTypes.array};
 FacetHeader.defaultProps = {title: ''};
 
 export default FacetHeader;

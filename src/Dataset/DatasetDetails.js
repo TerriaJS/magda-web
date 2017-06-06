@@ -62,7 +62,4 @@ function mapStateToProps(state) {
   };
 }
 
-
-DatasetDetails.propTypes = {dataset: React.PropTypes.object};
-
 export default connect(mapStateToProps)(DatasetDetails);

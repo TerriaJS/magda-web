@@ -18,7 +18,6 @@ class PublisherSummary extends Component {
     }
 }
 
-PublisherSummary.propTypes = {publisher: React.PropTypes.object};
 
 
 export default PublisherSummary;

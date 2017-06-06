@@ -18,8 +18,5 @@ class Tabs extends Component {
     }
 }
 
-Tabs.propTypes = {list: React.PropTypes.array,
-                  baseUrl: React.PropTypes.string,
-                };
 
 export default Tabs;

@@ -62,9 +62,6 @@ class PublishersViewer extends Component {
     }
 }
 
-PublishersViewer.propTypes = {publishers: React.PropTypes.array,
-                              isFetching: React.PropTypes.bool,
-                              error: React.PropTypes.string};
 
 
 function mapDispatchToProps(dispatch: Function) {
