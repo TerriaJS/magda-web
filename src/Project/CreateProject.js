@@ -1,13 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import ReactDocumentTitle from "react-document-title";
+import ReactDocumentTitle from 'react-document-title';
 import queryString from 'query-string';
 import type {Project } from '../types';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {config} from '../config.js';
-import { bindActionCreators } from "redux";
+import { bindActionCreators } from 'redux';
 import { validateFields, resetProjectFields } from '../actions/projectActions';
-import { fetchDatasetFromRegistry } from "../actions/recordActions";
+import { fetchDatasetFromRegistry } from '../actions/recordActions';
 
 import { Link } from 'react-router';
 import Immutable from 'immutable';
@@ -24,10 +24,10 @@ class CreateProject extends Component {
       super(props);
 
       const project = Immutable.Map({
-        description: "",
+        description: '',
         members: [],
         datasets: [],
-        status: "open"
+        status: 'open'
       })
       this.state = {project: Immutable.Map({
         id: uuidV1(),
@@ -43,7 +43,7 @@ class CreateProject extends Component {
       if(datasetId){
         this.props.fetchDataset(datasetId);
         this.setState({
-          project: this.state.project.setIn(["aspects", 'project', 'datasets'], [datasetId])
+          project: this.state.project.setIn(['aspects', 'project', 'datasets'], [datasetId])
         })
       }
     }
@@ -52,7 +52,7 @@ class CreateProject extends Component {
       const prevDatasetId: string = queryString.parse(this.props.location.search).dataset;
       if(datasetId && prevDatasetId !== datasetId){
         this.setState({
-          project: this.state.project.setIn(["aspects", 'project', 'datasets'], [datasetId])
+          project: this.state.project.setIn(['aspects', 'project', 'datasets'], [datasetId])
         })
         nextProps.fetchDataset(datasetId);
       }
@@ -81,14 +81,14 @@ class CreateProject extends Component {
     }
 
     datasetActive(){
-      const datasets = this.state.project.getIn(["aspects", 'project', 'datasets']);
+      const datasets = this.state.project.getIn(['aspects', 'project', 'datasets']);
       return datasets.indexOf(this.props.dataset.identifier) !== -1;
     }
 
     toggleDataset(){
       const datasets = this.datasetActive() ? []: [this.props.dataset.identifier];
       this.setState({
-        project: this.state.project.setIn(["aspects", 'project', 'datasets'], datasets)
+        project: this.state.project.setIn(['aspects', 'project', 'datasets'], datasets)
       })
     }
 
@@ -97,35 +97,45 @@ class CreateProject extends Component {
       // dispatch validating and submission
       this.props.validateFields(this.state.project);
     }
+
+    renderDataset(){
+      return <div>
+          <h2>Datasets</h2>
+            <div>
+              <h3><Link className={`${this.datasetActive() ? 'dataset-active' : 'dataset-non-active'}`} to={`/dataset/${this.props.dataset.identifier}`}>{this.props.dataset.title}</Link></h3>
+              <button onClick={()=>this.toggleDataset()} className='btn btn-primary'>{this.datasetActive() ? 'Remove' : 'Add'}</button>
+            </div>
+      </div>
+    }
     render(){
-      return <ReactDocumentTitle title={"New project | " + config.appName}>
-              <div className="create-project container">
-              <div className="row">
+      const datasetIdfromUrl: string = queryString.parse(this.props.location.search).dataset;
+      return <ReactDocumentTitle title={'New project | ' + config.appName}>
+              <div className='create-project container'>
+              <div className='row'>
                 {!this.props.isFetching && this.props.error &&
                    <Notification content={this.props.error}
-                                 type="error"
+                                 type='error'
                                  onDismiss={()=>this.onDismissError()}/>
                 }
-                <div className="col-sm-8">
+                <div className='col-sm-8'>
                   <h1>Create project</h1>
                   <form>
-                    <label className="input-group">
+                    <label className='input-group'>
                       Project title * :
-                      {this.props.fieldErrors.name && <div className="field-error">{this.props.fieldErrors.name}</div>}
-                      <input type="text" name="name" className={`form-control ${this.props.fieldErrors.name ? "form-error" : ""}`} value={this.state.name} onChange={(e: MouseEvent)=>this.handleChange(e, "name")}/>
+                      {this.props.fieldErrors.name && <div className='field-error'>{this.props.fieldErrors.name}</div>}
+                      <input type='text' name='name' className={`form-control ${this.props.fieldErrors.name ? 'form-error' : ''}`} value={this.state.name} onChange={(e: MouseEvent)=>this.handleChange(e, 'name')}/>
                     </label>
-                    <label className="input-group">
+                    <label className='input-group'>
                       Project description * :
-                      {this.props.fieldErrors.description && <div className="field-error">{this.props.fieldErrors.description}</div>}
-                      <input type="text" name="description" className={`form-control ${this.props.fieldErrors.description ? "form-error" : ""}`} value={this.state.description} onChange={(e: MouseEvent)=>this.handleChange(e, "description")}/>
+                      {this.props.fieldErrors.description && <div className='field-error'>{this.props.fieldErrors.description}</div>}
+                      <input type='text' name='description' className={`form-control ${this.props.fieldErrors.description ? 'form-error' : ''}`} value={this.state.description} onChange={(e: MouseEvent)=>this.handleChange(e, 'description')}/>
                     </label>
 
-                    <input type="submit" value="Submit" className='btn btn-primary'  onClick={(e: MouseEvent)=>this.handleSubmit(e)}/>
+                    <input type='submit' value='Submit' className='btn btn-primary'  onClick={(e: MouseEvent)=>this.handleSubmit(e)}/>
                   </form>
                </div>
-               <div className="col-sm-4">
-                  <h2>Datasets</h2>
-                  <div><h3>{this.props.dataset && <Link className={`${this.datasetActive() ? "dataset-active" : "dataset-non-active"}`} to={`/dataset/${this.props.dataset.identifier}`}>{this.props.dataset.title}</Link>}</h3><button onClick={()=>this.toggleDataset()} className="btn btn-primary">{this.datasetActive() ? "Remove" : "Add"}</button></div>
+               <div className='col-sm-4'>
+                  {(datasetIdfromUrl && this.props.dataset) && this.renderDataset()}
                </div>
              </div>
              </div>

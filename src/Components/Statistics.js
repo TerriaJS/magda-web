@@ -7,16 +7,16 @@ import './Statistics.css';
 
 export default function Statistics(props: Object){
   return (
-    <div className="white-box statistics">
-      <div className="inner">
+    <div className='white-box statistics'>
+      <div className='inner'>
 
-          <ul className="list-unstyled">
+          <ul className='list-unstyled'>
               <li>
-                  <strong><span title="49,911">49.9k</span></strong>
+                  <strong><span title='49,911'>49.9k</span></strong>
                   discoverable datasets
               </li>
               <li>
-                  <strong><span title="9,052">9k</span></strong>
+                  <strong><span title='9,052'>9k</span></strong>
                   API enabled resources
               </li>
               <li>

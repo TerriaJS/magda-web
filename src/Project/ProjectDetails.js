@@ -1,11 +1,12 @@
 
 //@flow
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {config} from '../config.js';
-import { bindActionCreators } from "redux";
+import {Link} from 'react-router';
+import { bindActionCreators } from 'redux';
 import { fetchProjectIfNeeded } from '../actions/projectActions';
-import ReactDocumentTitle from "react-document-title";
+import ReactDocumentTitle from 'react-document-title';
 import ErrorHandler from '../Components/ErrorHandler';
 import ProgressBar from '../UI/ProgressBar';
 
@@ -25,17 +26,19 @@ class ProjectDetails extends Component {
     if(this.props.error){
       return <ErrorHandler errorCode={this.props.error}/>
     } else if(!this.props.isFetching && this.props.project){
-      return <ReactDocumentTitle title={this.props.project.name + "|" + config.appName}>
-              <div className="project-details container">
-                <div className="row">
-                  <div className="col-sm-8">
-                    {this.props.showNotification && <div className="success-message">Project successfully created</div>}
+      return <ReactDocumentTitle title={this.props.project.name + '|' + config.appName}>
+              <div className='project-details container'>
+                <div className='row'>
+                  <div className='col-sm-8'>
+                    {this.props.showNotification && <div className='success-message'>Project successfully created</div>}
                     <h1>{this.props.project.name}</h1>
-
-                    <div className="white-box">
+                    <div className='white-box'>
                       <h2> Description </h2>
                       {this.props.project.description}
                     </div>
+                 </div>
+                 <div className='col-sm-4'>
+                   <Link className='btn btn-primary' to='/project/new'> Create new project </Link>
                  </div>
                  </div>
              </div>

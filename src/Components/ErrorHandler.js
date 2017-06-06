@@ -1,7 +1,7 @@
 //@flow
 import React from 'react';
 import {config} from '../config.js';
-import ReactDocumentTitle from "react-document-title";
+import ReactDocumentTitle from 'react-document-title';
 
 export default class ErrorHandler extends React.Component {
   props: {
@@ -10,15 +10,15 @@ export default class ErrorHandler extends React.Component {
   interpretateErrorCode(code: ?number){
     switch(code){
       case 404:
-        return "record not found";
+        return 'record not found';
       default:
-        return "Error occured"
+        return 'Error occured'
     }
   }
   render() {
     return (
-      <ReactDocumentTitle title={"Error | " + config.appName}>
-        <div className="container">
+      <ReactDocumentTitle title={'Error | ' + config.appName}>
+        <div className='container'>
           <h1>{this.props.errorCode}</h1>
           {this.interpretateErrorCode(this.props.errorCode)}
         </div>

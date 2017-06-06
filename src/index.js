@@ -5,7 +5,7 @@ import './index.css';
 // import {browserHistory} from 'react-router';
 import {config} from './config'
 import { Router, Route, IndexRoute, IndexRedirect, hashHistory} from 'react-router';
-import {fetchFeaturedPublishersFromRegistry} from "./actions/featuredPublishersActions";
+import {fetchFeaturedPublishersFromRegistry} from './actions/featuredPublishersActions';
 import thunkMiddleware from 'redux-thunk'
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -64,29 +64,29 @@ ReactDOM.render(
     <Router history={hashHistory}>
       <Route path={baseurl} component={AppContainer} onEnter={loadDefaultData(store)}>
         <IndexRoute component={Home}/>
-        <Route path="search" component={Search} />
-        <Route path="feedback" component={Feedback} />
-        <Route path="contact" component={Contact} />
-        <Route path="sign-in" component={Account} />
-        <Route path="new-account" component={Account} />
+        <Route path='search' component={Search} />
+        <Route path='feedback' component={Feedback} />
+        <Route path='contact' component={Contact} />
+        <Route path='sign-in' component={Account} />
+        <Route path='new-account' component={Account} />
 
-        <Route path="dataset/:datasetId" component={RecordHandler}>
-          <IndexRedirect to="details"/>
-          <Route path="details" component={DatasetDetails}/>
-          <Route path="discussion" component={DatasetDiscussion}/>
-          <Route path="publisher" component={DatasetPublisher}/>
+        <Route path='dataset/:datasetId' component={RecordHandler}>
+          <IndexRedirect to='details'/>
+          <Route path='details' component={DatasetDetails}/>
+          <Route path='discussion' component={DatasetDiscussion}/>
+          <Route path='publisher' component={DatasetPublisher}/>
         </Route>
-        <Route path="dataset/:datasetId/distribution/:distributionId" component={RecordHandler}>
-            <IndexRedirect to="details"/>
-            <Route path="details" component={DistributionDetails}/>
-            <Route path="map" component={DistributionMap}/>
-            <Route path="chart" component={DistributionChart}/>
+        <Route path='dataset/:datasetId/distribution/:distributionId' component={RecordHandler}>
+            <IndexRedirect to='details'/>
+            <Route path='details' component={DistributionDetails}/>
+            <Route path='map' component={DistributionMap}/>
+            <Route path='chart' component={DistributionChart}/>
         </Route>
-        <Route path="projects" component={ProjectsViewer}/>
-        <Route path="projects/:projectId" component={ProjectDetails}/>
-        <Route path="project/new" component={CreateProject}/>
-        <Route path="publishers" component={PublishersViewer}/>
-        <Route path="publishers/:publisherId" component={PublisherDetails}/>
+        <Route path='projects' component={ProjectsViewer}/>
+        <Route path='projects/:projectId' component={ProjectDetails}/>
+        <Route path='project/new' component={CreateProject}/>
+        <Route path='publishers' component={PublishersViewer}/>
+        <Route path='publishers/:publisherId' component={PublisherDetails}/>
         {staticPageRegister.map( item =>
         <Route path={`page/:id`} key={item.path} component={item.component}/>)}
       </Route>

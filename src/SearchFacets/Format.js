@@ -63,7 +63,7 @@ class Format extends Component {
           <Recommendations options={this.props.formatOptions}
                            onClick={this.onToggleFormatOption}
                            activeOptions={this.props.activeFormats}
-                           description={"Are you searching for items in the following format "}
+                           description={'Are you searching for items in the following format '}
           />
         );
       default:

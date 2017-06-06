@@ -62,7 +62,7 @@ class Publisher extends Component {
           <Recommendations options={this.props.publisherOptions}
                            onClick={this.onTogglePublisherOption}
                            activeOptions={this.props.activePublishers}
-                           description={"Are you searching for items published by "}
+                           description={'Are you searching for items published by '}
           />
         );
       default:

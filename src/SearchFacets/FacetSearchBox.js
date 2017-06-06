@@ -117,9 +117,9 @@ class FacetSearchBox extends Component {
     return (
       <div className='facet-search-box'>
         <form onKeyDown={this.handleKeyDown}>
-            <i className="fa fa-search search-icon" aria-hidden="true"></i>
+            <i className='fa fa-search search-icon' aria-hidden='true'></i>
             <input className='form-control'
-                   type="text"
+                   type='text'
                    value={this.state.searchText}
                    onInput={this.onSearchTextChange}
                    />

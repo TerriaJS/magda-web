@@ -1,15 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Editor from "draft-js-plugins-editor";
-import { fromJS } from "immutable";
-import { Editor as DraftEditor, EditorState, ContentState } from "draft-js";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Editor from 'draft-js-plugins-editor';
+import { fromJS } from 'immutable';
+import { Editor as DraftEditor, EditorState, ContentState } from 'draft-js';
 import {Link} from 'react-router';
 
-import base from "../../Base";
-import Message from "./Message";
-import EntryBox from "./EntryBox";
-import "draft-js-mention-plugin/lib/plugin.css";
-import "./CrappyChat.css";
+import base from '../../Base';
+import Message from './Message';
+import EntryBox from './EntryBox';
+import 'draft-js-mention-plugin/lib/plugin.css';
+import './CrappyChat.css';
 
 export default class CrappyChat extends React.Component {
   constructor(props) {
@@ -65,7 +65,7 @@ export default class CrappyChat extends React.Component {
        * post has finished.
        */
       then: () => {
-        console.log("POSTED");
+        console.log('POSTED');
         this.scrollToBottom();
       }
     });
@@ -91,7 +91,7 @@ export default class CrappyChat extends React.Component {
 
         <div
           ref={this.registerMessagesDiv.bind(this)}
-          className="crappy-chat__messages"
+          className='crappy-chat__messages'
         >
           {this.state.comments.map((comment, index) => {
             return <Message key={comment.key} comment={comment} />;
@@ -101,7 +101,7 @@ export default class CrappyChat extends React.Component {
         {this.state.user && <EntryBox onSubmit={this._newChat.bind(this)} />}
 
         {!this.state.user &&
-          <div><Link to="sign-in">Sign in</Link> to join the discussion!</div>}
+          <div><Link to='sign-in'>Sign in</Link> to join the discussion!</div>}
       </div>
     );
   }

@@ -4,10 +4,10 @@ import Statistics from '../Components/Statistics';
 import News from '../Components/News';
 import {config} from '../config'
 import {connect} from 'react-redux';
-import { bindActionCreators } from "redux";
-import {fetchFeaturedDatasetsFromRegistry} from "../actions/featuredDatasetsActions";
+import { bindActionCreators } from 'redux';
+import {fetchFeaturedDatasetsFromRegistry} from '../actions/featuredDatasetsActions';
 import DatasetSummary from '../Dataset/DatasetSummary';
-import ReactDocumentTitle from "react-document-title";
+import ReactDocumentTitle from 'react-document-title';
 import './Home.css';
 
 class Home extends React.Component {
@@ -16,18 +16,18 @@ class Home extends React.Component {
   }
   render() {
     return (
-      <ReactDocumentTitle title={"Welcome | " + config.appName}>
-      <div className="container home">
-        <div className="row">
-          <div className="col-sm-8">
+      <ReactDocumentTitle title={'Welcome | ' + config.appName}>
+      <div className='container home'>
+        <div className='row'>
+          <div className='col-sm-8'>
             <h2>Featured datasets</h2>
-            <div className="white-box">
+            <div className='white-box'>
               {this.props.datasets.map(d=><DatasetSummary key={d.identifier} dataset={d}/>)}
             </div>
             <h2>News</h2>
             <News />
           </div>
-          <div className="col-sm-4">
+          <div className='col-sm-4'>
             <h2>data.gov.au statistics</h2>
             <Statistics/>
           </div>

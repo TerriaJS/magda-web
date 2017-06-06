@@ -101,7 +101,7 @@ export function postNewProject(props: Project){
   return (dispatch: Dispatch) => {
     dispatch(createProject(props));
     const url = config.registryUrl;
-    return fetch(config.registryUrl,
+    return fetch(url,
     {
       method: 'POST',
       body: JSON.stringify(props),
@@ -153,7 +153,7 @@ export function validateFields(props: Project){
 export function fetchProjectsFromRegistry():Object{
   return (dispatch: Dispatch)=>{
     dispatch(requestProjects())
-    let url : string = config.registryUrl + "?aspect=project";
+    let url : string = config.registryUrl + '?aspect=project';
     return fetch(url)
     .then(response => {
         if (response.status >= 400) {
@@ -181,7 +181,7 @@ export function fetchProjectsIfNeeded(){
 export function fetchProjectFromRegistry(projectId):Object{
   return (dispatch: Dispatch)=>{
     dispatch(requestProject())
-    let url : string = config.registryUrl + "/" + projectId + "?aspect=project";
+    let url : string = config.registryUrl + '/' + projectId + '?aspect=project';
     return fetch(url)
     .then(response => {
         if (response.status >= 400) {

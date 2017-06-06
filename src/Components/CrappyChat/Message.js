@@ -1,11 +1,11 @@
-import React from "react";
-import { EditorState, convertFromRaw } from "draft-js";
-import Editor from "draft-js-plugins-editor";
+import React from 'react';
+import { EditorState, convertFromRaw } from 'draft-js';
+import Editor from 'draft-js-plugins-editor';
 import prettydate from 'pretty-date';
 
-import base from "../../Base";
-import pluginsFn from "./Plugins/Plugins";
-import "./Message.css";
+import base from '../../Base';
+import pluginsFn from './Plugins/Plugins';
+import './Message.css';
 
 export default class Message extends React.Component {
   constructor(props) {
@@ -26,11 +26,11 @@ export default class Message extends React.Component {
   componentWillMount() {
     base.syncState(`users/${this.props.comment.uid}/displayName`, {
       context: this,
-      state: "userName"
+      state: 'userName'
     });
     base.syncState(`users/${this.props.comment.uid}/photoURL`, {
       context: this,
-      state: "userAvatar"
+      state: 'userAvatar'
     });
   }
 
@@ -51,14 +51,14 @@ export default class Message extends React.Component {
 
   render() {
     return (
-      <div className="cc-message">
+      <div className='cc-message'>
         <img
-          className="cc-message__avatar"
+          className='cc-message__avatar'
           src={this.state.userAvatar}
         />
 
-        <div className="cc-message__right-of-avatar">
-          <strong>{this.state.userName}</strong>{" "}
+        <div className='cc-message__right-of-avatar'>
+          <strong>{this.state.userName}</strong>{' '}
           <small>{this.props.comment.date && prettydate.format(new Date(this.props.comment.date))}</small>
           <Editor
             onChange={this.onEditorChange.bind(this)}

@@ -5,7 +5,7 @@ import './FacetHeader.css';
   */
 class FacetHeader extends Component {
   calculateTitle(){
-    if(this.props.title === "date range"){
+    if(this.props.title === 'date range'){
         if(!this.hasFilter()){
           return <span> Any date </span>
         } else if(this.props.activeOptions[0] && !this.props.activeOptions[1]){
@@ -18,23 +18,23 @@ class FacetHeader extends Component {
 
     else{
         if(!this.hasFilter()){
-          return <span>{"Any " + this.props.title}</span>;
+          return <span>{'Any ' + this.props.title}</span>;
         } else if(this.props.activeOptions.length === 1){
-          return <span>{this.props.activeOptions[0].value || this.props.activeOptions[0].regionType + ": " + this.props.activeOptions[0].regionName} </span>;
+          return <span>{this.props.activeOptions[0].value || this.props.activeOptions[0].regionType + ': ' + this.props.activeOptions[0].regionName} </span>;
         } else{
-          return <span>{this.props.title + ": " + this.props.activeOptions.length}  </span>
+          return <span>{this.props.title + ': ' + this.props.activeOptions.length}  </span>
         }
     }
   }
 
   hasFilter(){
     let hasFilter = true;
-    if(this.props.title === "date range"){
+    if(this.props.title === 'date range'){
       if(this.props.activeOptions.every(o=>!o)){
         hasFilter = false;
       }
     } else{
-      if( !this.props.activeOptions || this.props.activeOptions.length === 0 || !this.props.activeOptions[0] ||(this.props.title === "location" && !this.props.activeOptions[0].regionType)){
+      if( !this.props.activeOptions || this.props.activeOptions.length === 0 || !this.props.activeOptions[0] ||(this.props.title === 'location' && !this.props.activeOptions[0].regionType)){
         hasFilter = false;
       }
     }
@@ -44,7 +44,7 @@ class FacetHeader extends Component {
   render(){
     return (
       <div className='facet-header'>
-        <button className={`facet-header__title btn ${this.hasFilter() ? "not-empty": ""}`} onClick={this.props.onClick}>{this.calculateTitle()}<span className="caret"></span></button>
+        <button className={`facet-header__title btn ${this.hasFilter() ? 'not-empty': ''}`} onClick={this.props.onClick}>{this.calculateTitle()}<span className='caret'></span></button>
       </div>
       );
   }

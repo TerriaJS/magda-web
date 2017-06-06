@@ -11,13 +11,13 @@ import defined from '../helpers/defined';
 import Pagination from '../UI/Pagination';
 import Notification from '../UI/Notification';
 import PublisherBox from '../Components/PublisherBox';
-import ReactDocumentTitle from "react-document-title";
+import ReactDocumentTitle from 'react-document-title';
 import React, { Component } from 'react';
 import SearchFacets from '../SearchFacets/SearchFacets';
 import Publisher from '../SearchFacets/Publisher';
 import SearchResults from '../SearchResults/SearchResults';
 import MatchingStatus from './MatchingStatus';
-import { bindActionCreators } from "redux";
+import { bindActionCreators } from 'redux';
 import { fetchSearchResultsIfNeeded } from '../actions/datasetSearchActions';
 import type { SearchState} from '../types';
 import queryString from 'query-string';
@@ -122,11 +122,11 @@ class Search extends Component {
             </div>
             {searchText.length > 0 &&
              !this.props.isFetching &&
-             !this.props.error && <div className="results-count col-sm-4">{this.props.hitCount} results found</div>}
+             !this.props.error && <div className='results-count col-sm-4'>{this.props.hitCount} results found</div>}
           </div>
           <div className='row'>
             <div className='col-sm-8'>
-                {searchText.length === 0 && <div><img className="img-responsive img-rounded img-crispy" src={cripsy} alt="crispy"/></div>}
+                {searchText.length === 0 && <div><img className='img-responsive img-rounded img-crispy' src={cripsy} alt='crispy'/></div>}
                 {searchText.length > 0 &&
                  !this.props.isFetching &&
                  !this.props.error &&

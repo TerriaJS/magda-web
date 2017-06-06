@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {config} from '../config.js';
-import { bindActionCreators } from "redux";
+import { bindActionCreators } from 'redux';
 import { fetchPublishersIfNeeded } from '../actions/publisherActions';
-import ReactDocumentTitle from "react-document-title";
+import ReactDocumentTitle from 'react-document-title';
 import PublisherSummary from './PublisherSummary';
 import Pagination from '../UI/Pagination';
 import ErrorHandler from '../Components/ErrorHandler';
@@ -36,7 +36,7 @@ class PublishersViewer extends Component {
       if(this.props.error){
         return <ErrorHandler errorCode={this.props.error}/>
       } else{
-        return (<div className="col-sm-8">
+        return (<div className='col-sm-8'>
               {this.props.publishers.map(p=>
                 <PublisherSummary publisher={p} key={p.id}/>
               )}
@@ -51,9 +51,9 @@ class PublishersViewer extends Component {
     }
 
     render(){
-      return <ReactDocumentTitle title={"Publishers | " + config.appName}>
-              <div className="container publishers-viewer">
-              <div className="row">
+      return <ReactDocumentTitle title={'Publishers | ' + config.appName}>
+              <div className='container publishers-viewer'>
+              <div className='row'>
                 {!this.props.isFetching && this.renderContent()}
                 {this.props.isFetching && <ProgressBar/>}
               </div>
