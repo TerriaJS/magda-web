@@ -38,8 +38,10 @@ class PublisherDetails extends Component {
                         <div className='publisher-details-overview'>
                             <h3 className='section-heading'>Overview</h3>
                             <OverviewBox content={publisher.description}/>
-                            <Link to={`/search?publisher=${encodeURIComponent(publisher.title)}&q=${encodeURIComponent('*')}`}>View all datasets from {publisher.title}</Link>
                         </div>
+                    </div>
+                    <div className='col-sm-4'>
+                        <Link to={`/search?publisher=${encodeURIComponent(publisher.title)}&q=${encodeURIComponent('*')}`}>View all datasets from {publisher.title}</Link>
                     </div>
                 </div>
              </div>

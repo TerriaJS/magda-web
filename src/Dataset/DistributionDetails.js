@@ -34,10 +34,6 @@ class DistributionDetails extends Component {
               <div className='record-details__sidebar col-sm-4'>
                   <div><Link to={`project/new?dataset=${this.props.params.datasetId}`} className='btn btn-primary'>Add to project</Link></div>
                   <Social/>
-                  <div className='tags'>
-                    <h5>Tags</h5>
-                    {distribution.tags && distribution.tags.map(t=><Link className='badge' key={t} to={`/search?q=${encodeURIComponent(t)}`}>{t}</Link>)}
-                  </div>
               </div>
               </div>
 

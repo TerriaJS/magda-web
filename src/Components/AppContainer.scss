@@ -17,6 +17,32 @@
 }
 
 
+.mobile-nav{
+  .navbar-brand{
+    height: auto;
+  }
+  img{
+    height: 40px;
+  }
+  .navbar-toggle{
+    background: $magda-blue;
+    color: #fff;
+    &:hover{
+      background: lighten($magda-blue, 10%);
+    }
+  }
+  .navbar-collapse{
+    width: 100%;
+    margin-bottom: 5px;
+    li{
+      margin-bottom: 1px;
+      background: #fff;
+      border-radius: 3px;
+    }
+  }
+}
+
+
 @media(min-width: 768px){
     .decorator{
         padding: 15px 0;

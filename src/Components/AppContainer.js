@@ -7,17 +7,27 @@ import {config} from '../config.js';
 import { Link } from 'react-router';
 import SearchBox from '../Search/SearchBox';
 
-import {Small, Medium, Large} from '../UI/Responsive';
+import {ExtraSmall, Small, Medium, Large} from '../UI/Responsive';
 import {connect} from 'react-redux';
 import './AppContainer.css';
 
 class AppContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isOpen: false};
+  }
   renderLink(link: string){
     const regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
     if(!regex.test(link[1])){
       return <Link to={`/${encodeURI(link[1])}`}>{link[0]}</Link>
     }
     return <a target='_blank' href={link[1]}>{link[0]}</a>
+  }
+
+  toggleMenu(){
+    this.setState({
+      isOpen : !this.state.isOpen
+    })
   }
   render() {
     const headerNavs: Array <string> = config.headerNavigation;
@@ -28,26 +38,38 @@ class AppContainer extends React.Component {
             <nav className='appContainer__nav'>
               <div className='container'>
                 <div className='row'>
-                  <div className='col-sm-2'>
-                    <div className='navbar-header'>
-                      <a className='navbar-brand' href='/'><img className='logo' alt='data.gov.au-alpha' src={logo}/></a>
+                  <Small>
+                    <div className='col-sm-2'>
+                      <div className='navbar-header'>
+                        <a className='navbar-brand' href='/'><img className='logo' alt='data.gov.au-alpha' src={logo}/></a>
+                      </div>
                     </div>
+                    <div className='col-sm-10 nav-links'>
+                      <ul className='nav navbar-nav navbar-account'>
+                        <li><Link to={`/new-account`}>Create an account</Link></li>
+                        <li><Link to={`/sign-in`}>Sign in</Link></li>
+                      </ul>
+                      <ul className='nav navbar-nav'>
+                        {headerNavs.map(nav=>
+                          <li key={nav[1]}><Link to={`/${encodeURI(nav[1])}`}>{nav[0]}</Link></li>
+                        )}
+                      </ul>
                     </div>
-
-                      <Medium>
-                        <div className='col-sm-10 nav-links'>
-                          <ul className='nav navbar-nav navbar-account'>
-                            <li><Link to={`/new-account`}>Create an account</Link></li>
-                            <li><Link to={`/sign-in`}>Sign in</Link></li>
-                          </ul>
-                          <ul className='nav navbar-nav'>
+                  </Small>
+                    <ExtraSmall>
+                      <div className='mobile-nav'>
+                        <button className='btn navbar-toggle' onClick={()=>this.toggleMenu()}> <span className="sr-only">Toggle navigation</span> MENU </button>
+                        <a className='navbar-brand' href='/'><img className='logo' alt='data.gov.au-alpha' src={logo}/></a>
+                        <div className={`navbar-collapse collapse ${this.state.isOpen ? 'in' : ''}`} aria-expanded={`${this.state.isOpen ? 'true' : 'false'}`}>
+                          <ul className='nav nav-pills nav-stacked'>
                             {headerNavs.map(nav=>
                               <li key={nav[1]}><Link to={`/${encodeURI(nav[1])}`}>{nav[0]}</Link></li>
                             )}
                           </ul>
-
                         </div>
-                      </Medium>
+                      </div>
+                    </ExtraSmall>
+
                       </div>
                     <div className='row nav_second'>
                       <div className='col-sm-8'><SearchBox location={this.props.location}/> </div>
