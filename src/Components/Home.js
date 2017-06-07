@@ -27,7 +27,7 @@ class Home extends React.Component {
               {this.props.datasets.map(d=><DatasetSummary key={d.identifier} dataset={d}/>)}
             </div>
             <h2>News</h2>
-            <News />
+            <News isFetching={this.props.isNewsFetching} error={this.props.newsFetchingError} newsItems={this.props.newsItems}/>
           </div>
           <div className='col-sm-4'>
             <h2>data.gov.au statistics</h2>
@@ -44,7 +44,10 @@ const mapStateToProps = (state) => {
   const datasets= state.featuredDatasets.records;
   const isFetching= state.featuredDatasets.isFetching;
   const error = state.featuredDatasets.error;
-  return {datasets, isFetching, error}
+  const isNewsFetching = state.news.isFetching;
+  const newsItems = state.news.news;
+  const newsFetchingError = state.news.error;
+  return {datasets, isFetching, error, isNewsFetching, newsItems, newsFetchingError}
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<*>) => {

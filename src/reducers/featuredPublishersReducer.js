@@ -3,7 +3,7 @@ import type { FeaturedRecords, DataSearchJson, Dataset, FeaturedAction, Query } 
 import {parsePublisher} from '../helpers/api';
 
 const initialData = {
-  records: [],
+  publishers: [],
   isFetching: false,
   error: null,
   hitCount: 0
@@ -24,7 +24,7 @@ const featuredPublishersReducer = (state: FeaturedRecords = initialData, action:
     case 'RECEIVE_FEATURED_PUBLISHERS':
       return Object.assign({}, state, {
         isFetching: false,
-        records: action.json && action.json.map(d=>parsePublisher(d)),
+        publishers: action.json && action.json.map(d=>parsePublisher(d)),
         error: null
       })
 

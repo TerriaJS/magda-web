@@ -31,8 +31,4 @@ function mapStateToProps(state) {
   };
 }
 
-DatasetPublisher.propTypes = {dataset: React.PropTypes.object};
-
-
-
 export default connect(mapStateToProps)(DatasetPublisher);

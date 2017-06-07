@@ -55,11 +55,15 @@ class Search extends Component {
 
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.datasets && nextProps.datasets.length> 0 &&  nextProps.location.search !== this.props.location.search){
-      const featuredPublishers = nextProps.publisherOptions.map(o=> o.identifier);
-      this.props.fetchFeaturedPublishersFromRegistry(featuredPublishers);
+    if(nextProps.datasets.length > 0 &&
+       nextProps.publisherOptions.length > 0 &&
+       nextProps.publisherOptions.map(o=>o.identifier).toString() !== this.props.publisherOptions.map(o=>o.identifier).toString()){
+      const featuredPublishersById = nextProps.publisherOptions.map(o=> o.identifier);
+      this.props.fetchFeaturedPublishersFromRegistry(featuredPublishersById);
     }
   }
+
+
 
 
   onClickTag(tag: string){
@@ -185,6 +189,9 @@ Search.contextTypes ={
   router: React.PropTypes.object.isRequired,
 }
 
+Search.defaultProps = {
+  featuredPublishers: []
+};
 
 
 function mapDispatchToProps(dispatch) {
@@ -206,7 +213,7 @@ function mapStateToProps(state, ownProps) {
     strategy: datasetSearch.strategy,
     error: datasetSearch.error,
     freeText: datasetSearch.freeText,
-    featuredPublishers: featuredPublishers.records
+    featuredPublishers: featuredPublishers.publishers
   }
 }
 

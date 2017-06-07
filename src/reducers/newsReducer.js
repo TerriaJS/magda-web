@@ -22,7 +22,7 @@ const newsReducer = (state = initialData, action) => {
     case 'RECEIVE_NEWS':
       return Object.assign({}, state, {
         isFetching: false,
-        news: action.json,
+        news: action.news,
         error: null
       })
 

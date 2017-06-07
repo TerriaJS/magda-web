@@ -2,7 +2,7 @@ import {config} from '../config'
 import fetch from 'isomorphic-fetch'
 import {actionTypes} from '../constants/ActionTypes';
 import type { Action } from '../types';
-var parse = require('xml-parser');
+import parser from 'rss-parser'
 
 
 export function requestNews():Action {
@@ -30,11 +30,11 @@ export function requestNewsError(error: number): Action {
 export function fetchNewsfromRss(){
   return (dispatch: Function, getState: Function)=>{
       // check if we need to fetch
-      // if(getState().news.isFetching || getState.news.news){
-      //   return false;
-      // }
+      if(getState().news.isFetching || getState().news.news.length > 0){
+        return false;
+      }
       const url = config.rssUrl;
-      fetch("https://nationalmap.gov.au/proxy/_0d/https://blog.data.gov.au/blogs/rss.xml")
+      fetch(url)
       .then(response=>{
         if (response.status !== 200) {
           console.log("error")
@@ -43,9 +43,13 @@ export function fetchNewsfromRss(){
           return response.text()
         }
       }).then(text=>{
-        return parse(text)
+        parser.parseString(text, (err, result)=>{
+          if(err){
+            dispatch(requestNewsError());
+          } else {
+            dispatch(receiveNews(result.feed.entries))
+          }
+        })
       });
-
-
   }
 }
