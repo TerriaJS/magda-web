@@ -57,13 +57,11 @@ class Search extends Component {
   componentWillReceiveProps(nextProps){
     if(nextProps.datasets.length > 0 &&
        nextProps.publisherOptions.length > 0 &&
-       nextProps.publisherOptions.map(o=>o.identifier).toString() !== this.props.publisherOptions.map(o=>o.identifier).toString()){
-      const featuredPublishersById = nextProps.publisherOptions.map(o=> o.identifier);
+       nextProps.publisherOptions.filter(o=>o.identifier).map(o=>o.identifier).toString() !== this.props.publisherOptions.filter(o=>o.identifier).map(o=>o.identifier).toString()){
+      const featuredPublishersById = nextProps.publisherOptions.filter(o=>o.identifier).map(o=> o.identifier);
       this.props.fetchFeaturedPublishersFromRegistry(featuredPublishersById);
     }
   }
-
-
 
 
   onClickTag(tag: string){

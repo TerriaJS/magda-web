@@ -19,6 +19,7 @@
   "dependencies": {
     "d3-drag": "^1.0.1",
     "d3-selection": "^1.0.2",
+    "draft-js": "^0.10.1",
     "draft-js-mention-plugin": "git+https://github.com/TerriaJS/draft-js-mention-plugin#v2.1.0",
     "draft-js-plugins-editor": "beta",
     "es6-promise": "^4.1.0",
@@ -51,6 +52,8 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
+    "rss-parser": "^2.9.0",
+    "uuid": "^3.0.1",
     "xml-parser": "^1.2.1"
   },
   "scripts": {
