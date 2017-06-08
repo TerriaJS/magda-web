@@ -34,14 +34,14 @@ class PublisherDetails extends Component {
                 {this.props.isFetching && <ProgressBar/>}
                 <div className='row'>
                     <div className='publisher-details__body col-sm-8'>
-                        <h1>{publisher.title}</h1>
+                        <h1>{publisher.name}</h1>
                         <div className='publisher-details-overview'>
                             <h3 className='section-heading'>Overview</h3>
                             <OverviewBox content={publisher.description}/>
                         </div>
                     </div>
                     <div className='col-sm-4'>
-                        <Link to={`/search?publisher=${encodeURIComponent(publisher.title)}&q=${encodeURIComponent('*')}`}>View all datasets from {publisher.title}</Link>
+                        <Link to={`/search?publisher=${encodeURIComponent(publisher.name)}&q=${encodeURIComponent('*')}`}>View all datasets from {publisher.name}</Link>
                     </div>
                 </div>
              </div>
@@ -51,7 +51,7 @@ class PublisherDetails extends Component {
         if(this.props.error){
             return <ErrorHandler errorCode ={this.props.error} />
         }
-        return <ReactDocumentTitle title={this.props.publisher.title + ' | ' + config.appName}>{this.renderContent()}</ReactDocumentTitle>;
+        return <ReactDocumentTitle title={this.props.publisher.name + ' | ' + config.appName}>{this.renderContent()}</ReactDocumentTitle>;
     }
 }
 

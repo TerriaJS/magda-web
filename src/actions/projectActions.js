@@ -154,6 +154,7 @@ export function fetchProjectsFromRegistry():Object{
   return (dispatch: Dispatch)=>{
     dispatch(requestProjects())
     let url : string = config.registryUrl + '?aspect=project';
+    console.log(url);
     return fetch(url)
     .then(response => {
         if (response.status >= 400) {

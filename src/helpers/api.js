@@ -49,7 +49,7 @@ export function parseRegion(regionRaw : RegionRaw) : Region {
 
 export function parsePublisher(publisherRaw: PublisherRaw) : Publisher{
     const publisher = {
-        title: publisherRaw.name,
+        name: publisherRaw.name,
         description: publisherRaw.aspects['organization-details']['description'] || 'A description of this publisher is not available',
         image_url: publisherRaw.aspects['organization-details']['imageUrl'] || 'http://placehold.it/100x100?text=Image+unavailable',
         id: publisherRaw.id

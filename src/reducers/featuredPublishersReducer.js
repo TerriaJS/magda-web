@@ -24,7 +24,7 @@ const featuredPublishersReducer = (state: FeaturedRecords = initialData, action:
     case 'RECEIVE_FEATURED_PUBLISHERS':
       return Object.assign({}, state, {
         isFetching: false,
-        publishers: action.publishers,
+        publishers: action.publishers.map(p=> parsePublisher(p)),
         error: null
       })
 

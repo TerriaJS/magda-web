@@ -149,7 +149,7 @@ export type SearchState = {
 }
 
 export type Publisher ={
-  title: string,
+  name: string,
   description: string,
   id: string,
   image_url: string

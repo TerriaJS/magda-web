@@ -6,10 +6,10 @@ import OverviewBox from '../UI/OverviewBox';
 class DatasetPublisher extends Component {
   renderPublisher(publisher){
       return (<div className='col-sm-8'>
-                <h2>{publisher.title}</h2>
+                <h2>{publisher.name}</h2>
                 <h3 className='section-heading'>Overview</h3>
                 <OverviewBox content={publisher.description}/>
-                <Link to={`/search?publisher=${encodeURIComponent(publisher.title)}&q=${encodeURIComponent('*')}`}>View all datasets from {publisher.title}</Link>
+                <Link to={`/search?publisher=${encodeURIComponent(publisher.name)}&q=${encodeURIComponent('*')}`}>View all datasets from {publisher.name}</Link>
               </div>)
   }
 
