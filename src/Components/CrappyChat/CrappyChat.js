@@ -85,7 +85,6 @@ export default class CrappyChat extends React.Component {
 
     return (
       <div>
-
         <div
           ref={this.registerMessagesDiv.bind(this)}
           className='crappy-chat__messages'

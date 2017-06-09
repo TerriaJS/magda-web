@@ -68,22 +68,26 @@ export default class EntryBox extends React.Component {
 
   render() {
     return (
-      <form className='entry-box' onSubmit={this.onSubmit.bind(this)}>
-        <div className='entry-box__editor'>
-          <Editor
-            editorState={this.state.editorState}
-            onChange={this.onEditorChange.bind(this)}
-            plugins={Object.values(this.plugins)}
-            handleReturn={this.onReturnPressed.bind(this)}
-            ref={editor => this.editor = editor}
+      <div className='row'>
+      <div className='col-sm-8'>
+        <form className='entry-box' onSubmit={this.onSubmit.bind(this)}>
+          <div className='entry-box__editor'>
+            <Editor
+              editorState={this.state.editorState}
+              onChange={this.onEditorChange.bind(this)}
+              plugins={Object.values(this.plugins)}
+              handleReturn={this.onReturnPressed.bind(this)}
+              ref={editor => this.editor = editor}
+            />
+          </div>
+          <PluginComponents
+            userMentionsPlugin={this.plugins.userMentions}
+            dataSetMentionsPlugin={this.plugins.dataSetMentions}
           />
+          <input className='entry-box__submit-button btn btn-primary' type='submit' />
+        </form>
         </div>
-        <PluginComponents
-          userMentionsPlugin={this.plugins.userMentions}
-          dataSetMentionsPlugin={this.plugins.dataSetMentions}
-        />
-        <input className='entry-box__submit-button' type='submit' />
-      </form>
+      </div>
     );
   }
 }
