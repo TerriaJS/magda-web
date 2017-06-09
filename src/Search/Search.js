@@ -53,6 +53,7 @@ class Search extends Component {
 
 
   componentWillReceiveProps(nextProps){
+    nextProps.fetchSearchResultsIfNeeded(queryString.parse(nextProps.location.search));
     if(nextProps.datasets.length > 0 &&
        nextProps.publisherOptions.length > 0 &&
        nextProps.publisherOptions.filter(o=>o.identifier).map(o=>o.identifier).toString() !== this.props.publisherOptions.filter(o=>o.identifier).map(o=>o.identifier).toString()){
