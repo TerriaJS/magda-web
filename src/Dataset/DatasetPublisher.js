@@ -14,7 +14,6 @@ class DatasetPublisher extends Component {
   }
 
   render(){
-    const publisher = this.props.dataset.publisher || '';
     return <div className='dataset-publisher container' >
             <div className='row'>
                 {this.props.dataset.publisher && this.renderPublisher(this.props.dataset.publisherDetails)}

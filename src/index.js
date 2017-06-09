@@ -3,7 +3,6 @@
 import createLogger from 'redux-logger'
 import './index.css';
 // import {browserHistory} from 'react-router';
-import {config} from './config'
 import { Router, Route, IndexRoute, IndexRedirect, hashHistory} from 'react-router';
 
 import thunkMiddleware from 'redux-thunk'

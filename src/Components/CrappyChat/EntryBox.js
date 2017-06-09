@@ -1,16 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Editor from 'draft-js-plugins-editor';
 import {
   EditorState,
   ContentState,
-  convertFromRaw,
   convertToRaw,
-  getDefaultKeyBinding,
-  KeyBindingUtil
 } from 'draft-js';
-const { hasShiftModifier } = KeyBindingUtil;
-import base from '../../Base';
 
 import pluginsFn from './Plugins/Plugins';
 import PluginComponents from './Plugins/PluginComponents';

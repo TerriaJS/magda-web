@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch'
 import parseQuery from '../helpers/parseQuery'
 import {config} from '../config'
 import {actionTypes} from '../constants/ActionTypes';
-import type { DataAction, Action, DataSearchJson } from '../types';
+import type {Action, DataSearchJson } from '../types';
 
 
 export function requestResults(apiQuery: string ): Action{

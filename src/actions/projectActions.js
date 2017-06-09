@@ -162,7 +162,7 @@ export function fetchProjectsFromRegistry():Object{
 
 
 export function fetchProjectsIfNeeded(){
-  return (dispatch: Dispatch, getState: getState)=>{
+  return (dispatch: Dispatch, getState: GetState)=>{
     if(!getState().project.isFetching){
           return dispatch(fetchProjectsFromRegistry())
       } else{
@@ -190,7 +190,7 @@ export function fetchProjectFromRegistry(projectId):Object{
 
 
 export function fetchProjectIfNeeded(projectId: string){
-  return (dispatch: Dispatch, getState: getState)=>{
+  return (dispatch: Dispatch, getState: GetState)=>{
     if(!getState().project.isFetching){
           return dispatch(fetchProjectFromRegistry(projectId))
       } else{

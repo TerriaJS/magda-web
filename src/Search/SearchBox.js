@@ -10,7 +10,6 @@ import debounce from 'lodash.debounce';
 import defined from '../helpers/defined';
 import React, { Component } from 'react';
 import {fetchRegionMapping} from '../actions/regionMappingActions';
-import { fetchSearchResultsIfNeeded } from '../actions/datasetSearchActions';
 import queryString from 'query-string';
 
 

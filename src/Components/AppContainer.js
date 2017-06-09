@@ -2,12 +2,11 @@
 import React from 'react';
 import logo from '../assets/logo.svg';
 import ReactDocumentTitle from 'react-document-title';
-import MediaQuery from 'react-responsive';
 import {config} from '../config.js';
 import { Link } from 'react-router';
 import SearchBox from '../Search/SearchBox';
 
-import {ExtraSmall, Small, Medium, Large} from '../UI/Responsive';
+import {ExtraSmall, Small} from '../UI/Responsive';
 import {connect} from 'react-redux';
 import './AppContainer.css';
 
@@ -105,7 +104,6 @@ class AppContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  let { datasetSearch, record, publisher, project } = state;
   return {
   }
 }
