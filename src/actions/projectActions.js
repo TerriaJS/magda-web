@@ -3,16 +3,9 @@
 import fetch from 'isomorphic-fetch'
 import {config} from '../config'
 import {actionTypes} from '../constants/ActionTypes';
-import {validateProjectName, validateProjectDescription} from '../helpers/validateInput';
-import type { ProjectAction, Project } from '../types';
+import {validateProjectName, validateProjectDescription, Dispatch, GetState} from '../helpers/validateInput';
+import type { ProjectAction, Project,  } from '../types';
 import { hashHistory} from 'react-router';
-
-type Dispatch = ()=> Function
-type getState = () => {
-  project: {
-    isFetching: boolean
-  }
-}
 
 export function requestProjects():ProjectAction {
   return {
