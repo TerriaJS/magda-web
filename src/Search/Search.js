@@ -176,7 +176,7 @@ australia
               </div>
 
             <div className='col-sm-4'>
-            {!this.searchBoxEmpty() && this.props.featuredPublishers.map(p=><PublisherBox key={p.id} publisher={p}/>)}
+            {(!this.searchBoxEmpty() && this.props.datasets.length > 0) && this.props.featuredPublishers.map(p=><PublisherBox key={p.id} publisher={p}/>)}
             </div>
             </div>
           </div>

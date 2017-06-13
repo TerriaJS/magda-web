@@ -28,7 +28,7 @@ class ProjectsViewer extends Component {
       if(this.props.error){
         return <ErrorHandler errorCode={this.props.error}/>
       }
-      return (<div className='col-sm-8'>
+      return (<div>
                 {this.props.projects.map(p=>
                 <ProjectSummary project={p} key={p.id}/>)}
                 {this.props.hitCount > config.resultsPerPage &&
@@ -46,7 +46,9 @@ class ProjectsViewer extends Component {
                 <div className='container projects-viewer'>
                   {this.props.isFetching && <ProgressBar/>}
                   <div className='row'>
+                  <div className='col-sm-8 projects'>
                     {!this.props.isFetching && this.renderContent()}
+                    </div>
                     <div className='col-sm-4'>
                       <Link className='btn btn-primary' to='/project/new'> Create new project </Link>
                     </div>
