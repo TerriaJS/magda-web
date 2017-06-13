@@ -18,6 +18,8 @@ export default class CrappyChat extends React.Component {
     };
   }
 
+
+
   componentDidMount() {
     this.unsubscribeDiscussionsListener = base.listenTo(
       `dataset-discussions/${this.props.datasetId}`,
@@ -87,7 +89,7 @@ export default class CrappyChat extends React.Component {
       <div>
         <div
           ref={this.registerMessagesDiv.bind(this)}
-          className='crappy-chat__messages'
+          className='crappy-chat__messages white-box'
         >
           {this.state.comments.map((comment, index) => {
             return <Message key={comment.key} comment={comment} />;

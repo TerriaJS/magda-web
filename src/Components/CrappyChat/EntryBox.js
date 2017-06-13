@@ -68,8 +68,7 @@ export default class EntryBox extends React.Component {
 
   render() {
     return (
-      <div className='row'>
-      <div className='col-sm-8'>
+      <div className='clearfix white-box'>
         <form className='entry-box' onSubmit={this.onSubmit.bind(this)}>
           <div className='entry-box__editor'>
             <Editor
@@ -86,7 +85,6 @@ export default class EntryBox extends React.Component {
           />
           <input className='entry-box__submit-button btn btn-primary' type='submit' />
         </form>
-        </div>
       </div>
     );
   }
