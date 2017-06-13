@@ -94,6 +94,8 @@ export function postNewProject(props: Project){
   return (dispatch: Dispatch) => {
     dispatch(createProject(props));
     const url = config.registryUrl;
+    console.log(props);
+    
     return fetch(url,
     {
       method: 'POST',
