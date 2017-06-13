@@ -28,6 +28,12 @@ export function transferFailed(error: number): Action{
   }
 }
 
+export function resetDatasetSearch(): Action{
+  return {
+    type: actionTypes.RESET_DATASET_SEARCH
+  }
+}
+
 
 export function fetchSearchResults(query: string): Store {
   return (dispatch: Dispatch)=>{

@@ -52,7 +52,11 @@ const datasetSearchReducer = (state: SearchState= initialData, action: DataActio
         isFetching: false,
         error: action.error,
       })
-
+    case 'RESET_DATASET_SEARCH':
+      return Object.assign({}, state, {
+        isFetching: false,
+        error: null,
+      })
     case 'RECEIVE_RESULTS':
       let data: DataSearchJson  = action.json;
       let query : Query = data && data.query && data.query;

@@ -17,7 +17,7 @@ import Publisher from '../SearchFacets/Publisher';
 import SearchResults from '../SearchResults/SearchResults';
 import MatchingStatus from './MatchingStatus';
 import { bindActionCreators } from 'redux';
-import { fetchSearchResultsIfNeeded } from '../actions/datasetSearchActions';
+import { fetchSearchResultsIfNeeded, resetDatasetSearch } from '../actions/datasetSearchActions';
 import {fetchFeaturedPublishersFromRegistry} from '../actions/featuredPublishersActions';
 import queryString from 'query-string';
 import cripsy from './crispy.gif';
@@ -61,7 +61,7 @@ class Search extends Component {
       this.props.fetchFeaturedPublishersFromRegistry(featuredPublishersById);
     }
   }
-
+australia
 
   onClickTag(tag: string){
     this.setState({
@@ -101,6 +101,7 @@ class Search extends Component {
   onDismissError(){
     // remove all current configurations
     this.updateSearchText('');
+    this.props.resetDatasetSearch();
   }
 
   onToggleDataset(datasetIdentifier){
@@ -194,7 +195,8 @@ Search.defaultProps = {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchSearchResultsIfNeeded: fetchSearchResultsIfNeeded,
-    fetchFeaturedPublishersFromRegistry: fetchFeaturedPublishersFromRegistry
+    fetchFeaturedPublishersFromRegistry: fetchFeaturedPublishersFromRegistry,
+    resetDatasetSearch: resetDatasetSearch
   }, dispatch);
 }
 
