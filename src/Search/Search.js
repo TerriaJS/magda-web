@@ -48,6 +48,7 @@ class Search extends Component {
 
 
   componentWillMount(){
+    this.props.resetDatasetSearch();
     this.props.fetchSearchResultsIfNeeded(queryString.parse(this.props.location.search));
   }
 
@@ -110,6 +111,10 @@ australia
     })
   }
 
+  searchBoxEmpty(){
+    return !defined(queryString.parse(this.props.location.search).q) || queryString.parse(this.props.location.search).q.length === 0
+  }
+
   render() {
     const searchText = queryString.parse(this.props.location.search).q || '';
     return (
@@ -141,8 +146,7 @@ australia
                             component={'recommendations'}
                  />
 
-                 {defined(queryString.parse(this.props.location.search).q) &&
-                  queryString.parse(this.props.location.search).q.length > 0 &&
+                 {!this.searchBoxEmpty() &&
                     <MatchingStatus datasets={this.props.datasets}
                                     strategy={this.props.strategy}
                     />
@@ -172,7 +176,7 @@ australia
               </div>
 
             <div className='col-sm-4'>
-            {this.props.featuredPublishers.map(p=><PublisherBox key={p.id} publisher={p}/>)}
+            {!this.searchBoxEmpty() && this.props.featuredPublishers.map(p=><PublisherBox key={p.id} publisher={p}/>)}
             </div>
             </div>
           </div>
