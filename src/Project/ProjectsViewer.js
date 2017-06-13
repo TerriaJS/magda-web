@@ -28,6 +28,9 @@ class ProjectsViewer extends Component {
       if(this.props.error){
         return <ErrorHandler errorCode={this.props.error}/>
       }
+      if(this.props.projects.length === 0){
+        return <div>No projects at the moment, <Link to='/project/new'>create a project</Link> </div>
+      }
       return (<div>
                 {this.props.projects.map(p=>
                 <ProjectSummary project={p} key={p.id}/>)}
