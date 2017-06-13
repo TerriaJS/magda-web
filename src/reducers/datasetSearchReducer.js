@@ -50,7 +50,8 @@ const datasetSearchReducer = (state: SearchState= initialData, action: DataActio
         isFetching: false,
         error: null,
         datasets: [],
-        hitCount: 0
+        hitCount: 0,
+        apiQuery: ''
       })
     case 'RECEIVE_RESULTS':
       let data: DataSearchJson  = action.json;

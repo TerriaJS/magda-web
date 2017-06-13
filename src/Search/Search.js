@@ -62,7 +62,10 @@ class Search extends Component {
       this.props.fetchFeaturedPublishersFromRegistry(featuredPublishersById);
     }
   }
-australia
+
+  componentWillUnmount(){
+    this.props.resetDatasetSearch()
+  }
 
   onClickTag(tag: string){
     this.setState({
