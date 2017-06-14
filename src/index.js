@@ -57,7 +57,7 @@ browserHistory.listen (location=>{
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path={baseurl} component={AppContainer}>
+      <Route path='/' component={AppContainer}>
         <IndexRoute component={Home}/>
         <Route path='search' component={Search} />
         <Route path='feedback' component={Feedback} />

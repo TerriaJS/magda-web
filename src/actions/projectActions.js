@@ -116,7 +116,7 @@ export function postNewProject(props: Project){
         return false;
       }
       // should change into browserHistory?
-      browserHistory.push(`/projects/${props.id}`);
+      // browserHistory.push(`/projects/${props.id}`);
       dispatch(createProjectSuccess(result, true))
       setTimeout(function(){ dispatch(createProjectSuccess(result, false))}, 5000);
     });

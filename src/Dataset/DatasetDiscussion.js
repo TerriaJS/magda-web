@@ -6,7 +6,11 @@ export default class DatasetDiscussion extends Component {
   render() {
     return (
       <div className='dataset-discussion container'>
-        <CrappyChat datasetId={this.props.params.datasetId} />
+        <div className='row'>
+          <div className="col-sm-8">
+            <CrappyChat datasetId={this.props.params.datasetId} />
+          </div>
+        </div>
       </div>
     );
   }

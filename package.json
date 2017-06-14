@@ -2,7 +2,6 @@
   "name": "magda-web",
   "version": "0.0.1",
   "private": true,
-  "homepage": ".",
   "config": {
     "awsProfile": "terria",
     "awsS3BasePath": "s3://magda-dev.terria.io",
@@ -62,6 +61,7 @@
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
+    "surge-build": "react-scripts build",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
